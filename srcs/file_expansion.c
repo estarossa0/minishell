@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_expansion.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
+/*   By: b-pearl <b-pearl@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:05:57 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/02 12:15:08 by arraji           ###   ########.fr       */
+/*   Updated: 2020/12/07 17:52:38 by b-pearl          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ bool		parse_file(t_command *current, char *line, int *index)
 
 	type = line[*index];
 	overwrite_file(current);
-	if ((current->file = get_next_word(line, index) == NULL))
+	if ((current->file = get_next_word(line, index)) == NULL)
 		return (false);
 	BIT_ON(current->read_type, -1 * type);
 	if (type == RED_TO)

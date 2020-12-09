@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arraji <arraji@student.42.fr>              +#+  +:+       +#+         #
+#    By: b-pearl <b-pearl@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/18 16:04:41 by arraji            #+#    #+#              #
-#    Updated: 2020/12/01 12:22:38 by arraji           ###   ########.fr        #
+#    Updated: 2020/12/09 23:43:07 by b-pearl          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = dumbshell
+NAME = minishell
 FLAGS = # -Wall -Wextra -Werror
-SRC_FOLDER = ./src
+SRC_FOLDER = ./srcs
 BONUS_SRC_FOLDER = ./bonus_src
 HEADER_FOLDER = ./includes
 LIBFT_HEADER = ./libft/includes
@@ -27,7 +27,21 @@ GOLD = \033[0;33m
 RESET = \033[0m
 BONUS_HEADER_FOLDER = ./bonus_header
 
-SRC_FILES =
+SRC_FILES =  main.c \
+signals.c \
+builtins.c \
+executing.c \
+need.c \
+pre_execute.c \
+env_handle.c \
+parser_needs.c \
+file_expansion.c \
+variables_expansion.c \
+sets.c \
+error.c \
+lexer.c \
+parser.c \
+here_we_go.c \
 
 OBJECT_FILES = $(SRC_FILES:.c=.o)
 OBJECT_FILES := $(addprefix $(OBJECT_FOLDER)/, $(OBJECT_FILES))
