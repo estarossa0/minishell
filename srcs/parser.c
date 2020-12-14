@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: b-pearl <b-pearl@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 11:29:11 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/09 23:42:09 by b-pearl          ###   ########.fr       */
+/*   Updated: 2020/12/14 22:24:55 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static	void	init_list(t_command **current, t_all *all)
 	{
 		ft_lstadd_back((t_list **)&(all->pipe), malloc(sizeof(t_pipeline)));
 		all->pipe->cmd_head = NULL;
+		all->pipe->simple = 1;
 		*current = (t_command *)ft_lstadd_back((t_list **)&(all->pipe->cmd_head), malloc(sizeof(t_command)));
 		(*current)->list_args = NULL;
 		(*current)->file = NULL;
@@ -35,10 +36,15 @@ static	void	switch_current(t_command **current, char *line, int *index, t_all *a
 	{
 		pipe = (t_pipeline*)ft_lstadd_back((t_list **)&(all->pipe), malloc(sizeof(t_pipeline)));
 		pipe->cmd_head = NULL;
+		pipe->simple = 1;
 		*current = (t_command *)ft_lstadd_back((t_list **)&(pipe->cmd_head), malloc(sizeof(t_command)));
 	}
 	else
 	{
+		pipe = all->pipe;
+		while (pipe->next)
+			pipe = pipe->next;
+		pipe->simple = 0;
 		*current = (t_command *)ft_lstadd_back((t_list **)current, malloc(sizeof(t_command)));
 	}
 	(*current)->read_type = 0;
@@ -64,18 +70,31 @@ void	add_word(t_args **list, char *word, int type)
 	}
 }
 
+void		hardcode_empty_arg(char *line, int index)
+{
+	if ((index == 0 || line[index - 1] == WORD_SEP) && line[index + 1] == REMOVED
+	&& (line[index + 2] == WORD_SEP || line[index + 2] == '\0'))
+		line[index] = '\0';
+}
+
 bool		parser(char *line, t_all *all)
 {
 	int			index;
 	t_command	*current;
 
-	index = -1;
+	index = 0;
+
+	while (line[index] && line[index] == WORD_SEP)
+		index++;
+	index--;
 	while (line[++index])
 	{
-		init_list(&current, all);
+		if (line[index] == REMOVED)
+			hardcode_empty_arg(line, index);
 		if (line[index] == REMOVED)
 			continue;
-		else if (line[index] == RED_FROM || line[index] == RED_TO
+		init_list(&current, all);
+		if (line[index] == RED_FROM || line[index] == RED_TO
 		|| line[index] == RED_TO_APP)
 		{
 			if (parse_file(current, line, &index) == false)

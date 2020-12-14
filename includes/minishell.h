@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: b-pearl <b-pearl@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:25:48 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/07 17:51:23 by b-pearl          ###   ########.fr       */
+/*   Updated: 2020/12/14 22:18:27 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,6 @@ t_all	*g_all;
 extern char **environ;
 t_env		*g_env;
 int			g_total_env;
-int			g_shit_happened;
+pid_t		g_pid;
 bool	here_we_go(t_all *all);
 #endif

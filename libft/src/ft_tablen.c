@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tablen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arraji <arraji@student.1337.ma>            +#+  +:+       +#+        */
+/*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/31 02:20:12 by arraji            #+#    #+#             */
-/*   Updated: 2019/12/31 04:07:23 by arraji           ###   ########.fr       */
+/*   Updated: 2020/12/14 14:02:20 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	ft_tablen(char **tab)
 	size_t index;
 
 	index = 0;
-	while (tab[index])
+	while (tab && tab[index])
 	{
 		index++;
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pre_execute.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: b-pearl <b-pearl@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/02 18:41:46 by b-pearl           #+#    #+#             */
-/*   Updated: 2020/12/02 19:43:30 by b-pearl          ###   ########.fr       */
+/*   Created: 2020/12/02 18:41:46 by arraji            #+#    #+#             */
+/*   Updated: 2020/12/14 22:36:56 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static	bool	get_path(t_command *cmd, char *name)
 			else
 			{
 				free(name);
-				return (error(E_NOCMD, 127, cmd->cmd_name));
+				return (false);
 			}
 			break ;
 		}
@@ -100,8 +100,9 @@ bool	pre_execute(t_command *cmd, int pipefd[2], int savefd[2], int builthin)
 			cmd->full_path = ft_strdup(cmd->cmd_name);
 		else
 		{
-			if (get_path(cmd, ft_strjoin("/", cmd->cmd_name)) == false)
-				return (false);
+			if (cmd->cmd_name[0] == 0 ||
+			get_path(cmd, ft_strjoin("/", cmd->cmd_name)) == false)
+				return (error(E_NOCMD, 127, cmd->cmd_name));
 		}
 		if (stat(cmd->full_path, &buf) != 0)
 			return (error(E_WPATH, 127, cmd->full_path));

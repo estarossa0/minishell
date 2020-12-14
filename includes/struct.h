@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: b-pearl <b-pearl@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 16:05:20 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/09 23:39:52 by b-pearl          ###   ########.fr       */
+/*   Updated: 2020/12/14 14:01:35 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ typedef	struct	s_command
 	int					fd;
 	char				*file;
 	char				read_type;
+	int					simple;
 	int					relation;
 }				t_command;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sets.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: b-pearl <b-pearl@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/01 21:34:12 by b-pearl           #+#    #+#             */
-/*   Updated: 2020/12/01 22:50:29 by b-pearl          ###   ########.fr       */
+/*   Created: 2020/12/01 21:34:12 by arraji            #+#    #+#             */
+/*   Updated: 2020/12/14 22:37:46 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static	bool	set_pipe(char *line, int index, t_parser *parser)
 		return (true);
 	if (freak_out(parser->bits, line, index) == false)
 		return (false);
-	if (AND(parser->bits, BPIPE))
+	if (AND(parser->bits, BPIPE) || AND(parser->bits, BCHECK))
 		return (error(E_SYNTAX, 1, &line[index]));
 	line[index] = CMD_SEP;
 	BIT_ON(parser->bits, BPIPE);
@@ -49,8 +49,8 @@ static	bool	set_semicolon(char *line, int index, t_parser *parser)
 		return (true);
 	if (freak_out(parser->bits, line, index) == false)
 		return (false);
-	if (AND(parser->bits, BSEMIC))
-		return (false);
+	if (AND(parser->bits, BSEMIC) || AND(parser->bits, BCHECK))
+		return (error(E_SYNTAX, 1, &line[index]));
 	line[index] = PIPELINE_SEP;
 	BIT_ON(parser->bits, BSEMIC);
 	return (true);
@@ -107,7 +107,7 @@ static	bool	set_red_from(char *line, int index, t_parser *parser)
 		return (true);
 	if (AND(parser->bits, BRED_TO) || AND(parser->bits, BRED_TO_APP)
 	|| AND(parser->bits, BRED_FROM))
-		return (false);
+		return (error(E_SYNTAX, 1, &line[index]));
 	line[index] = RED_FROM;
 	BIT_ON(parser->bits, BRED_FROM);
 	return (true);

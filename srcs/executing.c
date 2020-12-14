@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executing.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: b-pearl <b-pearl@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/23 16:19:13 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/07 17:33:00 by b-pearl          ###   ########.fr       */
+/*   Updated: 2020/12/14 22:13:50 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,14 @@
 
 static	bool	peri_excuting(t_command *cmd, t_all *all)
 {
-	pid_t	pid;
-	int		exit_data;
 	int		ret;
 
-	if ((pid = fork()) == -1)
+	if (cmd->simple && (g_pid = fork()) == -1)
 		return (error(E_STANDARD, 1, NULL));
-	if (pid == 0)
+	if (g_pid == 0)
 	{
 		if ((execve(cmd->full_path, cmd->argv, reverse_env())) == -1 )
 			return (error(E_STANDARD, 1, NULL));
-	}
-	else
-	{
-		wait(&exit_data);
-		all->exit_status = WEXITSTATUS(exit_data);
 	}
 	return (true);
 }
@@ -54,7 +47,11 @@ bool			executing(t_command *cmd, int pipefd[2], int savefd[2])
 	builthin = is_builtin(cmd->cmd_name);
 	if (pre_execute(cmd, pipefd, savefd, builthin) == false)
 		return (false);
-	check = (builthin < 0) ? peri_excuting(cmd, g_all) : exec_builthin(cmd, builthin);
+	if (!cmd->simple)
+		if ((g_pid = fork()) == -1)
+			return (error(E_STANDARD, 1, NULL));
+	if (g_pid == -2)
+		check = (builthin < 0) ? peri_excuting(cmd, g_all) : exec_builthin(cmd, builthin);
 	if (check == false)
 		return (false);
 	post_executing(cmd, pipefd, savefd);

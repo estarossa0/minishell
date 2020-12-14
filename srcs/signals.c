@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: b-pearl <b-pearl@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 00:11:18 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/07 17:46:22 by b-pearl          ###   ########.fr       */
+/*   Updated: 2020/12/14 22:39:33 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@ void	handler(int sig)
 {
 	if (sig == SIGINT)
 	{
+		ft_fprintf(1, "\n" BOLD PRINT_RED PS RESET);
+		g_all->exit_status = 128 + sig;
 	}
-}
-
-void	child_handler(int sig)
-{
-	write(1, "\n", 2);
-	exit(128 + sig);
+	if (sig == SIGQUIT)
+	{
+		if (g_pid == -2)
+			write(1, "\b \b\b \b", 6);
+	}
 }

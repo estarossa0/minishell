@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: b-pearl <b-pearl@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 06:13:12 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/07 22:09:42 by b-pearl          ###   ########.fr       */
+/*   Updated: 2020/12/14 14:02:59 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,8 +139,10 @@ static	bool	b_exit(t_command *cmd)
 bool	exec_builthin(t_command *cmd, int builthin)
 {
 	bool	(*builthin_functions[7])(t_command *cmd) = {b_echo, b_cd, b_pwd, b_export, b_env, b_unset, b_exit};
+	bool	check;
 
-	if (builthin_functions[builthin](cmd) == false)
-		return (false);
-	return (true);
+	check = builthin_functions[builthin](cmd);
+	if (!cmd->simple)
+		exit(g_all->exit_status);
+	return (check);
 }

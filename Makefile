@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: b-pearl <b-pearl@student.42.fr>            +#+  +:+       +#+         #
+#    By: arraji <arraji@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/18 16:04:41 by arraji            #+#    #+#              #
-#    Updated: 2020/12/09 23:43:07 by b-pearl          ###   ########.fr        #
+#    Updated: 2020/12/14 14:00:50 by arraji           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ LIB_RULE:
 	@make -C $(LIBFT_FOLDER)/
 
 bonus: credit LIB_RULE $(BONUS_OBJECT_FILES)
-	@clang -g -I $(BONUS_HEADER_FOLDER) -I $(LIBFT_FOLDER) $(BONUS_OBJECT_FILES) $(LIBFT_FOLDER)/$(LIBFT_LIB) $(LIBS) -o $(NAME)_bonus
+	@clang -g -I $(BONUS_HEADER_FOLDER) -I $(LIBFT_FOLDER) $(BONUS_OBJECT_FILES) $(LIBFT_FOLDER)/$(LIBFT_LIB) $(LIBS) -D PS="$(NAME)_bonus" -o $(NAME)_bonus
 	@echo
 	@echo $(NAME)"_bonus created $(GOLD)successfully$(RESET)"
 
@@ -66,7 +66,7 @@ $(BONUS_OBJECT_FOLDER)/%.o: $(BONUS_SRC_FOLDER)/%.c
 	@clang $(FLAGS) -g -I $(BONUS_HEADER_FOLDER) -I $(LIBFT_HEADER)  -o $@ -c $< && echo  "creating" $< "object $(GOLD){OK}$(RESET)"
 
 $(NAME): LIB_RULE $(OBJECT_FILES)
-	@clang -g -I $(HEADER_FOLDER) -I $(LIBFT_FOLDER)  $(OBJECT_FILES) $(LIBFT_FOLDER)/$(LIBFT_LIB) $(LIBS) -o $@
+	@clang -g -I $(HEADER_FOLDER) -I $(LIBFT_FOLDER)  $(OBJECT_FILES) $(LIBFT_FOLDER)/$(LIBFT_LIB) $(LIBS) -D PS="$(NAME)" -o $@
 	@echo
 	@echo $(NAME)" created $(GREEN)successfully$(RESET)"
 

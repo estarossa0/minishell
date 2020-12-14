@@ -3,16 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: b-pearl <b-pearl@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 14:02:21 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/09 23:43:21 by b-pearl          ###   ########.fr       */
+/*   Updated: 2020/12/14 14:01:12 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PARSER_H
 # define FT_PARSER_H
-# define PS "minishell$> "
+# ifndef PS
+#  define PS "minishell$> "
+# endif
 # define PRINT_RED		"\033[1;31m"
 # define PRINT_GR		"\033[1;32m"
 # define BOLD			"\033[1;31m"
