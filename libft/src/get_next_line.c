@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 10:49:36 by arraji            #+#    #+#             */
-/*   Updated: 2020/03/04 22:27:33 by arraji           ###   ########.fr       */
+/*   Updated: 2020/12/14 23:34:29 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ static	int		is_line(char *str, int rd)
 	index = 0;
 	if (!str)
 		return (0);
-	if (!rd)
-		return (1);
 	while (str[index])
 		if (str[index++] == '\n')
 			return (1);
+	if (!rd && ft_strlen(str) == 0)
+		return (1);
 	return (0);
 }
 
