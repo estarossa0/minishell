@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:59:41 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/14 22:18:21 by arraji           ###   ########.fr       */
+/*   Updated: 2020/12/14 23:53:10 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ bool			here_we_go(t_all *all)
 			}
 			cmd = cmd->next;
 		}
-		while (g_pid != -2 && wait(&exit_data) != g_pid);
+		while (g_pid != 0 && wait(&exit_data) != g_pid);
 		set_return(exit_data);
 		pipe = pipe->next;
 	}

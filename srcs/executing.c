@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/23 16:19:13 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/14 22:13:50 by arraji           ###   ########.fr       */
+/*   Updated: 2020/12/15 00:00:54 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,13 @@ bool			executing(t_command *cmd, int pipefd[2], int savefd[2])
 	bool	check;
 
 	builthin = is_builtin(cmd->cmd_name);
+	check = true;
 	if (pre_execute(cmd, pipefd, savefd, builthin) == false)
 		return (false);
 	if (!cmd->simple)
 		if ((g_pid = fork()) == -1)
 			return (error(E_STANDARD, 1, NULL));
-	if (g_pid == -2)
+	if (g_pid == 0)
 		check = (builthin < 0) ? peri_excuting(cmd, g_all) : exec_builthin(cmd, builthin);
 	if (check == false)
 		return (false);
