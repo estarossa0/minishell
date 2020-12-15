@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 12:23:09 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/14 23:50:50 by arraji           ###   ########.fr       */
+/*   Updated: 2020/12/15 19:01:32 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	init(t_all *all)
 void	clear(t_all *all)
 {
 	t_command	*curr;
-	t_pipeline	*currp;
 	void		*save;
+
 	while (all->pipe)
 	{
 		curr = all->pipe->cmd_head;

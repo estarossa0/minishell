@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:59:41 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/14 23:53:10 by arraji           ###   ########.fr       */
+/*   Updated: 2020/12/15 18:58:53 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,7 @@ bool			here_we_go(t_all *all)
 		while(cmd)
 		{
 			cmd->simple = pipe->simple;
-			if (cmd->cmd_name && executing(cmd, pipefd, savefd) == false)
-			{
-				fd_saving(savefd);
-				return (false);
-			}
+			cmd->cmd_name ? executing(cmd, pipefd, savefd) : 1;
 			cmd = cmd->next;
 		}
 		while (g_pid != 0 && wait(&exit_data) != g_pid);

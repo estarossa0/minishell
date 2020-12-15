@@ -6,16 +6,14 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/23 16:19:13 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/15 00:00:54 by arraji           ###   ########.fr       */
+/*   Updated: 2020/12/15 18:07:37 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static	bool	peri_excuting(t_command *cmd, t_all *all)
+static	bool	peri_excuting(t_command *cmd)
 {
-	int		ret;
-
 	if (cmd->simple && (g_pid = fork()) == -1)
 		return (error(E_STANDARD, 1, NULL));
 	if (g_pid == 0)
@@ -52,7 +50,7 @@ bool			executing(t_command *cmd, int pipefd[2], int savefd[2])
 		if ((g_pid = fork()) == -1)
 			return (error(E_STANDARD, 1, NULL));
 	if (g_pid == 0)
-		check = (builthin < 0) ? peri_excuting(cmd, g_all) : exec_builthin(cmd, builthin);
+		check = (builthin < 0) ? peri_excuting(cmd) : exec_builthin(cmd, builthin);
 	if (check == false)
 		return (false);
 	post_executing(cmd, pipefd, savefd);
