@@ -2,7 +2,7 @@
 #ifndef FT_PARSER_H
 # define FT_PARSER_H
 # ifndef PS
-#  define PS "ll$> "
+#  define PS "minishell$> "
 # endif
 # define PRINT_RED		"\033[1;31m"
 # define PRINT_GR		"\033[1;32m"
@@ -33,6 +33,7 @@ bool	lexer(char *, t_parser *parser);
 bool	sets(char *line, int index, t_parser *parser);
 void	add_word(t_args **list, char *word, int type);
 bool	parse_file(t_command *current, char *line, int *index);
-bool	reverse_parser(t_all *all);
+void	reverse_args(t_args **args);
+bool	link_argv(t_command *cmd);
 #endif
 

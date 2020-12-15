@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 11:29:11 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/14 22:24:55 by arraji           ###   ########.fr       */
+/*   Updated: 2020/12/15 23:07:20 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,5 @@ bool		parser(char *line, t_all *all)
 		else
 			add_word(&current->list_args, &line[index], 0);
 	}
-	return (reverse_parser(all));
+	return (true);
 }

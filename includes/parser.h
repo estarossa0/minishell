@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 14:02:21 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/14 14:01:12 by arraji           ###   ########.fr       */
+/*   Updated: 2020/12/15 23:07:41 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ bool	lexer(char *, t_parser *parser);
 bool	sets(char *line, int index, t_parser *parser);
 void	add_word(t_args **list, char *word, int type);
 bool	parse_file(t_command *current, char *line, int *index);
-bool	reverse_parser(t_all *all);
+void	reverse_args(t_args **args);
+bool	link_argv(t_command *cmd);
 #endif
 

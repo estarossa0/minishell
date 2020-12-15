@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 18:35:03 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/15 18:36:28 by arraji           ###   ########.fr       */
+/*   Updated: 2020/12/15 23:05:18 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static	int		get_next_word_size(t_args *current)
 {
 	int size;
+	char *var_value;
 
 	size = 0;
 	while (current && current->c != WORD_SEP)
@@ -22,7 +23,12 @@ static	int		get_next_word_size(t_args *current)
 		if (current->type == 0)
 			size++;
 		else
+		{
+			var_value = get_var_value(current->str);
+			free(current->str);
+			current->str = var_value ? var_value : "";
 			size += ft_strlen(current->str);
+		}
 		current = current->next;
 	}
 	return (size);
@@ -54,7 +60,7 @@ static	void	init_word(t_args *new[2], t_args *current, int need[2])
 	need[1] = 0;
 }
 
-static	void	reverse_args(t_args **args)
+void	reverse_args(t_args **args)
 {
 	t_args	*current[2];
 	t_args	*new[2];
@@ -78,7 +84,7 @@ static	void	reverse_args(t_args **args)
 	*args = new[0];
 }
 
-static	bool	link_argv(t_command *cmd)
+bool	link_argv(t_command *cmd)
 {
 	int size;
 	t_args	*list[2];
@@ -99,27 +105,6 @@ static	bool	link_argv(t_command *cmd)
 	}
 	cmd->argv[index] = NULL;
 	cmd->list_args = NULL;
-	return (true);
-}
-
-bool	reverse_parser(t_all *all)
-{
-	t_pipeline	*current_pipe;
-	t_command	*current_cmd;
-
-	current_pipe = all->pipe;
-	while (current_pipe)
-	{
-		current_cmd = current_pipe->cmd_head;
-		while (current_cmd)
-		{
-			reverse_args(&(current_cmd->list_args));
-			if (link_argv(current_cmd) == false)
-				return (false);
-			current_cmd->cmd_name = current_cmd->argv[0];
-			current_cmd = current_cmd->next;
-		}
-		current_pipe = current_pipe->next;
-	}
+	cmd->cmd_name = cmd->argv[0];
 	return (true);
 }
