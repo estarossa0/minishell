@@ -24,9 +24,9 @@ static	bool	peri_excuting(t_command *cmd)
 	return (true);
 }
 
-static	void	post_executing(t_command *cmd, int pipefd[2], int savefd[2])
+void	post_executing(t_command *cmd, int pipefd[2], int savefd[2])
 {
-	if (cmd->next)
+	if (cmd->next && cmd->next->type != SUB_OUT)
 	{
 		dup_close(pipefd[READ_END], STDIN_FILENO);
 	}
