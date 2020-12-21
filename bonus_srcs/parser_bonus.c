@@ -20,11 +20,7 @@ static	void	init_list(t_command **current, t_all *all)
 		all->pipe->cmd_head = NULL;
 		all->pipe->simple = 1;
 		*current = (t_command *)ft_lstadd_back((t_list **)&(all->pipe->cmd_head), malloc(sizeof(t_command)));
-		(*current)->list_args = NULL;
-		(*current)->file = NULL;
-		(*current)->argv = NULL;
-		(*current)->read_type = 0;
-		(*current)->full_path = NULL;
+		**current = (t_command){0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0};
 	}
 }
 
@@ -47,11 +43,7 @@ static	void	switch_current(t_command **current, char *line, int *index, t_all *a
 		pipe->simple = 0;
 		*current = (t_command *)ft_lstadd_back((t_list **)current, malloc(sizeof(t_command)));
 	}
-	(*current)->read_type = 0;
-	(*current)->list_args = NULL;
-	(*current)->file = NULL;
-	(*current)->argv = NULL;
-	(*current)->full_path = NULL;
+	**current = (t_command){0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0};
 	(*index)++;
 }
 
@@ -104,6 +96,8 @@ bool		parser(char *line, t_all *all)
 			variable_expansion(line, &index, current);
 		else if (line[index] == CMD_SEP || line[index] == PIPELINE_SEP)
 			switch_current(&current, line, &index, all);
+		else if (line[index] == SUB_IN || line[index] == SUB_OUT)
+			subshell_parse(&current, line, index);
 		else
 			add_word(&current->list_args, &line[index], 0);
 	}

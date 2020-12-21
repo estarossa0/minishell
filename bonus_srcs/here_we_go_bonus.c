@@ -17,7 +17,7 @@ static	void	set_return(int data)
 	if (WIFEXITED(data))
 		g_all->exit_status = WEXITSTATUS(data);
 	else if (WIFSIGNALED(data))
-		g_all->exit_status = 128 + WTERMSIG(data);
+			g_all->exit_status = 128 + WTERMSIG(data);
 	g_all->exit_status == 128 + SIGQUIT ? write(1, "Quit\n", 5) : 1;
 }
 
@@ -34,12 +34,15 @@ bool			here_we_go(t_all *all)
 	while (pipe)
 	{
 		cmd = pipe->cmd_head;
-		while(cmd)
+		while(cmd && cmd->type != SUB_OUT)
 		{
 			cmd->simple = pipe->simple;
 			reverse_args(&(cmd->list_args));
 			link_argv(cmd);
-			cmd->cmd_name ? executing(cmd, pipefd, savefd): 1;
+			if (cmd->type != 0)
+				subshell_handle(&cmd, &pipe, pipefd, savefd);
+			else
+				cmd->cmd_name ? executing(cmd, pipefd, savefd): 1;
 			cmd = cmd->next;
 		}
 		while (g_pid != 0 && wait(&exit_data) != g_pid);

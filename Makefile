@@ -58,6 +58,7 @@ pre_execute_bonus.c \
 sets_bonus.c \
 signals_bonus.c \
 variables_expansion_bonus.c \
+subshell_handle_bonus.c \
 
 OBJECT_FILES = $(SRC_FILES:.c=.o)
 OBJECT_FILES := $(addprefix $(OBJECT_FOLDER)/, $(OBJECT_FILES))

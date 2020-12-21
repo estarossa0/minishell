@@ -24,6 +24,8 @@ bool	lexer(char *line, t_parser *parser)
 	}
 	if (freak_out(parser->bits, line, i) == false)
 		return(false);
+	if (g_depth != 0)
+		return (error(E_DEPTH, 1, NULL));
 	chill(&parser->bits);
 	return (true);
 }

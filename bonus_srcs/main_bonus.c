@@ -21,7 +21,8 @@ void	init(t_all *all)
 		init_env();
 	}
 	g_pid = 0;
-	all->parser.bits = 64;
+	g_depth = 0;
+	all->parser.bits = 64 + 1024;
 	ft_end((void **)&(all->parser.line), NULL, 1);
 	all->pipe = NULL;
 }

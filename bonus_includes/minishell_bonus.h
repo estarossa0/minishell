@@ -16,6 +16,7 @@ typedef char bool;
 # define true 0
 # define false 1
 # define D_ERROR
+# define _DEFAULT_SOURCE
 # include <stdlib.h>
 # include <stdio.h>
 # include <fcntl.h>
@@ -39,5 +40,6 @@ extern char **environ;
 t_env		*g_env;
 int			g_total_env;
 pid_t		g_pid;
+int			g_depth;
 bool	here_we_go(t_all *all);
 #endif

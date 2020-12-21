@@ -28,6 +28,8 @@ int		freak_out(int bits, char *line, int index)
 
 void	chill(int *bits)
 {
+	BIT_OFF(*bits, OK_SIN);
+	BIT_ON(*bits, OK_SOUT);
 	BIT_OFF(*bits, BPIPE);
 	BIT_OFF(*bits, BSEMIC);
 	BIT_OFF(*bits, BCHECK);
@@ -52,11 +54,13 @@ int		error(int err, int exit_value, char *need)
 	err == E_NOCMD ? ft_fprintf(2, "command not found: <%s>\n", need) : 1;
 	err == E_WPATH ? ft_fprintf(2, "no such file or directory: %s\n", need) : 1;
 	err == E_ISDIR ? ft_fprintf(2, "%s: Is a directory\n", need) : 1;
-	err == E_ARGS ? ft_fprintf(1, "%s: too many arguments\n", need) : 1;
-	err == E_CD ? ft_fprintf(1, "cd: %s: no such file or directory\n", need) : 1;
+	err == E_ARGS ? ft_fprintf(2, "%s: too many arguments\n", need) : 1;
+	err == E_CD ? ft_fprintf(2, "cd: %s: no such file or directory\n", need) : 1;
 	err == E_NOT_VAL ? ft_fprintf(2, "export: `%s\': not a valid identifier\n", need) : 1;
 	err == E_EXIT_ARG ? ft_fprintf(2, "exit: `%s\' is notnumeric argument\n", need) : 1;
 	err == E_CD_HOME ? ft_fprintf(2, "cd: HOME not set\n") : 1;
+	err == E_DEPTH ? ft_fprintf(2, "parentheses not matching\n") : 1;
+	err == E_TOKEN ? ft_fprintf(2, "token\n") : 1;
 	g_all->exit_status = exit_value;
 	return(1);
 }
