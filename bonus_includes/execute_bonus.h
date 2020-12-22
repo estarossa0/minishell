@@ -21,4 +21,5 @@ bool	executing(t_command *cmd, int pipefd[2], int savefd[2]);
 bool	exec_builthin(t_command *cmd, int builthin);
 void	subshell_handle(t_command **cmd, t_pipeline **, int pipefd[2], int savefd[2]);
 void	skip_subshell(t_command **cmd, t_pipeline **pipe);
+void	finish_all(t_pipeline *pipe);
 #endif

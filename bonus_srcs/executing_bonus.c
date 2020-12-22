@@ -21,6 +21,7 @@ static	bool	peri_excuting(t_command *cmd)
 		if ((execve(cmd->full_path, cmd->argv, reverse_env())) == -1 )
 			return (error(E_STANDARD, 1, NULL));
 	}
+	cmd->pid = g_pid;
 	return (true);
 }
 
@@ -49,6 +50,7 @@ bool			executing(t_command *cmd, int pipefd[2], int savefd[2])
 	if (!cmd->simple)
 		if ((g_pid = fork()) == -1)
 			return (error(E_STANDARD, 1, NULL));
+	cmd->pid = g_pid;
 	if (g_pid == 0)
 		check = (builthin < 0) ? peri_excuting(cmd) : exec_builthin(cmd, builthin);
 	if (check == false)

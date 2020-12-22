@@ -17,4 +17,5 @@
 bool	pre_execute(t_command *cmd, int pipefd[2], int savfd[2], int builthin);
 bool	executing(t_command *cmd, int pipefd[2], int savefd[2]);
 bool	exec_builthin(t_command *cmd, int builthin);
+void	finish_all(t_pipeline *pipe);
 #endif

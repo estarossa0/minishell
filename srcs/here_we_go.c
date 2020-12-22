@@ -12,13 +12,40 @@
 
 # include "minishell.h"
 
-static	void	set_return(int data)
+void			finish_all(t_pipeline *pipe)
 {
-	if (WIFEXITED(data))
-		g_all->exit_status = WEXITSTATUS(data);
-	else if (WIFSIGNALED(data))
-		g_all->exit_status = 128 + WTERMSIG(data);
-	g_all->exit_status == 128 + SIGQUIT ? write(1, "Quit\n", 5) : 1;
+	t_command	*cmd;
+
+	cmd = pipe->cmd_head;
+	while (cmd)
+	{
+		if (cmd->pid > 0)
+			kill(cmd->pid, SIGKILL);
+		cmd = cmd->next;
+	}
+}
+
+static	void	set_return(t_pipeline *pipe)
+{
+	int			ret;
+	int			data;
+
+	ret = 0;
+	data = 0;
+	while (ret != -1)
+	{
+		ret = wait(&data);
+		if (ret == g_pid)
+			finish_all(pipe);
+		if (ret == g_pid && WIFEXITED(data))
+			g_all->exit_status = WEXITSTATUS(data);
+		else if (ret == g_pid && WIFSIGNALED(data))
+		{
+			g_all->exit_status = 128 + WTERMSIG(data);
+			WTERMSIG(data) == SIGQUIT ? write(1, "Quit\n", 5) : 1;
+		}
+	}
+	g_pid = 0;
 }
 
 bool			here_we_go(t_all *all)
@@ -27,7 +54,6 @@ bool			here_we_go(t_all *all)
 	t_command	*cmd;
 	int			pipefd[2];
 	int			savefd[2];
-	int			exit_data;
 
 	pipe = all->pipe;
 	fd_saving(savefd);
@@ -42,8 +68,7 @@ bool			here_we_go(t_all *all)
 			cmd->cmd_name ? executing(cmd, pipefd, savefd) : 1;
 			cmd = cmd->next;
 		}
-		while (g_pid != 0 && wait(&exit_data) != g_pid);
-		set_return(exit_data);
+		set_return(pipe);
 		pipe = pipe->next;
 	}
 	fd_saving(savefd);

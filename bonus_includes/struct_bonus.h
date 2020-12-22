@@ -43,6 +43,7 @@ typedef	struct	s_command
 	int					simple;
 	int					relation;
 	int					type;
+	int					pid;
 }				t_command;
 
 typedef	struct s_pipeline

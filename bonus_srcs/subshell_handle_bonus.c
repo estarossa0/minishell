@@ -41,6 +41,7 @@ int pipefd[2], int savefd[2])
 		*cmd = save;
 		post_executing(*cmd, pipefd, savefd);
 	}
+	(*cmd)->pid = g_pid;
 }
 
 void		subshell_parse(t_command **current, char *line, int index)
