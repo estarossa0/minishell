@@ -24,11 +24,11 @@ static	void	init_list(t_command **current, t_all *all)
 	}
 }
 
-static	void	switch_current(t_command **current, char *line, int *index, t_all *all)
+static	void	switch_current(t_command **current, char *line, int index, t_all *all)
 {
 	t_pipeline	*pipe;
 
-	if (line[*index] == PIPELINE_SEP)
+	if (line[index] == PIPELINE_SEP)
 	{
 		pipe = (t_pipeline*)ft_lstadd_back((t_list **)&(all->pipe), malloc(sizeof(t_pipeline)));
 		pipe->cmd_head = NULL;
@@ -44,7 +44,6 @@ static	void	switch_current(t_command **current, char *line, int *index, t_all *a
 		*current = (t_command *)ft_lstadd_back((t_list **)current, malloc(sizeof(t_command)));
 	}
 	**current = (t_command){0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0};
-	(*index)++;
 }
 
 void	add_word(t_args **list, char *word, int type)
@@ -95,7 +94,7 @@ bool		parser(char *line, t_all *all)
 		else if (line[index] == VAR)
 			variable_expansion(line, &index, current);
 		else if (line[index] == CMD_SEP || line[index] == PIPELINE_SEP)
-			switch_current(&current, line, &index, all);
+			switch_current(&current, line, index, all);
 		else if (line[index] == SUB_IN || line[index] == SUB_OUT)
 			subshell_parse(&current, line, index);
 		else
