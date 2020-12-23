@@ -38,9 +38,11 @@ bool	parser(char *line, t_all *all);
 bool	lexer(char *, t_parser *parser);
 bool	sets(char *line, int index, t_parser *parser);
 void	add_word(t_args **list, char *word, int type);
-bool	parse_file(t_command *current, char *line, int *index);
+bool	parse_files(t_command *current);
 void	subshell_parse(t_command **current, char *line, int index);
 void	reverse_args(t_args **args);
 bool	link_argv(t_command *cmd);
+void	add_file(t_command *current, char *line, int *index);
+char	*get_next_word(char	*line, int *index);
 #endif
 

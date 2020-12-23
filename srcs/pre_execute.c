@@ -94,6 +94,9 @@ static	void	prepare_fd(t_command *cmd, int pipefd[2], int savefd[2])
 bool	pre_execute(t_command *cmd, int pipefd[2], int savefd[2], int builthin)
 {
 	struct	stat	buf;
+
+	if (parse_files(cmd) == false)
+		return (false);
 	if (builthin < 0)
 	{
 		if (with_path(cmd->cmd_name))

@@ -15,6 +15,13 @@
 # ifndef D_ERROR
 # error "include only dumbshell.h"
 # endif
+typedef	struct	s_files
+{
+	struct	s_files	*next;
+	char			*file;
+	int				type;
+}				t_files;
+
 typedef	struct	s_parser
 {
 	int		bits;
@@ -39,6 +46,7 @@ typedef	struct	s_command
 	char				*full_path;
 	int					fd;
 	char				*file;
+	t_files				*all_files;
 	char				read_type;
 	int					simple;
 	int					relation;

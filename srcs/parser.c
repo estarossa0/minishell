@@ -20,7 +20,7 @@ static	void	init_list(t_command **current, t_all *all)
 		all->pipe->cmd_head = NULL;
 		all->pipe->simple = 1;
 		*current = (t_command *)ft_lstadd_back((t_list **)&(all->pipe->cmd_head), malloc(sizeof(t_command)));
-		**current = (t_command){0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0};
+		**current = (t_command){0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0};
 	}
 }
 
@@ -43,7 +43,7 @@ static	void	switch_current(t_command **current, char *line, int index, t_all *al
 		pipe->simple = 0;
 		*current = (t_command *)ft_lstadd_back((t_list **)current, malloc(sizeof(t_command)));
 	}
-	**current = (t_command){0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0};
+	**current = (t_command){0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0};
 }
 
 void	add_word(t_args **list, char *word, int type)
@@ -87,10 +87,7 @@ bool		parser(char *line, t_all *all)
 		init_list(&current, all);
 		if (line[index] == RED_FROM || line[index] == RED_TO
 		|| line[index] == RED_TO_APP)
-		{
-			if (parse_file(current, line, &index) == false)
-				return (false);
-		}
+			add_file(current, line, &index);
 		else if (line[index] == VAR)
 			variable_expansion(line, &index, current);
 		else if (line[index] == CMD_SEP || line[index] == PIPELINE_SEP)

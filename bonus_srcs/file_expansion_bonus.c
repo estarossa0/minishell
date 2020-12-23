@@ -12,6 +12,16 @@
 
 #include "minishell_bonus.h"
 
+void			add_file(t_command *current, char *line, int *index)
+{
+	t_files	*new;
+
+	new = (t_files *)malloc(sizeof(t_files));
+	new->type = line[*index];
+	new->file = get_next_word(line, index);
+	ft_lstadd_back((t_list **)&(current->all_files), (t_list *)new);
+}
+
 static	void	overwrite_file(t_command *command)
 {
 	if (command->file)
@@ -21,7 +31,7 @@ static	void	overwrite_file(t_command *command)
 	}
 }
 
-static	char	*get_next_word(char	*line, int *index)
+char	*get_next_word(char	*line, int *index)
 {
 	int		save;
 	char	*word;
@@ -35,22 +45,27 @@ static	char	*get_next_word(char	*line, int *index)
 	return (word);
 }
 
-bool		parse_file(t_command *current, char *line, int *index)
+bool		parse_files(t_command *current)
 {
 	char	type;
+	t_files	*iterator;
 
-	type = line[*index];
-	overwrite_file(current);
-	if ((current->file = get_next_word(line, index)) == NULL)
-		return (false);
-	BIT_ON(current->read_type, -1 * type);
-	if (type == RED_TO)
-		current->fd = open(current->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	else if (type == RED_FROM)
-		current->fd = open(current->file, O_RDONLY);
-	else if (type == RED_TO_APP)
-		current->fd = open(current->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	if (current->fd < 0)
-		return (error(E_FILE, 1, current->file));
+	iterator = current->all_files;
+	while (iterator)
+	{
+		overwrite_file(current);
+		type = iterator->type;
+		current->file = iterator->file;
+		BIT_ON(current->read_type, -1 * type);
+		if (type == RED_TO)
+			current->fd = open(iterator->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		else if (type == RED_FROM)
+			current->fd = open(iterator->file, O_RDONLY);
+		else if (type == RED_TO_APP)
+			current->fd = open(iterator->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+		if (current->fd < 0)
+			return (error(E_FILE, 1, current->file));
+		iterator = iterator->next;
+	}
 	return (true);
 }

@@ -40,6 +40,8 @@ void	clear(t_all *all)
 			ft_end((void**)&(curr->full_path), (void**)&(curr->file), 1);
 			while (curr->list_args)
 				curr->list_args = (t_args *)ft_lstdelone((t_list *)curr->list_args, NULL);
+			while (curr->all_files)
+				curr->all_files = (t_files *)ft_lstdelone((t_list *)curr->all_files, NULL);
 			save = (void *)curr;
 			curr = curr->next;
 			free(save);
