@@ -26,7 +26,7 @@ static	char	*parse_path(char *all_paths, char *name)
 		if (path[index][ft_strlen(path[index])] == '/')
 			path[index][ft_strlen(path[index])] = 0;
 		full_path = ft_strjoin(path[index], name);
-		if (stat(full_path, &buf) == 0)
+		if (stat(full_path, &buf) == 0 && !S_ISDIR(buf.st_mode))
 		{
 			free_tab(path, ft_tablen(path));
 			return (full_path);
