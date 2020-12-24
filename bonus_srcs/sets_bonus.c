@@ -168,6 +168,40 @@ static	bool	set_subshell_out(char *line, int index, t_parser *parser)
 	return (true);
 }
 
+static	bool	set_or(char *line, int index, t_parser *parser)
+{
+	if (AND(parser->bits, BD_Q) || AND(parser->bits, BS_Q))
+		return true;
+	if (AND(parser->bits, BCHECK))
+		return (error(E_OPERATOR, 1, &line[index]));
+	if (freak_out(parser->bits, line, index) == false)
+		return (false);
+	BIT_ON(parser->bits, B_OR);
+	BIT_OFF(parser->bits, SUBSHELL);
+	BIT_OFF(parser->bits, OK_SOUT);
+	BIT_ON(parser->bits, OK_SIN);
+	line[index] = OP_OR;
+	line[index + 1] = REMOVED;
+	return true;
+}
+
+static	bool	set_and(char *line, int index, t_parser *parser)
+{
+	if (AND(parser->bits, BD_Q) || AND(parser->bits, BS_Q))
+		return true;
+	if (AND(parser->bits, BCHECK))
+		return (error(E_OPERATOR, 1, &line[index]));
+	if (freak_out(parser->bits, line, index) == false)
+		return (false);
+	BIT_ON(parser->bits, B_AND);
+	BIT_OFF(parser->bits, SUBSHELL);
+	BIT_OFF(parser->bits, OK_SOUT);
+	BIT_ON(parser->bits, OK_SIN);
+	line[index] = OP_AND;
+	line[index + 1] = REMOVED;
+	return true;
+}
+
 bool			sets(char *line, int index, t_parser *parser)
 {
 	bool	check;
@@ -175,6 +209,10 @@ bool			sets(char *line, int index, t_parser *parser)
 	check = true;
 	if (line[index] < 0)
 		return (true);
+	else if (line[index] == '|' && line[index + 1] == line[index])
+		check = set_or(line, index, parser);
+	else if (line[index] == '&' && line[index + 1] == line[index])
+		check = set_and(line, index, parser);
 	else if (line[index] == '|')
 		check = set_pipe(line, index, parser);
 	else if (line[index] == '\'')

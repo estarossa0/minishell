@@ -20,7 +20,7 @@ static	void	init_list(t_command **current, t_all *all)
 		all->pipe->cmd_head = NULL;
 		all->pipe->simple = 1;
 		*current = (t_command *)ft_lstadd_back((t_list **)&(all->pipe->cmd_head), malloc(sizeof(t_command)));
-		**current = (t_command){0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0};
+		**current = (t_command){0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0};
 	}
 }
 
@@ -28,22 +28,24 @@ static	void	switch_current(t_command **current, char *line, int index, t_all *al
 {
 	t_pipeline	*pipe;
 
-	if (line[index] == PIPELINE_SEP)
+	pipe = all->pipe;
+	while (pipe->next)
+		pipe = pipe->next;
+	if (line[index] == PIPELINE_SEP || line[index] == OP_AND || line[index] == OP_OR)
 	{
+		pipe->relation = line[index];
 		pipe = (t_pipeline*)ft_lstadd_back((t_list **)&(all->pipe), malloc(sizeof(t_pipeline)));
 		pipe->cmd_head = NULL;
 		pipe->simple = 1;
+		pipe->relation = PIPELINE_SEP;
 		*current = (t_command *)ft_lstadd_back((t_list **)&(pipe->cmd_head), malloc(sizeof(t_command)));
 	}
 	else
 	{
-		pipe = all->pipe;
-		while (pipe->next)
-			pipe = pipe->next;
 		pipe->simple = 0;
 		*current = (t_command *)ft_lstadd_back((t_list **)current, malloc(sizeof(t_command)));
 	}
-	**current = (t_command){0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0};
+	**current = (t_command){0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0};
 }
 
 void	add_word(t_args **list, char *word, int type)
@@ -90,7 +92,8 @@ bool		parser(char *line, t_all *all)
 			add_file(current, line, &index);
 		else if (line[index] == VAR)
 			variable_expansion(line, &index, current);
-		else if (line[index] == CMD_SEP || line[index] == PIPELINE_SEP)
+		else if (line[index] == CMD_SEP || line[index] == PIPELINE_SEP
+		|| line[index] == OP_OR || line[index] == OP_AND)
 			switch_current(&current, line, index, all);
 		else if (line[index] == SUB_IN || line[index] == SUB_OUT)
 			subshell_parse(&current, line, index);

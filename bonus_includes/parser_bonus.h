@@ -22,6 +22,8 @@
 # define	OK_SOUT			2048
 # define	SUBSHELL		4096
 # define	TOKEN			8192
+# define	B_OR			16384
+# define	B_AND			32768
 # define	WORD_SEP		-69
 # define	REMOVED			-2
 # define	PIPELINE_SEP	-3
@@ -33,6 +35,8 @@
 # define	CNULL			-10
 # define	SUB_IN			-6
 # define	SUB_OUT			-7
+# define	OP_OR			-11
+# define	OP_AND			-12
 bool	get_data(t_all *);
 bool	parser(char *line, t_all *all);
 bool	lexer(char *, t_parser *parser);

@@ -14,7 +14,8 @@
 # define FT_ERROR_H
 # define	E_STANDARD	1
 # define	E_SYNTAX	2
-# define	E_FILE		3
+# define	E_OPERATOR	3
+# define	E_FILE		14
 # define	E_NOCMD		4
 # define	E_WPATH		5
 # define	E_ISDIR		6

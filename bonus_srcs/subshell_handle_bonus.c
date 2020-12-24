@@ -5,6 +5,7 @@ void	skip_subshell(t_command **cmd, t_pipeline **pipe)
 	int	depth;
 
 	depth = 0;
+	*cmd = (*cmd)->next;
 	while (((*cmd)->type != SUB_OUT || depth != 0))
 	{
 		(*cmd)->type == SUB_IN ? depth++ : 1;
@@ -24,7 +25,7 @@ int pipefd[2], int savefd[2])
 	t_command	*save;
 	t_pipeline	*pipe_save;
 
-	save = (*cmd)->next;
+	save = (*cmd);
 	pipe_save = *pipeline;
 	skip_subshell(&save, &pipe_save);
 	prepare_fd(save, pipefd, savefd);

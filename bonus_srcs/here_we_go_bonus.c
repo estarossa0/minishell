@@ -50,6 +50,36 @@ static	void	set_return(t_command *cmd, t_pipeline *pipe)
 	g_pid = 0;
 }
 
+void			apply_operation(t_pipeline **pipe, int fail)
+{
+	t_pipeline	*new;
+	t_command	*cmd;
+	int			next;
+
+	new = (*pipe);
+	fail = (fail != 0) ? 1 : 0;
+	while (new && new->relation != PIPELINE_SEP)
+	{
+		if (new->relation == OP_OR)
+			next = fail | 0;
+		else
+			next = !(fail ^ 0);
+		if (next)
+			break;
+		new = new->next;
+		cmd = new->cmd_head;
+		while (cmd && cmd->type != SUB_OUT)
+		{
+			if (cmd->type != 0)
+				skip_subshell(&cmd, &new);
+			cmd = cmd->next;
+		}
+		if (cmd && cmd->type == SUB_OUT)
+			exit(g_all->exit_status);
+	}
+	*pipe = new;
+}
+
 bool			here_we_go(t_all *all)
 {
 	t_pipeline	*pipe;
@@ -74,6 +104,7 @@ bool			here_we_go(t_all *all)
 			cmd = cmd->next;
 		}
 		set_return(cmd, pipe);
+		apply_operation(&pipe, all->exit_status);
 		pipe = pipe->next;
 	}
 	fd_saving(savefd);

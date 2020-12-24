@@ -49,7 +49,6 @@ typedef	struct	s_command
 	t_files				*all_files;
 	char				read_type;
 	int					simple;
-	int					relation;
 	int					type;
 	int					pid;
 }				t_command;
@@ -58,6 +57,7 @@ typedef	struct s_pipeline
 {
 	struct	s_pipeline	*next;
 	int					simple;
+	int					relation;
 	struct	s_command	*cmd_head;
 }				t_pipeline;
 

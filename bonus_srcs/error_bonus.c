@@ -23,6 +23,10 @@ int		freak_out(int bits, char *line, int index)
 	else if (AND(bits, BRED_TO) || AND(bits, BRED_TO_APP)
 	|| AND(bits, BRED_FROM))
 		return (error(E_SYNTAX, 1, &line[index]));
+	else if (AND(bits, B_AND))
+		return (error(E_OPERATOR, 1, &line[index]));
+	else if (AND(bits, B_OR))
+		return (error(E_OPERATOR, 1, &line[index]));
 	return (true);
 }
 
@@ -36,17 +40,20 @@ void	chill(int *bits)
 	BIT_OFF(*bits, BRED_FROM);
 	BIT_OFF(*bits, BRED_TO);
 	BIT_OFF(*bits, BRED_TO_APP);
+	BIT_OFF(*bits, B_AND);
+	BIT_OFF(*bits, B_OR);
 }
 
 int		error(int err, int exit_value, char *need)
 {
-	if (need && need[0] == '\0' && err == E_SYNTAX)
+	if (need && need[0] == '\0' && (err == E_SYNTAX || err == E_OPERATOR))
 		need = "newline";
-	else if (err == E_SYNTAX && need)
+	else if ((err == E_SYNTAX || err == E_OPERATOR) && need)
 	{
 		need[0] = *need;
-		need[1] = '\0';
+		need[err - 1] = '\0';
 	}
+	err == E_OPERATOR ? err = E_SYNTAX : 1;
 	ft_fprintf(2, "minishell %d: ", err);
 	err == E_SYNTAX ? ft_fprintf(2, "parse error near `%s'\n", need) : 1;
 	err == E_STANDARD ? ft_fprintf(2, "%s.\n", strerror(errno)) : 1;
