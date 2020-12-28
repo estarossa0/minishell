@@ -78,9 +78,11 @@ static	bool	get_path(t_command *cmd, char *name)
 	return (true);
 }
 
-static	void	prepare_fd(t_command *cmd, int pipefd[2], int savefd[2])
+static	bool	prepare_fd(t_command *cmd, int pipefd[2], int savefd[2])
 {
-	
+	bool	check;
+
+	check = parse_files(cmd);
 	if (cmd->next && pipe(pipefd) == true)
 		dup_close(pipefd[WRITE_END], STDOUT_FILENO);
 	if (cmd->next == NULL)
@@ -89,13 +91,14 @@ static	void	prepare_fd(t_command *cmd, int pipefd[2], int savefd[2])
 		dup_close(cmd->fd, STDIN_FILENO);
 	if(cmd->file && (AND(cmd->read_type, RED_TO * -1) || AND(cmd->read_type, RED_TO_APP * -1)))
 		dup_close(cmd->fd, STDOUT_FILENO);
+	return (check);
 }
 
 bool	pre_execute(t_command *cmd, int pipefd[2], int savefd[2], int builthin)
 {
 	struct	stat	buf;
 
-	if (parse_files(cmd) == false)
+	if (prepare_fd(cmd, pipefd, savefd) == false)
 		return (false);
 	if (builthin < 0)
 	{
@@ -112,6 +115,5 @@ bool	pre_execute(t_command *cmd, int pipefd[2], int savefd[2], int builthin)
 		else if (S_ISDIR(buf.st_mode))
 			return (error(E_ISDIR, 126, cmd->full_path));
 	}
-	prepare_fd(cmd, pipefd, savefd);
 	return (true);
 }
