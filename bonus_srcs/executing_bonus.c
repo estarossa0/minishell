@@ -12,8 +12,13 @@
 
 #include "minishell_bonus.h"
 
-static	bool	peri_excuting(t_command *cmd)
+static	bool	peri_excuting(t_command *cmd, int builtin)
 {
+	if (!cmd->simple)
+		if ((g_pid = fork()) == -1)
+			return (error(E_STANDARD, 1, NULL));
+	if (builtin > 0)
+		return (exec_builthin(cmd, builtin));
 	if (cmd->simple && (g_pid = fork()) == -1)
 		return (error(E_STANDARD, 1, NULL));
 	if (g_pid == 0)
@@ -38,23 +43,12 @@ void	post_executing(t_command *cmd, int pipefd[2], int savefd[2])
 	}
 }
 
-bool			executing(t_command *cmd, int pipefd[2], int savefd[2])
+void			executing(t_command *cmd, int pipefd[2], int savefd[2])
 {
 	int		builthin;
-	bool	check;
 
 	builthin = is_builtin(cmd->cmd_name);
-	check = true;
-	if (pre_execute(cmd, pipefd, savefd, builthin) == false)
-		return (false);
-	if (!cmd->simple)
-		if ((g_pid = fork()) == -1)
-			return (error(E_STANDARD, 1, NULL));
-	cmd->pid = g_pid;
-	if (g_pid == 0)
-		check = (builthin < 0) ? peri_excuting(cmd) : exec_builthin(cmd, builthin);
-	if (check == false)
-		return (false);
+	if (pre_execute(cmd, pipefd, savefd, builthin) == true)
+		peri_excuting(cmd, builthin);
 	post_executing(cmd, pipefd, savefd);
-	return (true);
 }
