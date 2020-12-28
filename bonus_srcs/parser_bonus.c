@@ -19,6 +19,7 @@ static	void	init_list(t_command **current, t_all *all)
 		ft_lstadd_back((t_list **)&(all->pipe), malloc(sizeof(t_pipeline)));
 		all->pipe->cmd_head = NULL;
 		all->pipe->simple = 1;
+		all->pipe->relation = PIPELINE_SEP;
 		*current = (t_command *)ft_lstadd_back((t_list **)&(all->pipe->cmd_head), malloc(sizeof(t_command)));
 		**current = (t_command){0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0};
 	}
