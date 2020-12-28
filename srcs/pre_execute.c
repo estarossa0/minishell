@@ -80,15 +80,15 @@ static	bool	get_path(t_command *cmd, char *name)
 
 static	void	prepare_fd(t_command *cmd, int pipefd[2], int savefd[2])
 {
-	pipe(pipefd);
+	
+	if (cmd->next && pipe(pipefd) == true)
+		dup_close(pipefd[WRITE_END], STDOUT_FILENO);
+	if (cmd->next == NULL)
+		dup2(savefd[1], STDOUT_FILENO);
 	if (cmd->file && AND(cmd->read_type, RED_FROM * -1))
 		dup_close(cmd->fd, STDIN_FILENO);
-	else if(cmd->file && (AND(cmd->read_type, RED_TO * -1) || AND(cmd->read_type, RED_TO_APP * -1)))
+	if(cmd->file && (AND(cmd->read_type, RED_TO * -1) || AND(cmd->read_type, RED_TO_APP * -1)))
 		dup_close(cmd->fd, STDOUT_FILENO);
-	else if (cmd->next)
-		dup_close(pipefd[WRITE_END], STDOUT_FILENO);
-	else if (cmd->next == NULL)
-		dup2(savefd[1], STDOUT_FILENO);
 }
 
 bool	pre_execute(t_command *cmd, int pipefd[2], int savefd[2], int builthin)
