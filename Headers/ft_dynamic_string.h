@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   terminal.h                                         :+:      :+:    :+:   */
+/*   ft_string.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ikhadem <ikhadem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/28 08:28:00 by ikhadem           #+#    #+#             */
-/*   Updated: 2020/12/29 09:57:21 by ikhadem          ###   ########.fr       */
+/*   Created: 2020/12/29 09:45:22 by ikhadem           #+#    #+#             */
+/*   Updated: 2020/12/29 10:24:38 by ikhadem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TERMINAL_H
-# define TERMINAL_H
+#ifndef FT_STRING_H
+# define FT_STRING_H
 
+# define MIN_LEN 1024
+
+# include <string.h>
 # include <stdlib.h>
-# include <stdio.h>
-# include <sys/errno.h>
-# include <ncurses.h>
-# include <term.h>
-# include "ft_io.h"
 # include "ft_defines.h"
-# include "ft_string.h"
-
-int			init_terminal(void);
-int			setup_terminal(struct termios *term);
-int			unset_terminal(struct termios *term);
-void		ft_init_capabilities(t_cmd *cmd);
-void		insert_mode(int c, t_cmd *cmd);
-void		delete_mode(t_cmd *cmd);
 
 #endif

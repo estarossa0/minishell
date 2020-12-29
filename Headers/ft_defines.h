@@ -6,7 +6,7 @@
 /*   By: ikhadem <ikhadem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 08:39:50 by ikhadem           #+#    #+#             */
-/*   Updated: 2020/12/29 08:31:03 by ikhadem          ###   ########.fr       */
+/*   Updated: 2020/12/29 10:12:43 by ikhadem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # ifndef FALSE
 #  define FALSE 0
 # endif
+
+# define K_RETURN 127
 
 /*
 **	im ==> string to inter insert mode
@@ -79,6 +81,7 @@ typedef	struct	s_cmd
 {
 	char			*line;
 	int				index;
+	int				length;
 	t_capability	cap;
 }				t_cmd;
 

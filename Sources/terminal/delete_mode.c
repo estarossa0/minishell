@@ -1,22 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   termcaps.h                                         :+:      :+:    :+:   */
+/*   delete_mode.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ikhadem <ikhadem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/28 08:11:44 by ikhadem           #+#    #+#             */
-/*   Updated: 2020/12/29 09:57:12 by ikhadem          ###   ########.fr       */
+/*   Created: 2020/12/29 09:35:24 by ikhadem           #+#    #+#             */
+/*   Updated: 2020/12/29 09:39:56 by ikhadem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TERMCAPS_H
-# define TERMCAPS_H
+#include "terminal.h"
 
-char	**g_env;
-
-# include <stdio.h>
-# include <terminal.h>
-# include <ncurses.h>
-
-#endif
+void		delete_mode(t_cmd *cmd)
+{
+	tputs(cmd->cap.delete_char.dm, 1, ft_putchar);
+	tputs(cmd->cap.delete_char.dc, 1, ft_putchar);
+	tputs(cmd->cap.delete_char.ed, 1, ft_putchar);
+}

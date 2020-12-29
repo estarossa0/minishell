@@ -1,22 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   termcaps.h                                         :+:      :+:    :+:   */
+/*   str_manip.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ikhadem <ikhadem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/28 08:11:44 by ikhadem           #+#    #+#             */
-/*   Updated: 2020/12/29 09:57:12 by ikhadem          ###   ########.fr       */
+/*   Created: 2020/12/29 09:45:02 by ikhadem           #+#    #+#             */
+/*   Updated: 2020/12/29 10:49:41 by ikhadem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TERMCAPS_H
-# define TERMCAPS_H
+#include "ft_string.h"
 
-char	**g_env;
+/*
+**	Ensures a 100 byte buffer
+**	Meaures Against overflow
+*/
 
-# include <stdio.h>
-# include <terminal.h>
-# include <ncurses.h>
+static void		check_str_overflow(char *str, t_cmd *cmd)
+{
+	size_t		len;
+	char		*tmp;
 
-#endif
+	len = strlen(str);
+	if (len - 50 > cmd->length)
+	{
+		tmp = (char *)malloc(len + 50);
+		memset(tmp, '\0', len + 50);
+		memcpy(tmp, cmd->line, len);
+		free(cmd->line);
+		cmd->line = tmp;
+	}
+}
+
+void			str_add(t_cmd *cmd, int c)
+{
+}
