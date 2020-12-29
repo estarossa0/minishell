@@ -6,7 +6,7 @@
 /*   By: ikhadem <ikhadem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 08:12:18 by ikhadem           #+#    #+#             */
-/*   Updated: 2020/12/29 09:04:05 by ikhadem          ###   ########.fr       */
+/*   Updated: 2020/12/29 09:33:46 by ikhadem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void input_manip()
 	ft_init_capabilities(&command);
 	read(STDIN_FILENO, &c, 1);
 	if (isprint(c))
-		insert_mode(c, command);
+		insert_mode(c, &command);
 }
 
 int		main(int argc, char **argv, char **env)
