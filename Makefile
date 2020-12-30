@@ -6,7 +6,7 @@
 #    By: ikhadem <ikhadem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/12/28 08:01:27 by ikhadem           #+#    #+#              #
-#    Updated: 2020/12/29 09:23:48 by ikhadem          ###   ########.fr        #
+#    Updated: 2020/12/30 09:06:55 by ikhadem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,9 @@ SRC :=	main.c \
 		sources/IO/ft_putstr_fd.c \
 		sources/terminal/terminal.c \
 		sources/terminal/ft_capabilities.c \
-		sources/terminal/insert_mode.c
+		sources/string/str_manip.c \
+		sources/terminal/insert_mode.c \
+		sources/terminal/delete_mode.c
 
 OBJ := $(SRC:.c=.o)
 
@@ -38,12 +40,12 @@ $(NAME):	$(OBJ)
 
 clean:
 			@rm -f $(OBJ)
-			@echo "Removed Objects"
+			@echo "$(NAME) : Removed Objects"
 
 fclean:		clean
 			@rm -f $(NAME)
-			@echo "Removed Binary"
+			@echo "$(NAME) : Removed Binary"
 
 re:			fclean
 			@rm -f $(NAME)
-			@echo "Recompiled Project"
+			@echo "$(NAME) : Recompiled Project"

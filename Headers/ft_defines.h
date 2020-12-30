@@ -6,7 +6,7 @@
 /*   By: ikhadem <ikhadem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 08:39:50 by ikhadem           #+#    #+#             */
-/*   Updated: 2020/12/29 10:12:43 by ikhadem          ###   ########.fr       */
+/*   Updated: 2020/12/30 08:12:39 by ikhadem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef	struct	s_cmd
 	char			*line;
 	int				index;
 	int				length;
+	int				buff_size;
 	t_capability	cap;
 }				t_cmd;
 

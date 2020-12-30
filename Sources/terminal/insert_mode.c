@@ -6,7 +6,7 @@
 /*   By: ikhadem <ikhadem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 08:16:48 by ikhadem           #+#    #+#             */
-/*   Updated: 2020/12/29 10:14:44 by ikhadem          ###   ########.fr       */
+/*   Updated: 2020/12/30 09:14:37 by ikhadem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,6 @@ static void		terminal_putstr(char *str, t_capability cap)
 
 void			insert_mode(int c, t_cmd *cmd)
 {
-	
+	str_add(cmd, c);
+	terminal_putstr(cmd->line, cmd->cap);
 }

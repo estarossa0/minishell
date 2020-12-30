@@ -6,7 +6,7 @@
 /*   By: ikhadem <ikhadem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 08:12:18 by ikhadem           #+#    #+#             */
-/*   Updated: 2020/12/29 10:14:12 by ikhadem          ###   ########.fr       */
+/*   Updated: 2020/12/30 09:13:59 by ikhadem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@ struct termios term;
 
 int		ft_init_command(t_cmd *cmd)
 {
-	if (!(cmd->line = (char *)malloc(MIN_LEN * sizeof (char))))
+	if (!(cmd->line = (char *)malloc(CMD_MAX_LEN * sizeof (char))))
 		return (FALSE);
-	cmd->index = 0;
+	cmd->index = 1;
 	cmd->length = 0;
-	memset(cmd->line, '\0', MIN_LEN);
+	cmd->buff_size = CMD_MAX_LEN;
+	memset(cmd->line, '\0', cmd->buff_size);
 	return (TRUE);
 }
 
@@ -33,7 +34,6 @@ void input_manip(t_cmd *command)
 	int			c;
 
 	c = 0;
-	ft_init_command(command);
 	read(STDIN_FILENO, &c, 1);
 	if (isprint(c))
 		insert_mode(c, command);
@@ -50,6 +50,7 @@ int		main(int argc, char **argv, char **env)
 		exit(-1);
 	if (!ft_init_command(&command))
 		exit(-1);
+	ft_init_capabilities(&command);
 	while (1)
 		input_manip(&command);
 	if (!unset_terminal(&term))
