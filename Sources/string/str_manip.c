@@ -6,7 +6,7 @@
 /*   By: ikhadem <ikhadem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 09:45:02 by ikhadem           #+#    #+#             */
-/*   Updated: 2020/12/30 09:03:40 by ikhadem          ###   ########.fr       */
+/*   Updated: 2021/01/05 12:05:49 by ikhadem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ static void		check_str_overflow(t_cmd *cmd)
 }
 
 /*
-** add the pqssed charcater into pos (refered to by the current cursor pos)
+** add the passed charcater into pos
+** (refered to by the current cursor pos)
 */
 
 void			str_add(t_cmd *cmd, int c)

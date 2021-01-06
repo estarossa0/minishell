@@ -6,7 +6,7 @@
 /*   By: ikhadem <ikhadem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 08:28:00 by ikhadem           #+#    #+#             */
-/*   Updated: 2020/12/29 09:57:21 by ikhadem          ###   ########.fr       */
+/*   Updated: 2020/12/30 09:20:27 by ikhadem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ int			unset_terminal(struct termios *term);
 void		ft_init_capabilities(t_cmd *cmd);
 void		insert_mode(int c, t_cmd *cmd);
 void		delete_mode(t_cmd *cmd);
+void		terminal_clear_screen(t_cmd *cmd);
 
 #endif

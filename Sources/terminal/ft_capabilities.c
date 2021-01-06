@@ -6,7 +6,7 @@
 /*   By: ikhadem <ikhadem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 08:31:34 by ikhadem           #+#    #+#             */
-/*   Updated: 2020/12/29 09:37:49 by ikhadem          ###   ########.fr       */
+/*   Updated: 2021/01/05 12:39:18 by ikhadem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,16 @@ static void		init_delete_char(t_cmd *cmd)
 	cmd->cap.delete_char.ed = tgetstr("ed", NULL);
 }
 
+static void		init_cursor(t_cmd *cmd)
+{
+	cmd->cap.cursor.le = tgetstr("le", NULL);
+	cmd->cap.cursor.dw = tgetstr("do", NULL);
+	cmd->cap.cursor.cr = tgetstr("cr", NULL);
+}
+
 void			ft_init_capabilities(t_cmd *cmd)
 {
 	init_edit_char(cmd);
 	init_delete_char(cmd);
+	init_cursor(cmd);
 }

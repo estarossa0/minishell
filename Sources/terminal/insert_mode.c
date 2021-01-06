@@ -6,7 +6,7 @@
 /*   By: ikhadem <ikhadem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/29 08:16:48 by ikhadem           #+#    #+#             */
-/*   Updated: 2020/12/30 09:14:37 by ikhadem          ###   ########.fr       */
+/*   Updated: 2021/01/05 12:50:28 by ikhadem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,27 @@ static void		terminal_putchar(int c, t_capability cap)
 static void		terminal_putstr(char *str, t_capability cap)
 {
 	int		i;
+	int		width;
 
 	i = 0;
-	tputs(cap.insert_char.im, 1, ft_putchar);
+	width = tgetnum("co");
 	while (i < strlen(str))
 	{
+		tputs(cap.insert_char.im, 1, ft_putchar);
 		terminal_putchar(str[i], cap);
+		tputs(cap.insert_char.ei, 1, ft_putchar);
+		if (i % width == 0 && i != 0)
+		{
+			tputs(cap.cursor.dw, 1, ft_putchar);
+			tputs(cap.cursor.cr, 1, ft_putchar);
+		}
 		i++;
 	}
-	tputs(cap.insert_char.ei, 1, ft_putchar);
 }
 
 void			insert_mode(int c, t_cmd *cmd)
 {
 	str_add(cmd, c);
+	terminal_clear_screen(cmd);
 	terminal_putstr(cmd->line, cmd->cap);
 }

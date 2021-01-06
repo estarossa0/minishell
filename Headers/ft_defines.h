@@ -6,7 +6,7 @@
 /*   By: ikhadem <ikhadem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/28 08:39:50 by ikhadem           #+#    #+#             */
-/*   Updated: 2020/12/30 08:12:39 by ikhadem          ###   ########.fr       */
+/*   Updated: 2021/01/05 12:39:09 by ikhadem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,9 @@ typedef	struct	s_dchar
 
 typedef struct	s_cmotion
 {
-	char		*cm;
 	char		*le;
-	char		*ri;
-	char		*ho;
-	char		*up;
 	char		*dw;
+	char		*cr;
 }				t_cmotion;
 
 typedef	struct	s_capability
