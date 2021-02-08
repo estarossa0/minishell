@@ -100,7 +100,7 @@ bool			here_we_go(t_all *all)
 			if (cmd->type != 0)
 				subshell_handle(&cmd, &pipe, pipefd, savefd);
 			else
-				cmd->cmd_name ? executing(cmd, pipefd, savefd): 1;
+				executing(cmd, pipefd, savefd);
 			cmd = cmd->next;
 		}
 		set_return(cmd, pipe);

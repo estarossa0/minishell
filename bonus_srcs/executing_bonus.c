@@ -17,13 +17,15 @@ static	bool	peri_excuting(t_command *cmd, int builtin)
 	if (!cmd->simple)
 		if ((g_pid = fork()) == -1)
 			return (error(E_STANDARD, 1, NULL));
-	if (builtin >= 0 && g_pid == 0)
+	if (builtin >= 0 && g_pid == 0 && cmd->cmd_name)
 		return (exec_builthin(cmd, builtin));
 	if (cmd->simple && (g_pid = fork()) == -1)
 		return (error(E_STANDARD, 1, NULL));
 	if (g_pid == 0)
 	{
-		if ((execve(cmd->full_path, cmd->argv, reverse_env())) == -1 )
+		if (!cmd->cmd_name)
+			exit(0);
+		else if ((execve(cmd->full_path, cmd->argv, reverse_env())) == -1 )
 			return (error(E_STANDARD, 1, NULL));
 	}
 	cmd->pid = g_pid;
@@ -47,7 +49,7 @@ void			executing(t_command *cmd, int pipefd[2], int savefd[2])
 {
 	int		builthin;
 
-	builthin = is_builtin(cmd->cmd_name);
+	builthin = cmd->cmd_name ? is_builtin(cmd->cmd_name) : 0;
 	if (pre_execute(cmd, pipefd, savefd, builthin) == true)
 		peri_excuting(cmd, builthin);
 	post_executing(cmd, pipefd, savefd);

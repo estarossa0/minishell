@@ -65,7 +65,7 @@ bool			here_we_go(t_all *all)
 			cmd->simple = pipe->simple;
 			reverse_args(&(cmd->list_args));
 			link_argv(cmd);
-			cmd->cmd_name ? executing(cmd, pipefd, savefd) : 1;
+			executing(cmd, pipefd, savefd);
 			cmd = cmd->next;
 		}
 		set_return(pipe);
