@@ -17,7 +17,7 @@ static	bool	peri_excuting(t_command *cmd, int builtin)
 	if (!cmd->simple)
 		if ((g_pid = fork()) == -1)
 			return (error(E_STANDARD, 1, NULL));
-	if (builtin >= 0)
+	if (builtin >= 0 && g_pid == 0)
 		return (exec_builthin(cmd, builtin));
 	if (cmd->simple && (g_pid = fork()) == -1)
 		return (error(E_STANDARD, 1, NULL));
