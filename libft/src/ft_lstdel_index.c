@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/31 23:01:39 by arraji            #+#    #+#             */
-/*   Updated: 2020/06/02 21:39:37 by arraji           ###   ########.fr       */
+/*   Updated: 2021/02/08 08:14:35 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ t_list	*ft_lstdel_index(t_list **list, void fun(t_list *) , int index)
 	t_list	*save;
 	t_list	*previous;
 
+	previous = NULL;
 	if (index == 0)
 	{
 		save = (*list);
