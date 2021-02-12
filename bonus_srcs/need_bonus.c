@@ -47,6 +47,9 @@ int	find_replace(t_env *var)
 		if (!ft_strcmp(curr->key, var->key))
 		{
 			var->next = curr->next;
+			free(curr->key);
+			free(curr->full_var);
+			free(curr->value);
 			*curr = *var;
 			free (var);
 			return (1);
