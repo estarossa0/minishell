@@ -144,6 +144,7 @@ bool	exec_builthin(t_command *cmd, int builthin)
 	bool	check;
 
 	check = builthin_functions[builthin](cmd);
+	g_all->exit_status = check == true ? 0 : g_all->exit_status;
 	if (!cmd->simple)
 		exit(g_all->exit_status);
 	return (check);
