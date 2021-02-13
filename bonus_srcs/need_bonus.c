@@ -76,3 +76,24 @@ int	is_builtin(char *cmd)
 		return (6);
 	return (-1);
 }
+
+void	change_variables(char *old_pwd, bool all)
+{
+	t_env	*new;
+	char	*pwd;
+
+	if (all == true)
+	{
+		ft_stradd(&old_pwd, "OLDPWD=", -1);
+		new = new_var(old_pwd);
+		if (!find_replace(new))
+			ft_lstadd_back((t_list **)&g_env, (void *)new);
+	}
+	free(old_pwd);
+	pwd = getcwd(NULL, 0);
+	ft_stradd(&pwd, "PWD=", -1);
+	new = new_var(pwd);
+	if (!find_replace(new))
+		ft_lstadd_back((t_list **)&g_env, (void *)new);
+	free(pwd);
+}

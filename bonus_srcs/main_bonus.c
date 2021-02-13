@@ -25,6 +25,7 @@ void	init(t_all *all)
 	all->parser.bits = 64 + 1024;
 	ft_end((void **)&(all->parser.line), NULL, 1);
 	all->pipe = NULL;
+	change_variables(NULL, false);
 }
 
 void	clear(t_all *all)
@@ -56,7 +57,7 @@ void	clear(t_all *all)
 int main()
 {
 	t_all	all;
-	
+
 	all.exit_status = 0;
 	signal(SIGINT, handler);
 	signal(SIGQUIT, handler);

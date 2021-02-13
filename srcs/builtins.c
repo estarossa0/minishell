@@ -35,24 +35,26 @@ static	bool	b_cd(t_command *cmd)
 {
 	int len;
 	char	*home;
+	bool	check;
+	char	*old_pwd;
 
+	old_pwd = getcwd(NULL, 0);
 	len = ft_tablen(cmd->argv);
+	check = true;
 	if (len > 2)
-		return (error(E_ARGS, 1, cmd->cmd_name));
+		check = error(E_ARGS, 1, cmd->cmd_name);
 	if	(len == 1)
 	{
 		home = get_var_value("HOME");
 		if (home)
-		{
-			if (chdir(home) == -1)
-				return (error(E_CD, 1, home));
-		}
+			check = (chdir(home) == -1) ? error(E_CD, 1, home) : true;
 		else
-			return (error(E_CD_HOME, 1, NULL));
+			check = error(E_CD_HOME, 1, NULL);
 	}
 	else if (chdir(cmd->argv[1]) == -1)
-		return (error(E_CD, 1, cmd->argv[1]));
-	return (true);
+		check = error(E_CD, 1, cmd->argv[1]);
+	change_variables(old_pwd, check);
+	return (check);
 }
 
 static	bool	b_pwd(t_command *cmd)
