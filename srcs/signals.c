@@ -14,7 +14,7 @@
 
 void	handler(int sig)
 {
-	if (sig == SIGINT)
+	if (sig == SIGINT && g_pid == 0)
 	{
 		ft_fprintf(1, "\n" BOLD PRINT_RED PS RESET);
 		g_all->exit_status = 128 + sig;
