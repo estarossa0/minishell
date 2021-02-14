@@ -87,9 +87,9 @@ bool	prepare_fd(t_command *cmd, int pipefd[2], int savefd[2])
 		dup_close(pipefd[WRITE_END], STDOUT_FILENO);
 	if (cmd->next == NULL || cmd->next->type == SUB_OUT)
 		dup2(savefd[1], STDOUT_FILENO);
-	if (cmd->file && AND(cmd->read_type, RED_FROM * -1))
+	if (cmd->file && cmd->fd >= 0 && AND(cmd->read_type, RED_FROM * -1))
 		dup_close(cmd->fd, STDIN_FILENO);
-	if(cmd->file && (AND(cmd->read_type, RED_TO * -1) ||
+	if(cmd->file && cmd->fd >= 0 && (AND(cmd->read_type, RED_TO * -1) ||
 		AND(cmd->read_type, RED_TO_APP * -1)))
 		dup_close(cmd->fd, STDOUT_FILENO);
 	return (check);
