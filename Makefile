@@ -42,6 +42,7 @@ error.c \
 lexer.c \
 parser.c \
 here_we_go.c \
+export_need.c \
 
 BONUS_SRC_FILES = builtins_bonus.c \
 env_handle_bonus.c \
