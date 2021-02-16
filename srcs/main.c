@@ -19,12 +19,12 @@ void	init(t_all *all)
 		g_total_env = 0;
 		g_all = all;
 		init_env();
+		change_variables(NULL, false);
 	}
 	g_pid = 0;
 	all->parser.bits = 64;
 	ft_end((void **)&(all->parser.line), NULL, 1);
 	all->pipe = NULL;
-	change_variables(NULL, false);
 }
 
 void	clear(t_all *all)
