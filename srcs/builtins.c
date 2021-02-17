@@ -12,6 +12,34 @@
 
 #include "minishell.h"
 
+int		ft_echo_print(char **str, int i, int newline)
+{
+	int		j;
+	while (str[i] && str[i][0] == '-')
+	{
+		if (str[i][1] == 'n')
+		{
+			j = 2;
+			while (str[i][j] && str[i][j] == 'n')
+				j++;
+			if (str[i][j] == '\0')
+				newline = 1;
+			else
+				break ;
+		}
+		else
+			break ;
+		i++;
+	}
+	while (str[i] != NULL)
+	{
+		ft_fprintf(1, "%s", str[i]);
+		(str[i + 1] != NULL) ? write(1, " ", 1) : 1;
+		i++;
+	}
+	return (newline);
+}
+
 static	bool	b_echo(t_command *cmd)
 {
 	int		index;
@@ -19,13 +47,7 @@ static	bool	b_echo(t_command *cmd)
 
 	save = 0;
 	index = 1;
-	if (cmd->argv[1] && !ft_strcmp(cmd->argv[1], "-n") && index++)
-		save = 1;
-	while (cmd->argv[index])
-	{
-		ft_fprintf(1, "%s", cmd->argv[index++]);
-		cmd->argv[index] != NULL ? ft_fprintf(1, " ") : 1;
-	}
+	save = ft_echo_print(cmd->argv, 1, 0);
 	save ? 1 : write(1, "\n", 1);
 	g_all->exit_status = 0;
 	return (true);
@@ -77,7 +99,7 @@ static	bool	b_export(t_command *cmd)
 
 	index = 0;
 	if (ft_tablen(cmd->argv) == 1)
-		print_env();
+		print_export(g_env);
 	else
 	{
 		while (cmd->argv[++index])
