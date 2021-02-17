@@ -16,7 +16,10 @@ static	int		cmp(char *a, char *b)
 		b[index] = ft_toupper(b[index]);
 		index++;
 	}
-	return (ft_strcmp(a, b));
+	index = ft_strcmp(a, b);
+	free(a);
+	free(b);
+	return (index);
 }
 
 static	void	env_sort(t_env *lst)
@@ -31,7 +34,7 @@ static	void	env_sort(t_env *lst)
 		tmp = begin_list;
 		while (tmp->next != NULL)
 		{
-			if (cmp(tmp->key, tmp->next->key) > 0)
+			if (cmp(ft_strdup(tmp->key), ft_strdup(tmp->next->key)) > 0)
 			{
 				swap = *tmp;
 				*tmp = *tmp->next;
