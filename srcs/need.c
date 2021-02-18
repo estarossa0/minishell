@@ -91,9 +91,12 @@ void	change_variables(char *old_pwd, bool all)
 	}
 	free(old_pwd);
 	pwd = getcwd(NULL, 0);
+	if (pwd)
+	{
 	ft_stradd(&pwd, "PWD=", -1);
 	new = new_var(pwd);
 	if (!find_replace(new))
 		ft_lstadd_back((t_list **)&g_env, (void *)new);
 	free(pwd);
+	}
 }
