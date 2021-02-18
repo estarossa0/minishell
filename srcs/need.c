@@ -93,6 +93,7 @@ void	change_variables(char *old_pwd, bool all)
 	pwd = getcwd(NULL, 0);
 	if (pwd)
 	{
+	g_all->pwd = ft_strdup(pwd);
 	ft_stradd(&pwd, "PWD=", -1);
 	new = new_var(pwd);
 	if (!find_replace(new))

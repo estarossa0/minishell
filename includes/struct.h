@@ -65,6 +65,7 @@ typedef	struct	s_all
 	unsigned char	exit_status;
 	t_parser		parser;
 	t_pipeline		*pipe;
+	char			*pwd;
 }				t_all;
 
 typedef	struct	s_env

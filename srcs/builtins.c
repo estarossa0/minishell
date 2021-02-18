@@ -81,13 +81,9 @@ static	bool	b_cd(t_command *cmd)
 
 static	bool	b_pwd(t_command *cmd)
 {
-	char	*dir;
-
 	if (ft_tablen(cmd->argv) != 1)
 		return (error(E_ARGS, 1, cmd->cmd_name));
-	dir = getcwd(NULL, 0);
-	ft_fprintf(1, "%s\n", dir);
-	free(dir);
+	ft_fprintf(1, "%s\n", g_all->pwd);
 	return (true);
 }
 
