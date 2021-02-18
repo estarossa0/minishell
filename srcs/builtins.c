@@ -58,9 +58,7 @@ static	bool	b_cd(t_command *cmd)
 	int len;
 	char	*home;
 	bool	check;
-	char	*old_pwd;
 
-	old_pwd = getcwd(NULL, 0);
 	len = ft_tablen(cmd->argv);
 	check = true;
 	if (len > 2)
@@ -75,7 +73,7 @@ static	bool	b_cd(t_command *cmd)
 	}
 	else if (chdir(cmd->argv[1]) == -1)
 		check = error(E_CD, 1, cmd->argv[1]);
-	change_variables(old_pwd, check);
+	change_variables(g_all->pwd, check);
 	return (check);
 }
 

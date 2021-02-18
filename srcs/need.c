@@ -88,8 +88,8 @@ void	change_variables(char *old_pwd, bool all)
 		new = new_var(old_pwd);
 		if (!find_replace(new))
 			ft_lstadd_back((t_list **)&g_env, (void *)new);
+		free(old_pwd);
 	}
-	free(old_pwd);
 	pwd = getcwd(NULL, 0);
 	if (pwd)
 	{
