@@ -76,7 +76,11 @@ void	print_export(t_env *list)
 	env_sort(new);
 	while (new)
 	{
-		ft_fprintf(1, "declare -x %s\n", new->full_var);
+		write(1, "declare -x ", 11);
+		ft_fprintf(1, "%s", new->key);
+		if (new->type == ENV_VAR)
+			ft_fprintf(1, "=\"%s\" ", new->value);
+		write(1, "\n", 1);
 		tmp = new;
 		new = new->next;
 		free(tmp);

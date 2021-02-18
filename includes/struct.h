@@ -73,5 +73,6 @@ typedef	struct	s_env
 	char			*key;
 	char			*value;
 	char			*full_var;
+	int				type;
 }				t_env;
 #endif
