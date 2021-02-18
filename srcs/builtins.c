@@ -96,7 +96,9 @@ static	bool	b_export(t_command *cmd)
 {
 	int		index;
 	t_env	*curr;
+	bool	check;
 
+	check = true;
 	index = 0;
 	if (ft_tablen(cmd->argv) == 1)
 		print_export(g_env);
@@ -106,13 +108,17 @@ static	bool	b_export(t_command *cmd)
 		{
 			curr = new_var(cmd->argv[index]);
 			if (ft_strlen(curr->key) == 0)
-				return (error(E_NOT_VAL, 1, curr->full_var));
+			{
+				check = error(E_NOT_VAL, 1, curr->full_var);
+				free(curr);
+				continue ;
+			}
 			if (find_replace(curr))
 				continue ;
 			ft_lstadd_back((t_list **)&g_env, (void *)curr);
 		}
 	}
-	return (true);
+	return (check);
 }
 
 static	bool	b_env(t_command *cmd)
