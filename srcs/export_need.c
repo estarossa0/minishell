@@ -27,12 +27,15 @@ static	void	env_sort(t_env *lst)
 	t_env	*begin_list;
 	t_env	*tmp;
 	t_env	swap;
+	int		max[2];
 
 	begin_list = lst;
-	while (lst != NULL)
+	max[0] = ft_tablen(environ) + 1;
+	while (lst != NULL && --max[0])
 	{
 		tmp = begin_list;
-		while (tmp->next != NULL)
+		max[1] = max[0] + 1;
+		while (tmp->next != NULL && --max[1] - 1)
 		{
 			if (cmp(ft_strdup(tmp->key), ft_strdup(tmp->next->key)) > 0)
 			{
