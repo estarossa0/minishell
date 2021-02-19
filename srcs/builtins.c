@@ -61,8 +61,6 @@ static	bool	b_cd(t_command *cmd)
 
 	len = ft_tablen(cmd->argv);
 	check = true;
-	if (len > 2)
-		check = error(E_ARGS, 1, cmd->cmd_name);
 	if	(len == 1)
 	{
 		home = get_var_value("HOME");
