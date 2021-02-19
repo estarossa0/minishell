@@ -79,7 +79,7 @@ bonus: credit LIB_RULE $(BONUS_OBJECT_FILES)
 	@echo
 	@echo $(NAME)"_bonus created $(GOLD)successfully$(RESET)"
 
-$(BONUS_OBJECT_FOLDER)/%.o: $(BONUS_SRC_FOLDER)/%.c
+$(BONUS_OBJECT_FOLDER)/%.o: $(BONUS_SRC_FOLDER)/%.c  $(BONUS_HEADER_FOLDER)/*.h
 	@(mkdir $(BONUS_OBJECT_FOLDER) 2> /dev/null && echo "creating "$(BONUS_OBJECT_FOLDER)" folder $(GOLD){OK}$(RESET)") || true
 	@clang $(FLAGS) -g -I $(BONUS_HEADER_FOLDER) -I $(LIBFT_HEADER) -D PS='"$(NAME)_bonus$$> "' -o $@ -c $< && echo  "creating" $< "object $(GOLD){OK}$(RESET)"
 
@@ -88,7 +88,7 @@ $(NAME): LIB_RULE $(OBJECT_FILES)
 	@echo
 	@echo $(NAME)" created $(GREEN)successfully$(RESET)"
 
-$(OBJECT_FOLDER)/%.o: $(SRC_FOLDER)/%.c
+$(OBJECT_FOLDER)/%.o: $(SRC_FOLDER)/%.c $(HEADER_FOLDER)/*.h
 	@(mkdir $(OBJECT_FOLDER) 2> /dev/null && echo "creating "$(OBJECT_FOLDER)" folder $(GREEN){OK}$(RESET)") || true
 	@clang $(FLAGS) -g -I $(HEADER_FOLDER) -I $(LIBFT_HEADER) -D PS='"$(NAME)$$> "' -o $@ -c $< && echo "creating" $< "object $(GREEN){OK}$(RESET)"
 
