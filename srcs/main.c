@@ -19,7 +19,7 @@ void	init(t_all *all)
 		g_total_env = 0;
 		g_all = all;
 		init_env();
-		change_variables(NULL, false);
+		change_variables(NULL, -1);
 	}
 	g_pid = 0;
 	all->parser.bits = 64;
