@@ -12,20 +12,7 @@
 
 # include "minishell.h"
 
-void			finish_all(t_pipeline *pipe)
-{
-	t_command	*cmd;
-
-	cmd = pipe->cmd_head;
-	while (cmd)
-	{
-		if (cmd->pid > 0)
-			kill(cmd->pid, SIGKILL);
-		cmd = cmd->next;
-	}
-}
-
-static	void	set_return(t_pipeline *pipe)
+static	void	set_return()
 {
 	int			ret;
 	int			data;
@@ -35,8 +22,6 @@ static	void	set_return(t_pipeline *pipe)
 	while (ret != -1)
 	{
 		ret = wait(&data);
-		if (ret == g_pid)
-			finish_all(pipe);
 		if (ret == g_pid && WIFEXITED(data))
 			g_all->exit_status = WEXITSTATUS(data);
 		else if (ret == g_pid && WIFSIGNALED(data))
@@ -68,7 +53,7 @@ bool			here_we_go(t_all *all)
 			executing(cmd, pipefd, savefd);
 			cmd = cmd->next;
 		}
-		set_return(pipe);
+		set_return();
 		pipe = pipe->next;
 	}
 	fd_saving(savefd);

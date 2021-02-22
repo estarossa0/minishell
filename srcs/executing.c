@@ -28,7 +28,6 @@ static	bool	peri_excuting(t_command *cmd, int builtin)
 		else if ((execve(cmd->full_path, cmd->argv, reverse_env())) == -1 )
 			return (error(E_STANDARD, 1, NULL));
 	}
-	cmd->pid = g_pid;
 	return (true);
 }
 

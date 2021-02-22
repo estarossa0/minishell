@@ -20,7 +20,7 @@ static	void	init_list(t_command **current, t_all *all)
 		all->pipe->cmd_head = NULL;
 		all->pipe->simple = 1;
 		*current = (t_command *)ft_lstadd_back((t_list **)&(all->pipe->cmd_head), malloc(sizeof(t_command)));
-		**current = (t_command){0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0};
+		**current = (t_command){0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0};
 	}
 }
 
@@ -43,7 +43,7 @@ static	void	switch_current(t_command **current, char *line, int index, t_all *al
 		pipe->simple = 0;
 		*current = (t_command *)ft_lstadd_back((t_list **)current, malloc(sizeof(t_command)));
 	}
-	**current = (t_command){0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0};
+	**current = (t_command){0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0};
 }
 
 void	add_word(t_args **list, char *word, int type)
