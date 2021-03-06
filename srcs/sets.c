@@ -65,7 +65,11 @@ static	void	set_dolar(char *line, int index, t_parser *parser)
 	line[index + 1] == ';' || line[index + 1] == '$' || line[index + 1] == 0)
 		return ;
 	else if (line[index + 1 ] == '\'')
+	{
+		if ((AND(parser->bits, BD_Q)))
+			return ;
 		line[index] = REMOVED;
+	}
 	else if (line[index + 1] == '"')
 		!(AND(parser->bits, BD_Q)) ? line[index] = REMOVED : 1;
 	else
