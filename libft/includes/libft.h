@@ -94,6 +94,7 @@ int				ft_strcmp(char *s1, char *s2);
 size_t			ft_linelen(char const *str, int type);
 void			flip_bit(int *data, int bit);
 void			standered_error();
+long long		ft_atol(const char *str);
 /*
 ** test if a bit is on
 */

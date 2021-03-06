@@ -69,3 +69,28 @@ int			ft_atoi(const char *str)
 	}
 	return (sign) == 1 ? (-result) : (result);
 }
+
+long long	ft_atol(const char *str)
+{
+	int			sign;
+	int			digit;
+	long long	lon;
+
+	lon = 0;
+	sign = -2;
+	while (is_blank(*str))
+		str++;
+	sign = get_sign(str);
+	if (sign == 0 || sign == 1)
+		str++;
+	while (is_digit(*str))
+	{
+		digit = *str - '0';
+		lon *= 10;
+		lon = (sign == 1) ? lon - digit : lon + digit;
+		if ((sign == 1 && lon > 0) || (sign != 1 && lon < 0))
+			return (sign) == 1 ? (1) : (-1);
+		str++;
+	}
+	return (lon);
+}
