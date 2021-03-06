@@ -68,7 +68,7 @@ bool			get_data(t_all *all)
 		return (error(E_STANDARD, 1, NULL));
 	if (all->parser.rt == 0)
 	{
-		write(1, "\n", 1);
+		write(1, "exit\n", 6);
 		exit(0);
 	}
 	if (lexer(all->parser.line, &all->parser) == false ||
