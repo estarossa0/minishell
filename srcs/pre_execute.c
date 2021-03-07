@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:41:46 by arraji            #+#    #+#             */
-/*   Updated: 2021/03/07 18:01:31 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 18:39:58 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static	char	*parse_path(char *all_paths, char *name)
 {
-	char	**path;
-	int		index;
-	char	*full_path;
-	struct stat buf;
+	char		**path;
+	int			index;
+	char		*full_path;
+	struct stat	buf;
 
 	index = 0;
 	path = ft_split(all_paths, ':');
@@ -87,16 +87,18 @@ static	t_bool	prepare_fd(t_command *cmd, int pipefd[2], int savefd[2])
 		dup_close(pipefd[WRITE_END], STDOUT_FILENO);
 	if (cmd->next == NULL)
 		dup2(savefd[1], STDOUT_FILENO);
-	if (cmd->file && cmd->fd >= 0 && and_op(cmd->read_type, RED_FROM * -1))
+	if (cmd->file && cmd->fd >= 0 && and_op(cmd->read_type, -RED_FROM))
 		dup_close(cmd->fd, STDIN_FILENO);
-	if(cmd->file && cmd->fd >= 0 && (and_op(cmd->read_type, RED_TO * -1) || and_op(cmd->read_type, RED_TO_APP * -1)))
+	if (cmd->file && cmd->fd >= 0 &&
+	(and_op(cmd->read_type, -RED_TO) || and_op(cmd->read_type, -RED_TO_APP)))
 		dup_close(cmd->fd, STDOUT_FILENO);
 	return (check);
 }
 
-t_bool	pre_execute(t_command *cmd, int pipefd[2], int savefd[2], int builthin)
+t_bool			pre_execute(t_command *cmd, int pipefd[2],
+int savefd[2], int builthin)
 {
-	struct	stat	buf;
+	struct stat	buf;
 
 	if (prepare_fd(cmd, pipefd, savefd) == FALSE)
 		return (FALSE);
