@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 16:04:52 by arraji            #+#    #+#             */
-/*   Updated: 2021/03/07 18:05:11 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 18:09:13 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ int		freak_out(int bits, char *line, int index)
 
 void	chill(int *bits)
 {
-	bit_off(*bits, BPIPE);
-	bit_off(*bits, BSEMIC);
-	bit_off(*bits, BCHECK);
-	bit_off(*bits, BRED_FROM);
-	bit_off(*bits, BRED_TO);
-	bit_off(*bits, BRED_TO_APP);
+	bit_off(bits, BPIPE);
+	bit_off(bits, BSEMIC);
+	bit_off(bits, BCHECK);
+	bit_off(bits, BRED_FROM);
+	bit_off(bits, BRED_TO);
+	bit_off(bits, BRED_TO_APP);
 }
 
 int		error(int err, int exit_value, char *need)

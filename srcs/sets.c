@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 21:34:12 by arraji            #+#    #+#             */
-/*   Updated: 2021/03/07 18:04:55 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 18:10:20 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static	t_bool	set_pipe(char *line, int index, t_parser *parser)
 	if (and_op(parser->bits, BPIPE) || and_op(parser->bits, BCHECK))
 		return (error(E_SYNTAX, 1, &line[index]));
 	line[index] = CMD_SEP;
-	bit_on(parser->bits, BPIPE);
+	bit_on(&(parser->bits), BPIPE);
 	return (TRUE);
 }
 
@@ -52,7 +52,7 @@ static	t_bool	set_semicolon(char *line, int index, t_parser *parser)
 	if (and_op(parser->bits, BSEMIC) || and_op(parser->bits, BCHECK))
 		return (error(E_SYNTAX, 1, &line[index]));
 	line[index] = PIPELINE_SEP;
-	bit_on(parser->bits, BSEMIC);
+	bit_on(&(parser->bits), BSEMIC);
 	return (TRUE);
 }
 
@@ -93,13 +93,13 @@ static	t_bool	set_red_to(char *line, int index, t_parser *parser)
 		return (error(E_SYNTAX, 1, &line[index]));
 	if (line[index + 1] == '>')
 	{
-		bit_on(parser->bits, BRED_TO_APP);
+		bit_on(&(parser->bits), BRED_TO_APP);
 		line[index] = RED_TO_APP;
 		line[index + 1] = RED_TO_APP;
 	}
 	else
 	{
-		bit_on(parser->bits, BRED_TO);
+		bit_on(&(parser->bits), BRED_TO);
 		line[index] = RED_TO;
 	}
 	return (TRUE);
@@ -113,7 +113,7 @@ static	t_bool	set_red_from(char *line, int index, t_parser *parser)
 	|| and_op(parser->bits, BRED_FROM))
 		return (error(E_SYNTAX, 1, &line[index]));
 	line[index] = RED_FROM;
-	bit_on(parser->bits, BRED_FROM);
+	bit_on(&(parser->bits), BRED_FROM);
 	return (TRUE);
 }
 
