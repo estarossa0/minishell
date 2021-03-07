@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_bonus.c                                      :+:      :+:    :+:   */
+/*   bitwise_op.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/12/15 18:34:40 by arraji            #+#    #+#             */
-/*   Updated: 2021/03/07 15:56:41 by arraji           ###   ########.fr       */
+/*   Created: 2021/03/07 17:40:28 by arraji            #+#    #+#             */
+/*   Updated: 2021/03/07 18:02:58 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell_bonus.h"
+#include "libft.h"
 
-t_bool	lexer(char *line, t_parser *parser)
+int		and_op(int x, int y)
 {
-	int i;
+	return (((x & y) == y));
+}
 
-	i = -1;
-	while (line[++i])
-	{
-		if (sets(line, i, parser) == FALSE)
-			return (FALSE);
-	}
-	if (freak_out(parser->bits, line, i) == FALSE)
-		return(FALSE);
-	if (g_depth != 0)
-		return (error(E_DEPTH, 1, NULL));
-	chill(&parser->bits);
-	return (TRUE);
+int		nand_op(int x, int y)
+{
+	return (((x & y) == 0));
+}
+
+void	bit_on(int *x, int y)
+{
+	*x |= y;
+}
+
+void	bit_off(int *x, int y)
+{
+	*x &= ~y;
 }

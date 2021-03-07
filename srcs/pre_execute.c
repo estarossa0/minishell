@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:41:46 by arraji            #+#    #+#             */
-/*   Updated: 2021/03/07 15:56:42 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 18:01:31 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ static	t_bool	prepare_fd(t_command *cmd, int pipefd[2], int savefd[2])
 		dup_close(pipefd[WRITE_END], STDOUT_FILENO);
 	if (cmd->next == NULL)
 		dup2(savefd[1], STDOUT_FILENO);
-	if (cmd->file && cmd->fd >= 0 && AND(cmd->read_type, RED_FROM * -1))
+	if (cmd->file && cmd->fd >= 0 && and_op(cmd->read_type, RED_FROM * -1))
 		dup_close(cmd->fd, STDIN_FILENO);
-	if(cmd->file && cmd->fd >= 0 && (AND(cmd->read_type, RED_TO * -1) || AND(cmd->read_type, RED_TO_APP * -1)))
+	if(cmd->file && cmd->fd >= 0 && (and_op(cmd->read_type, RED_TO * -1) || and_op(cmd->read_type, RED_TO_APP * -1)))
 		dup_close(cmd->fd, STDOUT_FILENO);
 	return (check);
 }

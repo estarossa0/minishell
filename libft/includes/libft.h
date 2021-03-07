@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 02:17:00 by arraji            #+#    #+#             */
-/*   Updated: 2021/03/07 16:23:04 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 18:05:59 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,34 +95,8 @@ size_t			ft_linelen(char const *str, int type);
 void			flip_bit(int *data, int bit);
 void			standered_error();
 long long		ft_atol(const char *str);
-/*
-** test if a bit is on
-*/
-# define AND(x, y)		(x & y) == y
-
-/*
-** test if a bit if off
-*/
-# define NAND(x, y)		(x & y) == 0
-
-/*
-** useless
-*/
-# define OR(x, y)		(x | y) == y
-
-/*
-** useless
-*/
-# define NOR(x, y)		(x | y) == 0
-
-/*
-** flip a bit on
-*/
-# define BIT_ON(x, y)	x |= y
-
-/*
-** flip a bit off
-*/
-# define BIT_OFF(x, y)	x &= ~y
-
+int				and_op(int x, int y);
+int				nand_op(int x, int y);
+void			bit_on(int *x, int y);
+void			bit_off(int *x, int y);
 #endif

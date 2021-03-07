@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:05:57 by arraji            #+#    #+#             */
-/*   Updated: 2021/03/07 15:56:42 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 18:04:55 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_bool			parse_files(t_command *current)
 		overwrite_file(current);
 		type = iterator->type;
 		current->file = iterator->file;
-		BIT_ON(current->read_type, -1 * type);
+		bit_on(current->read_type, -1 * type);
 		if (type == RED_TO)
 			current->fd =
 			open(iterator->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);

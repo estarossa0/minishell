@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 16:04:52 by arraji            #+#    #+#             */
-/*   Updated: 2021/03/07 15:44:10 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 18:05:11 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,26 @@
 
 int		freak_out(int bits, char *line, int index)
 {
-	if (AND(bits, BPIPE))
+	if (and_op(bits, BPIPE))
 		return (error(E_SYNTAX, 1, &line[index]));
-	else if (AND(bits, BD_Q))
+	else if (and_op(bits, BD_Q))
 		return (error(E_SYNTAX, 1, &line[index]));
-	else if (AND(bits, BS_Q))
+	else if (and_op(bits, BS_Q))
 		return (error(E_SYNTAX, 1, &line[index]));
-	else if (AND(bits, BRED_TO) || AND(bits, BRED_TO_APP)
-	|| AND(bits, BRED_FROM))
+	else if (and_op(bits, BRED_TO) || and_op(bits, BRED_TO_APP)
+	|| and_op(bits, BRED_FROM))
 		return (error(E_SYNTAX, 1, &line[index]));
 	return (TRUE);
 }
 
 void	chill(int *bits)
 {
-	BIT_OFF(*bits, BPIPE);
-	BIT_OFF(*bits, BSEMIC);
-	BIT_OFF(*bits, BCHECK);
-	BIT_OFF(*bits, BRED_FROM);
-	BIT_OFF(*bits, BRED_TO);
-	BIT_OFF(*bits, BRED_TO_APP);
+	bit_off(*bits, BPIPE);
+	bit_off(*bits, BSEMIC);
+	bit_off(*bits, BCHECK);
+	bit_off(*bits, BRED_FROM);
+	bit_off(*bits, BRED_TO);
+	bit_off(*bits, BRED_TO_APP);
 }
 
 int		error(int err, int exit_value, char *need)
