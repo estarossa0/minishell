@@ -6,13 +6,13 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 18:33:17 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/15 18:33:21 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 15:56:41 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_bonus.h"
 
-static	bool	b_echo(t_command *cmd)
+static	t_bool	b_echo(t_command *cmd)
 {
 	int		index;
 	int		save;
@@ -28,26 +28,26 @@ static	bool	b_echo(t_command *cmd)
 	}
 	save ? 1 : write(1, "\n", 1);
 	g_all->exit_status = 0;
-	return (true);
+	return (TRUE);
 }
 
-static	bool	b_cd(t_command *cmd)
+static	t_bool	b_cd(t_command *cmd)
 {
 	int len;
 	char	*home;
-	bool	check;
+	t_bool	check;
 	char	*old_pwd;
 
 	old_pwd = getcwd(NULL, 0);
 	len = ft_tablen(cmd->argv);
-	check = true;
+	check = TRUE;
 	if (len > 2)
 		check = error(E_ARGS, 1, cmd->cmd_name);
 	if	(len == 1)
 	{
 		home = get_var_value("HOME");
 		if (home)
-			check = (chdir(home) == -1) ? error(E_CD, 1, home) : true;
+			check = (chdir(home) == -1) ? error(E_CD, 1, home) : TRUE;
 		else
 			check = error(E_CD_HOME, 1, NULL);
 	}
@@ -57,7 +57,7 @@ static	bool	b_cd(t_command *cmd)
 	return (check);
 }
 
-static	bool	b_pwd(t_command *cmd)
+static	t_bool	b_pwd(t_command *cmd)
 {
 	char	*dir;
 
@@ -66,11 +66,11 @@ static	bool	b_pwd(t_command *cmd)
 	dir = getcwd(NULL, 0);
 	ft_fprintf(1, "%s\n", dir);
 	free(dir);
-	return (true);
+	return (TRUE);
 }
 
 
-static	bool	b_export(t_command *cmd)
+static	t_bool	b_export(t_command *cmd)
 {
 	int		index;
 	t_env	*curr;
@@ -90,18 +90,18 @@ static	bool	b_export(t_command *cmd)
 			ft_lstadd_back((t_list **)&g_env, (void *)curr);
 		}
 	}
-	return (true);
+	return (TRUE);
 }
 
-static	bool	b_env(t_command *cmd)
+static	t_bool	b_env(t_command *cmd)
 {
 	if (ft_tablen(cmd->argv) != 1)
 		return (error(E_ARGS, 1, cmd->cmd_name));
 	print_env();
-	return (true);
+	return (TRUE);
 }
 
-static	bool	b_unset(t_command *cmd)
+static	t_bool	b_unset(t_command *cmd)
 {
 	int		index;
 	int		jndex;
@@ -116,15 +116,15 @@ static	bool	b_unset(t_command *cmd)
 			if (!ft_strcmp(cmd->argv[index], curr->key))
 			{
 				ft_lstdel_index((t_list**)&g_env, (void (*)(t_list *))del_env, jndex);
-				return (true);
+				return (TRUE);
 			}
 		jndex++;
 		curr = curr->next;
 	}
-	return (true);
+	return (TRUE);
 }
 
-static	bool	b_exit(t_command *cmd)
+static	t_bool	b_exit(t_command *cmd)
 {
 	int		index;
 
@@ -135,16 +135,16 @@ static	bool	b_exit(t_command *cmd)
 		if (!ft_isdigit(cmd->argv[1][index++]))
 			return (error(E_EXIT_ARG, 2, cmd->argv[1]));
 	cmd->argv[1] == NULL ? exit(0) : exit(ft_atoi(cmd->argv[1]));
-	return (true);
+	return (TRUE);
 }
 
-bool	exec_builthin(t_command *cmd, int builthin)
+t_bool	exec_builthin(t_command *cmd, int builthin)
 {
-	bool	(*builthin_functions[7])(t_command *cmd) = {b_echo, b_cd, b_pwd, b_export, b_env, b_unset, b_exit};
-	bool	check;
+	t_bool	(*builthin_functions[7])(t_command *cmd) = {b_echo, b_cd, b_pwd, b_export, b_env, b_unset, b_exit};
+	t_bool	check;
 
 	check = builthin_functions[builthin](cmd);
-	g_all->exit_status = check == true ? 0 : g_all->exit_status;
+	g_all->exit_status = check == TRUE ? 0 : g_all->exit_status;
 	if (!cmd->simple)
 		exit(g_all->exit_status);
 	return (check);

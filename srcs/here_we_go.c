@@ -6,11 +6,11 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:59:41 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/15 23:05:58 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 15:56:42 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
 static	void	set_return()
 {
@@ -33,7 +33,7 @@ static	void	set_return()
 	g_pid = 0;
 }
 
-bool			here_we_go(t_all *all)
+t_bool			here_we_go(t_all *all)
 {
 	t_pipeline	*pipe;
 	t_command	*cmd;
@@ -57,10 +57,10 @@ bool			here_we_go(t_all *all)
 		pipe = pipe->next;
 	}
 	fd_saving(savefd);
-	return(true);
+	return(TRUE);
 }
 
-bool			get_data(t_all *all)
+t_bool			get_data(t_all *all)
 {
 	all->exit_status == 0 ? ft_fprintf(1, BOLD PRINT_GR PS RESET) :
 	ft_fprintf(1, BOLD PRINT_RED PS RESET);
@@ -71,8 +71,8 @@ bool			get_data(t_all *all)
 		write(1, "exit\n", 6);
 		exit(0);
 	}
-	if (lexer(all->parser.line, &all->parser) == false ||
-	parser(all->parser.line, all) == false)
-			return (false);
-	return (true);
+	if (lexer(all->parser.line, &all->parser) == FALSE ||
+	parser(all->parser.line, all) == FALSE)
+			return (FALSE);
+	return (TRUE);
 }

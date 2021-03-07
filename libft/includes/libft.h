@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 02:17:00 by arraji            #+#    #+#             */
-/*   Updated: 2020/06/04 03:20:06 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 16:23:04 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 500
 # endif
-# define vibe_check write(1, "v", 1);
-# define vibe_check2 write(1, "N", 1);
+
 typedef	struct	s_list
 {
 	struct s_list	*next;
 	void			*content;
 }				t_list;
+typedef	char	t_bool;
 void			free_tab(char **tab, int i);
 void			ft_bzero(void *tab, size_t num);
 void			*ft_memset(void *tab, int valeur, size_t lenght);
@@ -77,7 +77,7 @@ t_list			*ft_lstmap(t_list *lst, void *(*f)(void *),
 void			ft_lstpr_char(t_list *first);
 void			ft_lstpr_char_en(t_list *first);
 t_list			*ft_lst_test(void);
-t_list			*ft_lstdel_index(t_list **list, void fun(t_list *) , int index);
+t_list			*ft_lstdel_index(t_list **list, void fun(t_list *), int index);
 char			*ft_ltoa(unsigned long n);
 size_t			ft_number_len(long num);
 int				ft_stradd(char **s1, char *s2, int type);
@@ -98,25 +98,31 @@ long long		ft_atol(const char *str);
 /*
 ** test if a bit is on
 */
-#define AND(x, y)		(x & y) == y
+# define AND(x, y)		(x & y) == y
+
 /*
 ** test if a bit if off
 */
-#define NAND(x, y)		(x & y) == 0
+# define NAND(x, y)		(x & y) == 0
+
 /*
 ** useless
 */
-#define OR(x, y)		(x | y) == y
+# define OR(x, y)		(x | y) == y
+
 /*
 ** useless
 */
-#define NOR(x, y)		(x | y) == 0
+# define NOR(x, y)		(x | y) == 0
+
 /*
 ** flip a bit on
 */
-#define BIT_ON(x, y)	x |= y
+# define BIT_ON(x, y)	x |= y
+
 /*
 ** flip a bit off
 */
-#define BIT_OFF(x, y)	x &= ~y
+# define BIT_OFF(x, y)	x &= ~y
+
 #endif

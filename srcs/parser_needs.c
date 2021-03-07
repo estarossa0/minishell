@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 17:22:29 by b-pearl           #+#    #+#             */
-/*   Updated: 2020/12/15 23:10:56 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 15:56:42 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static	int		get_next_word_size(t_args *current)
 {
-	int size;
-	char *var_value;
+	int		size;
+	char	*var_value;
 
 	size = 0;
 	while (current && current->c != WORD_SEP)
@@ -52,7 +52,8 @@ static	void	init_word(t_args *new[2], t_args *current, int need[2])
 {
 	int size;
 
-	new[1] = (t_args *) ft_lstadd_back((t_list**)&new[0], malloc(sizeof(t_args)));
+	new[1] = (t_args *)ft_lstadd_back((t_list**)&new[0],
+	malloc(sizeof(t_args)));
 	size = get_next_word_size(current);
 	new[1]->str = malloc(size + 1);
 	new[1]->str[size] = (char)0;
@@ -60,7 +61,7 @@ static	void	init_word(t_args *new[2], t_args *current, int need[2])
 	need[1] = 0;
 }
 
-void	reverse_args(t_args **args)
+void			reverse_args(t_args **args)
 {
 	t_args	*current[2];
 	t_args	*new[2];
@@ -84,9 +85,9 @@ void	reverse_args(t_args **args)
 	*args = new[0];
 }
 
-bool	link_argv(t_command *cmd)
+t_bool			link_argv(t_command *cmd)
 {
-	int size;
+	int		size;
 	t_args	*list[2];
 	int		index;
 
@@ -106,5 +107,5 @@ bool	link_argv(t_command *cmd)
 	cmd->argv[index] = NULL;
 	cmd->list_args = NULL;
 	cmd->cmd_name = cmd->argv[0];
-	return (true);
+	return (TRUE);
 }

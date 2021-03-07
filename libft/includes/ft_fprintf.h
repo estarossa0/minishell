@@ -6,12 +6,12 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 02:34:07 by arraji            #+#    #+#             */
-/*   Updated: 2020/03/05 09:32:26 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 16:16:33 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef FT_FT_FPRINTF_H
+# define FT_FT_FPRINTF_H
 # include <stdarg.h>
 # include "libft.h"
 # define NONE	0
@@ -69,5 +69,4 @@ void			print_perc(t_data *data);
 void			check_flag(const char *arg1, va_list ar, t_data *data);
 char			*ft_to_hex(unsigned long hl, int type);
 void			ft_reset(t_data *data);
-
 #endif

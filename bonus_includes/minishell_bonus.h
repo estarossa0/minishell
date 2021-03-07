@@ -6,15 +6,15 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 18:37:33 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/15 18:37:50 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 15:56:41 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_MINISHELL_H
 # define FT_MINISHELL_H
-typedef char bool;
+typedef char t_bool;
 # define true 0
-# define false 1
+# define FALSE 1
 # define D_ERROR
 # define _DEFAULT_SOURCE
 # include <stdlib.h>
@@ -36,10 +36,10 @@ typedef char bool;
 # include "need_bonus.h"
 # include "signals_handler_bonus.h"
 t_all	*g_all;
-extern char **environ;
+extern char **g_environ;
 t_env		*g_env;
 int			g_total_env;
 pid_t		g_pid;
 int			g_depth;
-bool	here_we_go(t_all *all);
+t_bool	here_we_go(t_all *all);
 #endif

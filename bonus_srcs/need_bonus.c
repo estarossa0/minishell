@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 18:34:52 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/15 18:36:33 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 15:56:41 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ int	is_builtin(char *cmd)
 	return (-1);
 }
 
-void	change_variables(char *old_pwd, bool all)
+void	change_variables(char *old_pwd, t_bool all)
 {
 	t_env	*new;
 	char	*pwd;
 
-	if (all == true)
+	if (all == TRUE)
 	{
 		ft_stradd(&old_pwd, "OLDPWD=", -1);
 		new = new_var(old_pwd);

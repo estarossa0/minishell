@@ -6,15 +6,16 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 06:13:12 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/14 14:02:59 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 15:56:42 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int		ft_echo_print(char **str, int i, int newline)
+int				ft_echo_print(char **str, int i, int newline)
 {
 	int		j;
+
 	while (str[i] && str[i][0] == '-')
 	{
 		if (str[i][1] == 'n')
@@ -40,7 +41,7 @@ int		ft_echo_print(char **str, int i, int newline)
 	return (newline);
 }
 
-static	bool	b_echo(t_command *cmd)
+static	t_bool	b_echo(t_command *cmd)
 {
 	int		index;
 	int		save;
@@ -50,22 +51,22 @@ static	bool	b_echo(t_command *cmd)
 	save = ft_echo_print(cmd->argv, 1, 0);
 	save ? 1 : write(1, "\n", 1);
 	g_all->exit_status = 0;
-	return (true);
+	return (TRUE);
 }
 
-static	bool	b_cd(t_command *cmd)
+static	t_bool	b_cd(t_command *cmd)
 {
-	int len;
+	int		len;
 	char	*home;
-	bool	check;
+	t_bool	check;
 
 	len = ft_tablen(cmd->argv);
-	check = true;
-	if	(len == 1)
+	check = TRUE;
+	if (len == 1)
 	{
 		home = get_var_value("HOME");
 		if (home)
-			check = (chdir(home) == -1) ? error(E_CD, 1, home) : true;
+			check = (chdir(home) == -1) ? error(E_CD, 1, home) : TRUE;
 		else
 			check = error(E_CD_HOME, 1, NULL);
 	}
@@ -75,22 +76,21 @@ static	bool	b_cd(t_command *cmd)
 	return (check);
 }
 
-static	bool	b_pwd(t_command *cmd)
+static	t_bool	b_pwd(t_command *cmd)
 {
 	if (ft_tablen(cmd->argv) != 1)
 		return (error(E_ARGS, 1, cmd->cmd_name));
 	ft_fprintf(1, "%s\n", g_all->pwd);
-	return (true);
+	return (TRUE);
 }
 
-
-static	bool	b_export(t_command *cmd)
+static	t_bool	b_export(t_command *cmd)
 {
 	int		index;
 	t_env	*curr;
-	bool	check;
+	t_bool	check;
 
-	check = true;
+	check = TRUE;
 	index = 0;
 	if (ft_tablen(cmd->argv) == 1)
 		print_export(g_env);
@@ -113,15 +113,15 @@ static	bool	b_export(t_command *cmd)
 	return (check);
 }
 
-static	bool	b_env(t_command *cmd)
+static	t_bool	b_env(t_command *cmd)
 {
 	if (ft_tablen(cmd->argv) != 1)
 		return (error(E_ARGS, 1, cmd->cmd_name));
 	print_env();
-	return (true);
+	return (TRUE);
 }
 
-static	bool	b_unset(t_command *cmd)
+static	t_bool	b_unset(t_command *cmd)
 {
 	int		index;
 	int		jndex;
@@ -135,16 +135,17 @@ static	bool	b_unset(t_command *cmd)
 		while (cmd->argv[++index])
 			if (!ft_strcmp(cmd->argv[index], curr->key))
 			{
-				ft_lstdel_index((t_list**)&g_env, (void (*)(t_list *))del_env, jndex);
-				return (true);
+				ft_lstdel_index((t_list**)&g_env,
+				(void (*)(t_list *))del_env, jndex);
+				return (TRUE);
 			}
 		jndex++;
 		curr = curr->next;
 	}
-	return (true);
+	return (TRUE);
 }
 
-static	bool	b_exit(t_command *cmd)
+static	t_bool	b_exit(t_command *cmd)
 {
 	long long		index;
 
@@ -161,16 +162,23 @@ static	bool	b_exit(t_command *cmd)
 	|| (index >= 0 && cmd->argv[1][0] == '-')))
 		error(E_EXIT_ARG, 2, cmd->argv[1]);
 	exit(index);
-	return (true);
+	return (TRUE);
 }
 
-bool	exec_builthin(t_command *cmd, int builthin)
+t_bool			exec_builthin(t_command *cmd, int builthin)
 {
-	bool	(*builthin_functions[7])(t_command *cmd) = {b_echo, b_cd, b_pwd, b_export, b_env, b_unset, b_exit};
-	bool	check;
+	t_bool	(*builthin_functions[7])(t_command *cmd);
+	t_bool	check;
 
+	builthin_functions[0] = b_echo;
+	builthin_functions[1] = b_cd;
+	builthin_functions[2] = b_pwd;
+	builthin_functions[3] = b_export;
+	builthin_functions[4] = b_env;
+	builthin_functions[5] = b_unset;
+	builthin_functions[6] = b_exit;
 	check = builthin_functions[builthin](cmd);
-	g_all->exit_status = check == true ? 0 : g_all->exit_status;
+	g_all->exit_status = check == TRUE ? 0 : g_all->exit_status;
 	if (!cmd->simple)
 		exit(g_all->exit_status);
 	return (check);

@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 18:33:48 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/15 18:36:53 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 15:47:35 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,9 @@ void	init_env()
 	t_env	*current;
 
 	index = 0;
-	while(environ[index])
+	while(g_environ[index])
 	{
-		current = new_var(environ[index]);
+		current = new_var(g_environ[index]);
 		ft_lstadd_back((t_list**)&g_env, (t_list*)current);
 		index++;
 		g_total_env++;

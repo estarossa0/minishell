@@ -6,39 +6,39 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/23 16:19:13 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/15 18:07:37 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 15:56:42 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool		built_handle(t_command *cmd, int builtin, int pipefd[2])
+static	t_bool	built_handle(t_command *cmd, int builtin, int pipefd[2])
 {
 	if (!cmd->simple && (g_pid = fork()) == -1)
 		return (error(E_STANDARD, 1, NULL));
 	if (g_pid == 0)
 		close(pipefd[READ_END]);
 	else
-		return (true);
+		return (TRUE);
 	return (exec_builthin(cmd, builtin));
 }
 
-bool		execve_handle(t_command *cmd, int pipefd[2])
+static	t_bool	execve_handle(t_command *cmd, int pipefd[2])
 {
 	if ((g_pid = fork()) == -1)
 		return (error(E_STANDARD, 1, NULL));
 	if (g_pid == 0)
 		close(pipefd[READ_END]);
 	else
-		return (true);
+		return (TRUE);
 	if (!cmd->cmd_name)
 		exit(0);
 	if ((execve(cmd->full_path, cmd->argv, reverse_env())) == -1)
-			return (error(E_STANDARD, 1, NULL));
-	return (true);
+		return (error(E_STANDARD, 1, NULL));
+	return (TRUE);
 }
 
-static	bool	peri_excuting(t_command *cmd, int builtin, int pipefd[2])
+static	t_bool	peri_excuting(t_command *cmd, int builtin, int pipefd[2])
 {
 	if (builtin >= 0 && cmd->cmd_name)
 		return (built_handle(cmd, builtin, pipefd));
@@ -64,7 +64,7 @@ void			executing(t_command *cmd, int pipefd[2], int savefd[2])
 	int		builthin;
 
 	builthin = cmd->cmd_name ? is_builtin(cmd->cmd_name) : 0;
-	if (pre_execute(cmd, pipefd, savefd, builthin) == true)
+	if (pre_execute(cmd, pipefd, savefd, builthin) == TRUE)
 		peri_excuting(cmd, builthin, pipefd);
 	post_executing(cmd, pipefd, savefd);
 }

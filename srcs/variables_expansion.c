@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 11:48:41 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/15 23:12:19 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 15:29:03 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,20 +22,20 @@ char	*get_var_value(char *var_name)
 	while (curr)
 	{
 		if (ft_strcmp(var_name, curr->key) == 0)
-			return(curr->value);
+			return (curr->value);
 		curr = curr->next;
 	}
 	return (NULL);
 }
 
-void			variable_expansion(char *line, int *index, t_command *current)
+void	variable_expansion(char *line, int *index, t_command *current)
 {
 	char	*var_name;
 	int		save;
 
 	(*index)++;
 	save = *index;
-	while(ft_isalnum(line[*index + 1]) || line[*index + 1] == '_')
+	while (ft_isalnum(line[*index + 1]) || line[*index + 1] == '_')
 		(*index)++;
 	var_name = ft_substr(line, save, (*index) - save + 1);
 	if (var_name)

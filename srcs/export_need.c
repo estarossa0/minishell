@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   export_need.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/07 15:22:05 by arraji            #+#    #+#             */
+/*   Updated: 2021/03/07 15:47:35 by arraji           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static	int		cmp(char *a, char *b)
@@ -30,7 +42,7 @@ static	void	env_sort(t_env *lst)
 	int		max[2];
 
 	begin_list = lst;
-	max[0] = ft_tablen(environ) + 1;
+	max[0] = ft_tablen(g_environ) + 1;
 	while (lst != NULL && --max[0])
 	{
 		tmp = begin_list;
@@ -70,7 +82,7 @@ static	t_env	*env_copy(t_env *lst)
 	return (head);
 }
 
-void	print_export(t_env *list)
+void			print_export(t_env *list)
 {
 	t_env	*new;
 	t_env	*tmp;

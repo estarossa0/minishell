@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 12:23:09 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/15 19:01:32 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 16:10:23 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ void	clear(t_all *all)
 			free_tab(curr->argv, ft_tablen(curr->argv));
 			ft_end((void**)&(curr->full_path), (void**)&(curr->file), 1);
 			while (curr->list_args)
-				curr->list_args = (t_args *)ft_lstdelone((t_list *)curr->list_args, NULL);
+				curr->list_args =
+				(t_args *)ft_lstdelone((t_list *)curr->list_args, NULL);
 			while (curr->all_files)
-				curr->all_files = (t_files *)ft_lstdelone((t_list *)curr->all_files, NULL);
+				curr->all_files =
+				(t_files *)ft_lstdelone((t_list *)curr->all_files, NULL);
 			save = (void *)curr;
 			curr = curr->next;
 			free(save);
@@ -53,10 +55,13 @@ void	clear(t_all *all)
 	}
 }
 
-int main()
+int		main(int argc, char **argv, char **env)
 {
 	t_all	all;
 
+	(void)argc;
+	(void)argv;
+	g_environ = env;
 	all.exit_status = 0;
 	signal(SIGINT, handler);
 	signal(SIGQUIT, handler);
@@ -64,7 +69,7 @@ int main()
 	while (1)
 	{
 		init(&all);
-		if (get_data(&all) == false || here_we_go(&all) == false || 1)
+		if (get_data(&all) == FALSE || here_we_go(&all) == FALSE || 1)
 			clear(&all);
 	}
 }

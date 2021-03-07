@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 18:34:34 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/15 23:06:25 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 15:56:41 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void			apply_operation(t_pipeline **pipe, int fail)
 	*pipe = new;
 }
 
-bool			here_we_go(t_all *all)
+t_bool			here_we_go(t_all *all)
 {
 	t_pipeline	*pipe;
 	t_command	*cmd;
@@ -108,10 +108,10 @@ bool			here_we_go(t_all *all)
 		pipe = pipe->next;
 	}
 	fd_saving(savefd);
-	return(true);
+	return(TRUE);
 }
 
-bool			get_data(t_all *all)
+t_bool			get_data(t_all *all)
 {
 	all->exit_status == 0 ? ft_fprintf(1, BOLD PRINT_GR PS RESET) :
 	ft_fprintf(1, BOLD PRINT_RED PS RESET);
@@ -122,8 +122,8 @@ bool			get_data(t_all *all)
 		write(1, "\n", 1);
 		exit(0);
 	}
-	if (lexer(all->parser.line, &all->parser) == false ||
-	parser(all->parser.line, all) == false)
-			return (false);
-	return (true);
+	if (lexer(all->parser.line, &all->parser) == FALSE ||
+	parser(all->parser.line, all) == FALSE)
+			return (FALSE);
+	return (TRUE);
 }

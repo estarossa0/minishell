@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 04:37:40 by arraji            #+#    #+#             */
-/*   Updated: 2020/06/04 03:34:51 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 16:14:15 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_list	*ft_lstdelone(t_list *lst, void (*del)(void*))
 	if (!lst)
 		return (NULL);
 	save = lst->next;
-	if(del)
+	if (del)
 		del(lst->content);
 	free(lst);
 	return (save);

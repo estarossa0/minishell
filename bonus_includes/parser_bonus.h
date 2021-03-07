@@ -37,15 +37,15 @@
 # define	SUB_OUT			-7
 # define	OP_OR			-11
 # define	OP_AND			-12
-bool	get_data(t_all *);
-bool	parser(char *line, t_all *all);
-bool	lexer(char *, t_parser *parser);
-bool	sets(char *line, int index, t_parser *parser);
+t_bool	get_data(t_all *);
+t_bool	parser(char *line, t_all *all);
+t_bool	lexer(char *, t_parser *parser);
+t_bool	sets(char *line, int index, t_parser *parser);
 void	add_word(t_args **list, char *word, int type);
-bool	parse_files(t_command *current);
+t_bool	parse_files(t_command *current);
 void	subshell_parse(t_command **current, char *line, int index);
 void	reverse_args(t_args **args);
-bool	link_argv(t_command *cmd);
+t_bool	link_argv(t_command *cmd);
 void	add_file(t_command *current, char *line, int *index);
 char	*get_next_word(char	*line, int *index);
 #endif

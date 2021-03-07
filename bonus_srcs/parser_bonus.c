@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 18:34:57 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/15 23:07:20 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 15:56:42 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void		hardcode_empty_arg(char *line, int index)
 		line[index] = '\0';
 }
 
-bool		parser(char *line, t_all *all)
+t_bool		parser(char *line, t_all *all)
 {
 	int			index;
 	t_command	*current;
@@ -101,5 +101,5 @@ bool		parser(char *line, t_all *all)
 		else
 			add_word(&current->list_args, &line[index], 0);
 	}
-	return (true);
+	return (TRUE);
 }

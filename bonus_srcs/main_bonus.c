@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 18:34:47 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/15 18:36:36 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 15:44:36 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init(t_all *all)
 		g_total_env = 0;
 		g_all = all;
 		init_env();
-		change_variables(NULL, false);
+		change_variables(NULL, FALSE);
 	}
 	g_pid = 0;
 	g_depth = 0;
@@ -65,7 +65,7 @@ int main()
 	while (1)
 	{
 		init(&all);
-		if (get_data(&all) == false || here_we_go(&all) == false || 1)
+		if (get_data(&all) == FALSE || here_we_go(&all) == FALSE || 1)
 			clear(&all);
 	}
 }

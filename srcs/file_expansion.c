@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_expansion.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: b-pearl <b-pearl@student.42.fr>            +#+  +:+       +#+        */
+/*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 12:05:57 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/07 17:52:38 by b-pearl          ###   ########.fr       */
+/*   Updated: 2021/03/07 15:56:42 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,21 +31,22 @@ static	void	overwrite_file(t_command *command)
 	}
 }
 
-char	*get_next_word(char	*line, int *index)
+char			*get_next_word(char *line, int *index)
 {
 	int		save;
 	char	*word;
-	while(line[*index] < 0 && line[*index])
+
+	while (line[*index] < 0 && line[*index])
 		(*index)++;
 	save = *index;
-	while (line[*index + 1] > 0  && line[*index + 1])
+	while (line[*index + 1] > 0 && line[*index + 1])
 		(*index)++;
 	if (!(word = ft_substr(line, save, (*index) - save + 1)))
 		error(E_STANDARD, 1, NULL);
 	return (word);
 }
 
-bool		parse_files(t_command *current)
+t_bool			parse_files(t_command *current)
 {
 	char	type;
 	t_files	*iterator;
@@ -58,14 +59,16 @@ bool		parse_files(t_command *current)
 		current->file = iterator->file;
 		BIT_ON(current->read_type, -1 * type);
 		if (type == RED_TO)
-			current->fd = open(iterator->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			current->fd =
+			open(iterator->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		else if (type == RED_FROM)
 			current->fd = open(iterator->file, O_RDONLY);
 		else if (type == RED_TO_APP)
-			current->fd = open(iterator->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
+			current->fd =
+			open(iterator->file, O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (current->fd < 0)
 			return (error(E_FILE, 1, current->file));
 		iterator = iterator->next;
 	}
-	return (true);
+	return (TRUE);
 }

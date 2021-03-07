@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 18:34:25 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/15 18:36:42 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 15:56:41 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	*get_next_word(char	*line, int *index)
 	return (word);
 }
 
-bool		parse_files(t_command *current)
+t_bool		parse_files(t_command *current)
 {
 	char	type;
 	t_files	*iterator;
@@ -67,5 +67,5 @@ bool		parse_files(t_command *current)
 			return (error(E_FILE, 1, current->file));
 		iterator = iterator->next;
 	}
-	return (true);
+	return (TRUE);
 }

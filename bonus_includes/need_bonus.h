@@ -5,5 +5,5 @@ void	dup_close(int fd1, int fd2);
 void	fd_saving(int savefd[2]);
 int		is_builtin(char *cmd);
 int		find_replace(t_env *var);
-void	change_variables(char *old_pwd, bool all);
+void	change_variables(char *old_pwd, t_bool all);
 #endif

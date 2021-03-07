@@ -6,12 +6,12 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 01:31:03 by arraji            #+#    #+#             */
-/*   Updated: 2020/02/24 04:32:10 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 16:14:29 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
+
 char	*ft_strdup(const char *src)
 {
 	int		len;
@@ -22,7 +22,7 @@ char	*ft_strdup(const char *src)
 	i = 0;
 	str = 0;
 	if (src == NULL)
-		return(NULL);
+		return (NULL);
 	while (src[len] != '\0')
 		len++;
 	str = (char*)malloc((len + 1));

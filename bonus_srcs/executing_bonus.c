@@ -6,13 +6,13 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 18:34:19 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/15 18:36:45 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 15:56:41 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell_bonus.h"
 
-static	bool	peri_excuting(t_command *cmd, int builtin)
+static	t_bool	peri_excuting(t_command *cmd, int builtin)
 {
 	if (!cmd->simple)
 		if ((g_pid = fork()) == -1)
@@ -29,7 +29,7 @@ static	bool	peri_excuting(t_command *cmd, int builtin)
 			return (error(E_STANDARD, 1, NULL));
 	}
 	cmd->pid = g_pid;
-	return (true);
+	return (TRUE);
 }
 
 void	post_executing(t_command *cmd, int pipefd[2], int savefd[2])
@@ -50,7 +50,7 @@ void			executing(t_command *cmd, int pipefd[2], int savefd[2])
 	int		builthin;
 
 	builthin = cmd->cmd_name ? is_builtin(cmd->cmd_name) : 0;
-	if (pre_execute(cmd, pipefd, savefd, builthin) == true)
+	if (pre_execute(cmd, pipefd, savefd, builthin) == TRUE)
 		peri_excuting(cmd, builthin);
 	post_executing(cmd, pipefd, savefd);
 }

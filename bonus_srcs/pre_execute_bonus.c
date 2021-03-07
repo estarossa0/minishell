@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 18:35:10 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/15 18:36:26 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 15:56:41 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static	int		with_path(char *name)
 	return (0);
 }
 
-static	bool	get_path(t_command *cmd, char *name)
+static	t_bool	get_path(t_command *cmd, char *name)
 {
 	t_env	*curr;
 	char	*path;
@@ -68,22 +68,22 @@ static	bool	get_path(t_command *cmd, char *name)
 			else
 			{
 				free(name);
-				return (false);
+				return (FALSE);
 			}
 			break ;
 		}
 		curr = curr->next;
 	}
 	free(name);
-	return (true);
+	return (TRUE);
 }
 
-bool	prepare_fd(t_command *cmd, int pipefd[2], int savefd[2])
+t_bool	prepare_fd(t_command *cmd, int pipefd[2], int savefd[2])
 {
-	bool	check;
+	t_bool	check;
 
 	check = parse_files(cmd);
-	if (cmd->next && cmd->next->type != SUB_OUT && pipe(pipefd) == true)
+	if (cmd->next && cmd->next->type != SUB_OUT && pipe(pipefd) == TRUE)
 		dup_close(pipefd[WRITE_END], STDOUT_FILENO);
 	if (cmd->next == NULL || cmd->next->type == SUB_OUT)
 		dup2(savefd[1], STDOUT_FILENO);
@@ -95,12 +95,12 @@ bool	prepare_fd(t_command *cmd, int pipefd[2], int savefd[2])
 	return (check);
 }
 
-bool	pre_execute(t_command *cmd, int pipefd[2], int savefd[2], int builthin)
+t_bool	pre_execute(t_command *cmd, int pipefd[2], int savefd[2], int builthin)
 {
 	struct	stat	buf;
 
-	if (prepare_fd(cmd, pipefd, savefd) == false)
-		return (false);
+	if (prepare_fd(cmd, pipefd, savefd) == FALSE)
+		return (FALSE);
 	if (builthin < 0)
 	{
 		if (with_path(cmd->cmd_name))
@@ -108,7 +108,7 @@ bool	pre_execute(t_command *cmd, int pipefd[2], int savefd[2], int builthin)
 		else
 		{
 			if (cmd->cmd_name[0] == 0 ||
-			get_path(cmd, ft_strjoin("/", cmd->cmd_name)) == false)
+			get_path(cmd, ft_strjoin("/", cmd->cmd_name)) == FALSE)
 				return (error(E_NOCMD, 127, cmd->cmd_name));
 		}
 		if (stat(cmd->full_path, &buf) != 0)
@@ -116,5 +116,5 @@ bool	pre_execute(t_command *cmd, int pipefd[2], int savefd[2], int builthin)
 		else if (S_ISDIR(buf.st_mode))
 			return (error(E_ISDIR, 126, cmd->full_path));
 	}
-	return (true);
+	return (TRUE);
 }

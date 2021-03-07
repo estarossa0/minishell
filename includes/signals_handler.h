@@ -6,12 +6,13 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/04 00:13:48 by arraji            #+#    #+#             */
-/*   Updated: 2020/06/04 00:14:45 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 15:53:13 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SIGNAL_H
-# define SIGNAL_H
+#ifndef FT_SIGNALS_HANDLER_H
+# define FT_SIGNALS_HANDLER_H
+
 void	handler(int sig);
 void	child_handler(int sig);
 #endif

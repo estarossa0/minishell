@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 18:35:03 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/15 23:05:18 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 15:56:42 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	reverse_args(t_args **args)
 	*args = new[0];
 }
 
-bool	link_argv(t_command *cmd)
+t_bool	link_argv(t_command *cmd)
 {
 	int size;
 	t_args	*list[2];
@@ -106,5 +106,5 @@ bool	link_argv(t_command *cmd)
 	cmd->argv[index] = NULL;
 	cmd->list_args = NULL;
 	cmd->cmd_name = cmd->argv[0];
-	return (true);
+	return (TRUE);
 }

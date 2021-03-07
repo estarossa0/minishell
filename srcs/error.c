@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 16:04:52 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/14 22:09:41 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 15:44:10 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		freak_out(int bits, char *line, int index)
 	else if (AND(bits, BRED_TO) || AND(bits, BRED_TO_APP)
 	|| AND(bits, BRED_FROM))
 		return (error(E_SYNTAX, 1, &line[index]));
-	return (true);
+	return (TRUE);
 }
 
 void	chill(int *bits)
@@ -53,10 +53,14 @@ int		error(int err, int exit_value, char *need)
 	err == E_WPATH ? ft_fprintf(2, "no such file or directory: %s\n", need) : 1;
 	err == E_ISDIR ? ft_fprintf(2, "%s: Is a directory\n", need) : 1;
 	err == E_ARGS ? ft_fprintf(1, "%s: too many arguments\n", need) : 1;
-	err == E_CD ? ft_fprintf(1, "cd: %s: no such file or directory\n", need) : 1;
-	err == E_NOT_VAL ? ft_fprintf(2, "export: `%s\': not a valid identifier\n", need) : 1;
-	err == E_EXIT_ARG ? ft_fprintf(2, "exit: `%s\' is notnumeric argument\n", need) : 1;
-	err == E_CD_HOME ? ft_fprintf(2, "cd: HOME not set\n") : 1;
+	err == E_CD ?
+	ft_fprintf(1, "cd: %s: no such file or directory\n", need) : 1;
+	err == E_NOT_VAL ?
+	ft_fprintf(2, "export: `%s\': not a valid identifier\n", need) : 1;
+	err == E_EXIT_ARG ?
+	ft_fprintf(2, "exit: `%s\' is notnumeric argument\n", need) : 1;
+	err == E_CD_HOME ?
+	ft_fprintf(2, "cd: HOME not set\n") : 1;
 	g_all->exit_status = exit_value;
-	return(1);
+	return (1);
 }

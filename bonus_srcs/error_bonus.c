@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/15 18:34:08 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/15 18:36:48 by arraji           ###   ########.fr       */
+/*   Updated: 2021/03/07 15:44:10 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		freak_out(int bits, char *line, int index)
 		return (error(E_OPERATOR, 1, &line[index]));
 	else if (AND(bits, B_OR))
 		return (error(E_OPERATOR, 1, &line[index]));
-	return (true);
+	return (TRUE);
 }
 
 void	chill(int *bits)
