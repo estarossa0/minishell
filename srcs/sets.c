@@ -62,6 +62,7 @@ static	void	set_dolar(char *line, int index, t_parser *parser)
 		return ;
 	chill(&parser->bits);
 	if (line[index + 1] == ' ' || line[index + 1] == '|'||
+	line[index + 1] == '=' ||
 	line[index + 1] == ';' || line[index + 1] == '$' || line[index + 1] == 0)
 		return ;
 	else if (line[index + 1 ] == '\'')
