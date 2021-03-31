@@ -102,7 +102,8 @@ static	bool	b_export(t_command *cmd)
 			if (ft_strlen(curr->key) == 0 || !valid_var(curr))
 			{
 				check = error(E_NOT_VAL, 1, curr->full_var);
-				free(curr);
+				ft_lstdel_index((t_list**)&curr,
+				(void (*)(t_list *))del_env, 0);
 				continue ;
 			}
 			if (find_replace(curr))
