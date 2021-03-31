@@ -46,6 +46,12 @@ int	find_replace(t_env *var)
 	{
 		if (!ft_strcmp(curr->key, var->key))
 		{
+			if (var->type == SHELL_VAR)
+			{
+				ft_lstdel_index((t_list**)&var,
+				(void (*)(t_list *))del_env, 0);
+				return (1);
+			}
 			var->next = curr->next;
 			free(curr->key);
 			free(curr->full_var);
