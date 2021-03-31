@@ -99,7 +99,7 @@ static	bool	b_export(t_command *cmd)
 		while (cmd->argv[++index])
 		{
 			curr = new_var(cmd->argv[index]);
-			if (ft_strlen(curr->key) == 0)
+			if (ft_strlen(curr->key) == 0 || !valid_var(curr))
 			{
 				check = error(E_NOT_VAL, 1, curr->full_var);
 				free(curr);

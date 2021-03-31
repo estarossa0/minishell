@@ -6,4 +6,5 @@ int		is_builtin(char *cmd);
 int		find_replace(t_env *var);
 void	change_variables(char *old_pwd, bool all);
 void	print_export(t_env *list);
+int		valid_var(t_env *var);
 #endif
