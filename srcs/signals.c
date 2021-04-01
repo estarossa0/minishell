@@ -18,11 +18,6 @@ void	handler(int sig)
 	{
 		ft_fprintf(1, "\n" BOLD PRINT_RED PS RESET);
 		g_all->exit_status = 128 + sig;
-		get_next_line(-5, NULL);
-	}
-	if (sig == SIGQUIT)
-	{
-		if (g_pid == 0)
-			write(1, "\b \b\b \b", 6);
+		readline(NULL, &(g_all->hist));
 	}
 }

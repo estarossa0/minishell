@@ -25,6 +25,8 @@ typedef char bool;
 # include <sys/wait.h>
 # include <signal.h>
 # include <sys/types.h>
+# include <termcap.h>
+# include <termios.h>
 # include "libft.h"
 # include "struct.h"
 # include "parser.h"
@@ -34,6 +36,7 @@ typedef char bool;
 # include "env_handle.h"
 # include "need.h"
 # include "signals_handler.h"
+# include "history.h"
 t_all	*g_all;
 extern char **environ;
 t_env		*g_env;

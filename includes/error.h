@@ -23,6 +23,7 @@
 # define	E_NOT_VAL	9
 # define	E_EXIT_ARG	10
 # define	E_CD_HOME	11
+# define	E_NOTERM	12
 int		error(int error, int exit_value, char *need);
 int		freak_out(int bits, char *line, int index);
 void	chill(int *bits);

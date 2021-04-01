@@ -57,6 +57,7 @@ int		error(int err, int exit_value, char *need)
 	err == E_NOT_VAL ? ft_fprintf(2, "export: `%s\': not a valid identifier\n", need) : 1;
 	err == E_EXIT_ARG ? ft_fprintf(2, "exit: `%s\' is notnumeric argument\n", need) : 1;
 	err == E_CD_HOME ? ft_fprintf(2, "cd: HOME not set\n") : 1;
+	err == E_NOTERM ? ft_fprintf(2, "term not set\n", NULL) : 1;
 	g_all->exit_status = exit_value;
 	return(1);
 }

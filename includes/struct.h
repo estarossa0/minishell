@@ -15,6 +15,22 @@
 # ifndef D_ERROR
 # error "include only dumbshell.h"
 # endif
+typedef	struct	s_hlist
+{
+	struct s_hlist	*next;
+	struct s_hlist	*prev;
+	char			*cmd;
+	char			*updated;
+	int				llen;
+}				t_hlist;
+
+typedef	struct	s_hist
+{
+	t_hlist		*list;
+	t_hlist		*head;
+	t_hlist		*end;
+}				t_hist;
+
 typedef	struct	s_files
 {
 	struct	s_files	*next;
@@ -65,6 +81,7 @@ typedef	struct	s_all
 	t_parser		parser;
 	t_pipeline		*pipe;
 	char			*pwd;
+	t_hist			hist;
 }				t_all;
 
 typedef	struct	s_env
