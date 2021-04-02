@@ -46,6 +46,12 @@ int		find_replace(t_env *var)
 	{
 		if (!ft_strcmp(curr->key, var->key))
 		{
+			if (var->type == SHELL_VAR)
+			{
+				ft_lstdel_index((t_list**)&var,
+				(void (*)(t_list *))del_env, 0);
+				return (1);
+			}
 			var->next = curr->next;
 			free(curr->key);
 			free(curr->full_var);
@@ -102,4 +108,20 @@ void	change_variables(char *old_pwd, t_bool all)
 			ft_lstdel_index((t_list**)&new, (void (*)(t_list *))del_env, 0);
 		free(pwd);
 	}
+}
+
+int		valid_var(t_env *var)
+{
+	int	index;
+
+	index = 0;
+	if (!ft_isalpha(var->key[0]) && var->key[0] != '_')
+		return (0);
+	while (var->key[index])
+	{
+		if (!ft_isalnum(var->key[index]) && var->key[index] != '_')
+			return (0);
+		index++;
+	}
+	return (1);
 }

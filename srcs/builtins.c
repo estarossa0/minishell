@@ -91,18 +91,18 @@ static	t_bool	b_export(t_command *cmd)
 	t_bool	check;
 
 	check = TRUE;
-	index = 0;
-	if (ft_tablen(cmd->argv) == 1)
+	if (!(index = 0) && ft_tablen(cmd->argv) == 1)
 		print_export(g_env);
 	else
 	{
 		while (cmd->argv[++index])
 		{
 			curr = new_var(cmd->argv[index]);
-			if (ft_strlen(curr->key) == 0)
+			if (ft_strlen(curr->key) == 0 || !valid_var(curr))
 			{
 				check = error(E_NOT_VAL, 1, curr->full_var);
-				free(curr);
+				ft_lstdel_index((t_list**)&curr,
+				(void (*)(t_list *))del_env, 0);
 				continue ;
 			}
 			if (find_replace(curr))
@@ -152,11 +152,10 @@ static	t_bool	b_exit(t_command *cmd)
 	write(2, "exit\n", 5);
 	cmd->argv[1] == NULL ? exit(0) : 1;
 	index = (cmd->argv[1][0] == '-') || (cmd->argv[1][0] == '+') ? 1 : 0;
+	if (!ft_isdigit(cmd->argv[1][index]))
+		exit(error(E_EXIT_ARG, 255, cmd->argv[1]));
 	if (ft_tablen(cmd->argv) > 2)
 		return (error(E_ARGS, 1, cmd->cmd_name));
-	while (cmd->argv[1] && cmd->argv[1][index])
-		if (!ft_isdigit(cmd->argv[1][index++]))
-			exit(error(E_EXIT_ARG, 255, cmd->argv[1]));
 	index = ft_atol(cmd->argv[1]);
 	if (cmd->argv[1] && ((index < 0 && cmd->argv[1][0] != '-')
 	|| (index >= 0 && cmd->argv[1][0] == '-')))

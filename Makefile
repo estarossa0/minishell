@@ -19,7 +19,7 @@ LIBFT_HEADER = ./libft/includes
 LIBFT_FOLDER = ./libft
 OBJECT_FOLDER = ./objects
 BONUS_OBJECT_FOLDER = ./bonus_objects
-LIBS =
+LIBS = -ltermcap
 LIBFT_LIB = libft.a
 RED = \033[0;31m
 GREEN = \033[0;32m
@@ -43,6 +43,8 @@ lexer.c \
 parser.c \
 here_we_go.c \
 export_need.c \
+history.c \
+history_need.c \
 
 BONUS_SRC_FILES = builtins_bonus.c \
 env_handle_bonus.c \
