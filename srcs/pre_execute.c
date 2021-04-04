@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:41:46 by arraji            #+#    #+#             */
-/*   Updated: 2021/03/07 18:39:58 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/04 14:19:42 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,19 @@ static	t_bool	get_path(t_command *cmd, char *name)
 	{
 		if (ft_strcmp(curr->key, "PATH") == 0)
 		{
+			if (ft_strlen(curr->value) == 0)
+				break ;
 			path = parse_path(curr->value, name);
+			free(name);
 			if (path != NULL)
 				cmd->full_path = path;
 			else
-			{
-				free(name);
 				return (FALSE);
-			}
-			break ;
+			return (TRUE);
 		}
 		curr = curr->next;
 	}
+	cmd->full_path = ft_strdup(cmd->cmd_name);
 	free(name);
 	return (TRUE);
 }
