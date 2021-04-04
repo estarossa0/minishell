@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 16:04:52 by arraji            #+#    #+#             */
-/*   Updated: 2021/03/07 18:09:13 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/04 14:15:38 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,7 @@ int		error(int err, int exit_value, char *need)
 	ft_fprintf(2, "export: `%s\': not a valid identifier\n", need) : 1;
 	err == E_EXIT_ARG ?
 	ft_fprintf(2, "exit: `%s\' is notnumeric argument\n", need) : 1;
-	err == E_CD_HOME ?
-	ft_fprintf(2, "cd: HOME not set\n") : 1;
+	err == E_CD_HOME ? ft_fprintf(2, "cd: HOME not set\n") : 1;
 	err == E_NOTERM ? ft_fprintf(2, "term not set\n", NULL) : 1;
 	g_all->exit_status = exit_value;
 	return (1);

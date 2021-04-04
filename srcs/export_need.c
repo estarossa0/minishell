@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 15:22:05 by arraji            #+#    #+#             */
-/*   Updated: 2021/03/07 15:47:35 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/04 14:15:52 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,20 @@ void			print_export(t_env *list)
 		new = new->next;
 		free(tmp);
 	}
+}
+
+int				valid_var(t_env *var)
+{
+	int	index;
+
+	index = 0;
+	if (!ft_isalpha(var->key[0]) && var->key[0] != '_')
+		return (0);
+	while (var->key[index])
+	{
+		if (!ft_isalnum(var->key[index]) && var->key[index] != '_')
+			return (0);
+		index++;
+	}
+	return (1);
 }

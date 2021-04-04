@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 14:02:21 by arraji            #+#    #+#             */
-/*   Updated: 2021/03/07 15:56:41 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/04 14:11:48 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,8 @@ void	reverse_args(t_args **args);
 t_bool	link_argv(t_command *cmd);
 void	add_file(t_command *current, char *line, int *index);
 char	*get_next_word(char	*line, int *index);
+t_bool	set_pipe(char *line, int index, t_parser *parser);
+void	set_s_quotes(char *line, int index, t_parser *parser);
+void	set_d_quotes(char *line, int index, t_parser *parser);
+t_bool	set_semicolon(char *line, int index, t_parser *parser);
 #endif

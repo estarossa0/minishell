@@ -6,55 +6,11 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 21:34:12 by arraji            #+#    #+#             */
-/*   Updated: 2021/03/07 18:10:20 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/04 14:11:07 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static	t_bool	set_pipe(char *line, int index, t_parser *parser)
-{
-	if (and_op(parser->bits, BD_Q) || and_op(parser->bits, BS_Q))
-		return (TRUE);
-	if (freak_out(parser->bits, line, index) == FALSE)
-		return (FALSE);
-	if (and_op(parser->bits, BPIPE) || and_op(parser->bits, BCHECK))
-		return (error(E_SYNTAX, 1, &line[index]));
-	line[index] = CMD_SEP;
-	bit_on(&(parser->bits), BPIPE);
-	return (TRUE);
-}
-
-static	void	set_s_quotes(char *line, int index, t_parser *parser)
-{
-	if (and_op(parser->bits, BD_Q))
-		return ;
-	chill(&parser->bits);
-	line[index] = REMOVED;
-	flip_bit(&parser->bits, BS_Q);
-}
-
-static	void	set_d_quotes(char *line, int index, t_parser *parser)
-{
-	if (and_op(parser->bits, BS_Q))
-		return ;
-	chill(&parser->bits);
-	line[index] = REMOVED;
-	flip_bit(&parser->bits, BD_Q);
-}
-
-static	t_bool	set_semicolon(char *line, int index, t_parser *parser)
-{
-	if (and_op(parser->bits, BD_Q) || and_op(parser->bits, BS_Q))
-		return (TRUE);
-	if (freak_out(parser->bits, line, index) == FALSE)
-		return (FALSE);
-	if (and_op(parser->bits, BSEMIC) || and_op(parser->bits, BCHECK))
-		return (error(E_SYNTAX, 1, &line[index]));
-	line[index] = PIPELINE_SEP;
-	bit_on(&(parser->bits), BSEMIC);
-	return (TRUE);
-}
 
 static	void	set_dolar(char *line, int index, t_parser *parser)
 {

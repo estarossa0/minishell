@@ -6,7 +6,7 @@
 #    By: arraji <arraji@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/18 16:04:41 by arraji            #+#    #+#              #
-#    Updated: 2020/12/15 18:49:06 by arraji           ###   ########.fr        #
+#    Updated: 2021/04/04 14:13:00 by arraji           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -45,6 +45,8 @@ here_we_go.c \
 export_need.c \
 history.c \
 history_need.c \
+builtins2.c \
+sets2.c \
 
 BONUS_SRC_FILES = builtins_bonus.c \
 env_handle_bonus.c \
