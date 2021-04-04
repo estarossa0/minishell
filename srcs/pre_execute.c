@@ -62,18 +62,19 @@ static	bool	get_path(t_command *cmd, char *name)
 	{
 		if (ft_strcmp(curr->key, "PATH") == 0)
 		{
+			if (ft_strlen(curr->value) == 0)
+				break ;
 			path = parse_path(curr->value, name);
+			free(name);
 			if (path != NULL)
 				cmd->full_path = path;
 			else
-			{
-				free(name);
 				return (false);
-			}
-			break ;
+			return (true);
 		}
 		curr = curr->next;
 	}
+	cmd->full_path = ft_strdup(cmd->cmd_name);
 	free(name);
 	return (true);
 }
