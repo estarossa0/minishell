@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:25:48 by arraji            #+#    #+#             */
-/*   Updated: 2021/03/07 16:07:29 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/05 14:38:21 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,5 @@
 # include "history.h"
 
 t_all	*g_all;
-char	**g_environ;
-t_env		*g_env;
-int			g_total_env;
-pid_t		g_pid;
 t_bool	here_we_go(t_all *all);
 #endif

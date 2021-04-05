@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 15:11:20 by arraji            #+#    #+#             */
-/*   Updated: 2021/03/07 15:47:35 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/05 14:36:11 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_env(void)
 {
 	t_env	*curr;
 
-	curr = g_env;
+	curr = g_all->env;
 	while (curr)
 	{
 		curr->type == ENV_VAR ?
@@ -47,7 +47,7 @@ t_env	*new_var(char *full_var)
 	error(E_STANDARD, 1, NULL) : 1;
 	new->type = (full_var[split] == '=') ? ENV_VAR : SHELL_VAR;
 	if (new->type == ENV_VAR)
-		g_total_env++;
+		g_all->total_env++;
 	(new->value = ft_substr(new->full_var, split + 1,
 	ft_strlen(new->full_var) - split)) == NULL ? error(E_STANDARD, 1, NULL) : 1;
 	return (new);
@@ -59,12 +59,12 @@ void	init_env(void)
 	t_env	*current;
 
 	index = 0;
-	while (g_environ[index])
+	while (g_all->environ[index])
 	{
-		current = new_var(g_environ[index]);
-		ft_lstadd_back((t_list**)&g_env, (t_list*)current);
+		current = new_var(g_all->environ[index]);
+		ft_lstadd_back((t_list**)&g_all->env, (t_list*)current);
 		index++;
-		g_total_env++;
+		g_all->total_env++;
 		current->type = ENV_VAR;
 	}
 }
@@ -76,8 +76,8 @@ char	**reverse_env(void)
 	int		index;
 
 	index = 0;
-	curr = g_env;
-	env = (char **)malloc(sizeof(char *) * (g_total_env + 1));
+	curr = g_all->env;
+	env = (char **)malloc(sizeof(char *) * (g_all->total_env + 1));
 	env == NULL ? error(E_STANDARD, 1, NULL) : 1;
 	while (curr)
 	{

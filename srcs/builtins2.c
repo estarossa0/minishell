@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 13:59:29 by arraji            #+#    #+#             */
-/*   Updated: 2021/04/04 13:59:31 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/05 14:35:04 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_bool		b_export(t_command *cmd)
 	check = TRUE;
 	index = 0;
 	if (ft_tablen(cmd->argv) == 1)
-		print_export(g_env);
+		print_export(g_all->env);
 	else
 	{
 		while (cmd->argv[++index])
@@ -107,7 +107,7 @@ t_bool		b_export(t_command *cmd)
 			}
 			if (find_replace(curr))
 				continue ;
-			ft_lstadd_back((t_list **)&g_env, (void *)curr);
+			ft_lstadd_back((t_list **)&g_all->env, (void *)curr);
 		}
 	}
 	return (check);

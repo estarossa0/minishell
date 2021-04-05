@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:59:41 by arraji            #+#    #+#             */
-/*   Updated: 2021/04/04 14:15:29 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/05 14:41:53 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,15 @@ static	void	set_return(void)
 	while (ret != -1)
 	{
 		ret = wait(&data);
-		if (ret == g_pid && WIFEXITED(data))
+		if (ret == g_all->pid && WIFEXITED(data))
 			g_all->exit_status = WEXITSTATUS(data);
-		else if (ret == g_pid && WIFSIGNALED(data))
+		else if (ret == g_all->pid && WIFSIGNALED(data))
 		{
 			g_all->exit_status = 128 + WTERMSIG(data);
 			WTERMSIG(data) == SIGQUIT ? write(1, "Quit\n", 5) : 1;
 		}
 	}
-	g_pid = 0;
+	g_all->pid = 0;
 }
 
 t_bool			here_we_go(t_all *all)

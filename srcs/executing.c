@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/23 16:19:13 by arraji            #+#    #+#             */
-/*   Updated: 2021/03/07 15:56:42 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/05 14:36:42 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 static	t_bool	built_handle(t_command *cmd, int builtin, int pipefd[2])
 {
-	if (!cmd->simple && (g_pid = fork()) == -1)
+	if (!cmd->simple && (g_all->pid = fork()) == -1)
 		return (error(E_STANDARD, 1, NULL));
-	if (g_pid == 0)
+	if (g_all->pid == 0)
 		close(pipefd[READ_END]);
 	else
 		return (TRUE);
@@ -25,9 +25,9 @@ static	t_bool	built_handle(t_command *cmd, int builtin, int pipefd[2])
 
 static	t_bool	execve_handle(t_command *cmd, int pipefd[2])
 {
-	if ((g_pid = fork()) == -1)
+	if ((g_all->pid = fork()) == -1)
 		return (error(E_STANDARD, 1, NULL));
-	if (g_pid == 0)
+	if (g_all->pid == 0)
 		close(pipefd[READ_END]);
 	else
 		return (TRUE);

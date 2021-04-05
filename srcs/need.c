@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/23 16:16:26 by arraji            #+#    #+#             */
-/*   Updated: 2021/04/04 14:15:58 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/05 14:35:26 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int		find_replace(t_env *var)
 {
 	t_env	*curr;
 
-	curr = g_env;
+	curr = g_all->env;
 	while (curr)
 	{
 		if (!ft_strcmp(curr->key, var->key))
@@ -104,7 +104,7 @@ void	change_variables(char *old_pwd, t_bool all)
 		ft_stradd(&pwd, "PWD=", -1);
 		new = new_var(pwd);
 		if (!find_replace(new))
-			all == -1 ? ft_lstadd_back((t_list **)&g_env, (void *)new) :
+			all == -1 ? ft_lstadd_back((t_list **)&g_all->env, (void *)new) :
 			ft_lstdel_index((t_list**)&new, (void (*)(t_list *))del_env, 0);
 		free(pwd);
 	}

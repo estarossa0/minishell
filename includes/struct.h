@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 16:05:20 by arraji            #+#    #+#             */
-/*   Updated: 2021/03/07 15:53:01 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/05 14:38:27 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,15 +76,6 @@ typedef	struct	s_pipeline
 	struct s_command	*cmd_head;
 }				t_pipeline;
 
-typedef	struct	s_all
-{
-	unsigned char	exit_status;
-	t_parser		parser;
-	t_pipeline		*pipe;
-	char			*pwd;
-	t_hist			hist;
-}				t_all;
-
 typedef	struct	s_env
 {
 	struct s_env	*next;
@@ -93,4 +84,17 @@ typedef	struct	s_env
 	char			*full_var;
 	int				type;
 }				t_env;
+
+typedef	struct	s_all
+{
+	unsigned char	exit_status;
+	t_parser		parser;
+	t_pipeline		*pipe;
+	char			*pwd;
+	t_hist			hist;
+	char			**environ;
+	t_env			*env;
+	int				total_env;
+	pid_t			pid;
+}				t_all;
 #endif

@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:41:46 by arraji            #+#    #+#             */
-/*   Updated: 2021/04/04 14:19:42 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/05 14:35:29 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static	t_bool	get_path(t_command *cmd, char *name)
 	t_env	*curr;
 	char	*path;
 
-	curr = g_env;
+	curr = g_all->env;
 	while (curr)
 	{
 		if (ft_strcmp(curr->key, "PATH") == 0)

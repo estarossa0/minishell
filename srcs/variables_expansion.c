@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 11:48:41 by arraji            #+#    #+#             */
-/*   Updated: 2021/03/07 15:29:03 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/05 14:35:31 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*get_var_value(char *var_name)
 {
 	t_env	*curr;
 
-	curr = g_env;
+	curr = g_all->env;
 	if (ft_strcmp(var_name, "?") == 0)
 		return (ft_itoa(g_all->exit_status));
 	while (curr)

@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 15:22:05 by arraji            #+#    #+#             */
-/*   Updated: 2021/04/04 14:15:52 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/05 14:33:38 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static	void	env_sort(t_env *lst)
 	int		max[2];
 
 	begin_list = lst;
-	max[0] = ft_tablen(g_environ) + 1;
+	max[0] = ft_tablen(g_all->environ) + 1;
 	while (lst != NULL && --max[0])
 	{
 		tmp = begin_list;

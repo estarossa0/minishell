@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 06:13:12 by arraji            #+#    #+#             */
-/*   Updated: 2021/04/04 14:10:52 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/05 14:34:52 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ static	t_bool	b_unset(t_command *cmd)
 	t_env	*curr;
 
 	jndex = 0;
-	curr = g_env;
+	curr = g_all->env;
 	while (curr)
 	{
 		index = 0;
 		while (cmd->argv[++index])
 			if (!ft_strcmp(cmd->argv[index], curr->key))
 			{
-				ft_lstdel_index((t_list**)&g_env,
+				ft_lstdel_index((t_list**)&g_all->env,
 				(void (*)(t_list *))del_env, jndex);
 				return (TRUE);
 			}

@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 12:23:09 by arraji            #+#    #+#             */
-/*   Updated: 2021/03/07 16:10:23 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/05 14:48:35 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 void	init(t_all *all)
 {
-	if (g_env == NULL)
+	if (g_all->env == NULL)
 	{
-		g_total_env = 0;
-		g_all = all;
+		g_all->total_env = 0;
 		init_env();
 		change_variables(NULL, -1);
+		g_all->hist.end = NULL;
+		g_all->hist.list = NULL;
+		g_all->hist.head = NULL;
 	}
-	g_pid = 0;
+	g_all->pid = 0;
 	all->parser.bits = 64;
 	ft_end((void **)&(all->parser.line), NULL, 1);
 	all->pipe = NULL;
@@ -61,7 +63,9 @@ int		main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
-	g_environ = env;
+	g_all = &all;
+	g_all->environ = env;
+	g_all->env = NULL;
 	all.exit_status = 0;
 	signal(SIGINT, handler);
 	signal(SIGQUIT, handler);
