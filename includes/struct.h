@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 16:05:20 by arraji            #+#    #+#             */
-/*   Updated: 2021/04/05 14:38:27 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/05 14:58:26 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ typedef	struct	s_command
 	t_files				*all_files;
 	char				read_type;
 	int					simple;
-	int					relation;
 }				t_command;
 
 typedef	struct	s_pipeline

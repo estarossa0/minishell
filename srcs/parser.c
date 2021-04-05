@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 11:29:11 by arraji            #+#    #+#             */
-/*   Updated: 2021/03/07 15:56:42 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/05 14:59:14 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static	void	init_list(t_command **current, t_all *all)
 		all->pipe->simple = 1;
 		*current = (t_command *)ft_lstadd_back((t_list **)&(all->pipe->cmd_head)
 		, malloc(sizeof(t_command)));
-		**current = (t_command){0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0};
+		**current = (t_command){0, 0, 0, 0, 0, 1, 0, 0, 0, 0};
 	}
 }
 
@@ -48,7 +48,7 @@ int index, t_all *all)
 		*current = (t_command *)ft_lstadd_back((t_list **)current,
 		malloc(sizeof(t_command)));
 	}
-	**current = (t_command){0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0};
+	**current = (t_command){0, 0, 0, 0, 0, 1, 0, 0, 0, 0};
 }
 
 void			add_word(t_args **list, char *word, int type)
