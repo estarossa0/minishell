@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/23 16:16:26 by arraji            #+#    #+#             */
-/*   Updated: 2021/04/05 14:35:26 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 16:02:33 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,24 @@
 
 void	fd_saving(int savefd[2])
 {
-	static	int	flip = 0;
+	static int	flip = 0;
 
 	if (flip == 0)
 	{
-		(savefd[0] = dup(0)) == -1 ? error(E_STANDARD, 1, NULL) : 1;
-		(savefd[1] = dup(1)) == -1 ? error(E_STANDARD, 1, NULL) : 1;
+		savefd[0] = dup(0);
+		savefd[1] = dup(1);
 	}
 	else
 	{
-		dup2(savefd[0], 0) == -1 ? error(E_STANDARD, 1, NULL) : 1;
+		dup2(savefd[0], 0);
 		close(savefd[0]);
-		dup2(savefd[1], 1) == -1 ? error(E_STANDARD, 1, NULL) : 1;
+		dup2(savefd[1], 1);
 		close(savefd[1]);
 	}
-	flip = flip == 0 ? 1 : 0;
+	if (flip)
+		flip = 0;
+	else
+		flip = 1;
 }
 
 void	dup_close(int fd1, int fd2)
@@ -37,7 +40,7 @@ void	dup_close(int fd1, int fd2)
 	close(fd1);
 }
 
-int		find_replace(t_env *var)
+int	find_replace(t_env *var)
 {
 	t_env	*curr;
 
@@ -65,7 +68,7 @@ int		find_replace(t_env *var)
 	return (0);
 }
 
-int		is_builtin(char *cmd)
+int	is_builtin(char *cmd)
 {
 	if (!ft_strcmp(cmd, "echo"))
 		return (0);
@@ -82,30 +85,4 @@ int		is_builtin(char *cmd)
 	if (!ft_strcmp(cmd, "exit"))
 		return (6);
 	return (-1);
-}
-
-void	change_variables(char *old_pwd, t_bool all)
-{
-	t_env	*new;
-	char	*pwd;
-
-	if (all == TRUE)
-	{
-		ft_stradd(&old_pwd, "OLDPWD=", -1);
-		new = new_var(old_pwd);
-		if (!find_replace(new))
-			ft_lstdel_index((t_list**)&new, (void (*)(t_list *))del_env, 0);
-		free(old_pwd);
-	}
-	pwd = getcwd(NULL, 0);
-	if (pwd)
-	{
-		g_all->pwd = ft_strdup(pwd);
-		ft_stradd(&pwd, "PWD=", -1);
-		new = new_var(pwd);
-		if (!find_replace(new))
-			all == -1 ? ft_lstadd_back((t_list **)&g_all->env, (void *)new) :
-			ft_lstdel_index((t_list**)&new, (void (*)(t_list *))del_env, 0);
-		free(pwd);
-	}
 }

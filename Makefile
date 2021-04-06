@@ -6,7 +6,7 @@
 #    By: arraji <arraji@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/05/18 16:04:41 by arraji            #+#    #+#              #
-#    Updated: 2021/04/05 14:56:22 by arraji           ###   ########.fr        #
+#    Updated: 2021/04/06 16:03:07 by arraji           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ history.c \
 history_need.c \
 builtins2.c \
 sets2.c \
+need2.c \
 
 OBJECT_FILES = $(SRC_FILES:.c=.o)
 OBJECT_FILES := $(addprefix $(OBJECT_FOLDER)/, $(OBJECT_FILES))
