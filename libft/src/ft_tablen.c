@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/31 02:20:12 by arraji            #+#    #+#             */
-/*   Updated: 2020/12/14 14:02:20 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 19:11:48 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_tablen(char **tab)
 {
-	size_t index;
+	size_t	index;
 
 	index = 0;
 	while (tab && tab[index])

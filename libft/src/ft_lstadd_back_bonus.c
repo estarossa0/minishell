@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 22:37:37 by arraji            #+#    #+#             */
-/*   Updated: 2021/04/06 18:31:27 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 19:06:16 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_list	*ft_lstadd_back(t_list **alst, t_list *new)
 {
-	t_list *save;
+	t_list	*save;
 
 	if (!(*alst))
 	{

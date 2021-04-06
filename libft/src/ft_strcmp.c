@@ -6,11 +6,11 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 19:19:35 by arraji            #+#    #+#             */
-/*   Updated: 2020/06/02 21:24:14 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 19:10:34 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		ft_strcmp(char *s1, char *s2)
+int	ft_strcmp(char *s1, char *s2)
 {
 	int	index;
 	int	jndex;

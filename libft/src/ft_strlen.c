@@ -6,15 +6,15 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 19:01:30 by arraji            #+#    #+#             */
-/*   Updated: 2020/03/11 19:33:08 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 19:11:32 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t			ft_strlen(char const *str)
+size_t	ft_strlen(char const *str)
 {
-	size_t len;
+	size_t	len;
 
 	len = 0;
 	if (str == NULL)

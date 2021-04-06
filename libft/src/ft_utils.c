@@ -6,13 +6,13 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 15:18:27 by arraji            #+#    #+#             */
-/*   Updated: 2020/03/05 09:34:15 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 19:12:24 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_fprintf.h"
 
-char				*ft_to_hex(unsigned long hl, int type)
+char	*ft_to_hex(unsigned long hl, int type)
 {
 	char	*hex;
 	int		index;
@@ -37,7 +37,7 @@ char				*ft_to_hex(unsigned long hl, int type)
 	return (ft_revstr(hex));
 }
 
-void				ft_reset(t_data *data)
+void	ft_reset(t_data *data)
 {
 	data->type = 0;
 	data->flag = 0;
@@ -51,7 +51,7 @@ void				ft_reset(t_data *data)
 
 unsigned	char	check_type(char c)
 {
-	unsigned char type;
+	unsigned char	type;
 
 	type = 0;
 	if (c == 'c')

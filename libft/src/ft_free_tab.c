@@ -6,13 +6,13 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 02:58:44 by arraji            #+#    #+#             */
-/*   Updated: 2020/06/04 03:23:16 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 18:57:10 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		free_tab(char **tab, int i)
+void	free_tab(char **tab, int i)
 {
 	i--;
 	while (i >= 0)

@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 01:13:24 by arraji            #+#    #+#             */
-/*   Updated: 2019/10/28 22:54:58 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 19:12:49 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static	void	ft_zero(void *tab, size_t num)
 	}
 }
 
-void			*ft_calloc(size_t num, size_t size)
+void	*ft_calloc(size_t num, size_t size)
 {
-	void *temp;
+	void	*temp;
 
 	temp = malloc(num * size);
 	if (!temp)

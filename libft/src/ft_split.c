@@ -6,16 +6,16 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 04:22:53 by arraji            #+#    #+#             */
-/*   Updated: 2019/11/06 01:00:12 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 19:10:21 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static	int		word_count(char const *str, char c)
+static	int	word_count(char const *str, char c)
 {
-	int i;
-	int word_number;
+	int	i;
+	int	word_number;
 
 	i = 0;
 	word_number = 0;
@@ -31,7 +31,7 @@ static	int		word_count(char const *str, char c)
 	return (word_number);
 }
 
-static	int		word_len(char const *str, char c, int *vars)
+static	int	word_len(char const *str, char c, int *vars)
 {
 	int			word_l;
 
@@ -99,7 +99,7 @@ static	char	**freeall(char **tab, int i)
 	return (NULL);
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	int		nb_w;
 	int		ln_w;
@@ -112,13 +112,11 @@ char			**ft_split(char const *s, char c)
 	if (!s)
 		return (NULL);
 	nb_w = word_count(s, c);
-	if (!(tab = (char **)malloc((nb_w + 1) * sizeof(char *))))
-		return (NULL);
+	tab = (char **)malloc((nb_w + 1) * sizeof(char *));
 	while (vars[0] < nb_w)
 	{
 		ln_w = word_len(s, c, vars);
-		if (!(tab[vars[0]] = (char *)malloc((ln_w + 1))))
-			return (freeall(tab, vars[0]));
+		tab[vars[0]] = (char *)malloc((ln_w + 1));
 		assig(tab, s, vars, c);
 		vars[0] += 1;
 	}

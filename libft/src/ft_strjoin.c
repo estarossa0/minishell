@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 02:21:51 by arraji            #+#    #+#             */
-/*   Updated: 2019/10/22 08:44:17 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 19:11:20 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static	unsigned	int	ft_stlen(char const *tab)
 {
-	unsigned	int len;
+	unsigned int	len;
 
 	len = 0;
 	while (tab[len])
@@ -22,12 +22,12 @@ static	unsigned	int	ft_stlen(char const *tab)
 	return (len);
 }
 
-char					*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	unsigned	int	index;
-	unsigned	int	jndex;
-	unsigned	int s1_len;
-	unsigned	int s2_len;
+	unsigned int	index;
+	unsigned int	jndex;
+	unsigned int	s1_len;
+	unsigned int	s2_len;
 	char			*s3;
 
 	if (s1 == NULL || s2 == NULL)

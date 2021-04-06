@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 22:29:47 by arraji            #+#    #+#             */
-/*   Updated: 2019/10/29 04:12:59 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 19:06:22 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_lstsize(t_list *lst)
 {
-	int len;
+	int	len;
 
 	len = 0;
 	while (lst)

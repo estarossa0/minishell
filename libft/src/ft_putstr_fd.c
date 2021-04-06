@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 18:18:46 by arraji            #+#    #+#             */
-/*   Updated: 2019/10/22 05:13:05 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 19:07:30 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	int index;
+	int	index;
 
 	index = 0;
 	if (s)
