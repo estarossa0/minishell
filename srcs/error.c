@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 16:04:52 by arraji            #+#    #+#             */
-/*   Updated: 2021/04/04 14:15:38 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/05 14:58:12 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ int		error(int err, int exit_value, char *need)
 	err == E_NOCMD ? ft_fprintf(2, "command not found: <%s>\n", need) : 1;
 	err == E_WPATH ? ft_fprintf(2, "no such file or directory: %s\n", need) : 1;
 	err == E_ISDIR ? ft_fprintf(2, "%s: Is a directory\n", need) : 1;
-	err == E_ARGS ? ft_fprintf(1, "%s: too many arguments\n", need) : 1;
+	err == E_ARGS ? ft_fprintf(2, "%s: too many arguments\n", need) : 1;
 	err == E_CD ?
-	ft_fprintf(1, "cd: %s: no such file or directory\n", need) : 1;
+	ft_fprintf(2, "cd: %s: no such file or directory\n", need) : 1;
 	err == E_NOT_VAL ?
 	ft_fprintf(2, "export: `%s\': not a valid identifier\n", need) : 1;
 	err == E_EXIT_ARG ?
