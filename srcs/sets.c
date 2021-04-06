@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 21:34:12 by arraji            #+#    #+#             */
-/*   Updated: 2021/04/04 14:11:07 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 16:16:16 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static	void	set_dolar(char *line, int index, t_parser *parser)
 	if (and_op(parser->bits, BS_Q))
 		return ;
 	chill(&parser->bits);
-	if (line[index + 1] == ' ' || line[index + 1] == '|' ||
-	line[index + 1] == '=' ||
-	line[index + 1] == ';' || line[index + 1] == '$' || line[index + 1] == 0)
+	if (line[index + 1] == ' ' || line[index + 1] == '|'
+		|| line[index + 1] == '=' || line[index + 1] == ';'
+		|| line[index + 1] == '$' || line[index + 1] == 0)
 		return ;
 	else if (line[index + 1] == '\'')
 	{
@@ -28,7 +28,10 @@ static	void	set_dolar(char *line, int index, t_parser *parser)
 		line[index] = REMOVED;
 	}
 	else if (line[index + 1] == '"')
-		!(and_op(parser->bits, BD_Q)) ? line[index] = REMOVED : 1;
+	{
+		if (!(and_op(parser->bits, BD_Q)))
+			line[index] = REMOVED;
+	}
 	else
 		line[index] = VAR;
 }
@@ -46,7 +49,7 @@ static	t_bool	set_red_to(char *line, int index, t_parser *parser)
 	if (and_op(parser->bits, BD_Q) || and_op(parser->bits, BS_Q))
 		return (TRUE);
 	if (and_op(parser->bits, BRED_TO) || and_op(parser->bits, BRED_TO_APP)
-	|| and_op(parser->bits, BRED_FROM))
+		|| and_op(parser->bits, BRED_FROM))
 		return (error(E_SYNTAX, 1, &line[index]));
 	if (line[index + 1] == '>')
 	{
@@ -67,14 +70,14 @@ static	t_bool	set_red_from(char *line, int index, t_parser *parser)
 	if (and_op(parser->bits, BD_Q) || and_op(parser->bits, BS_Q))
 		return (TRUE);
 	if (and_op(parser->bits, BRED_TO) || and_op(parser->bits, BRED_TO_APP)
-	|| and_op(parser->bits, BRED_FROM))
+		|| and_op(parser->bits, BRED_FROM))
 		return (error(E_SYNTAX, 1, &line[index]));
 	line[index] = RED_FROM;
 	bit_on(&(parser->bits), BRED_FROM);
 	return (TRUE);
 }
 
-t_bool			sets(char *line, int index, t_parser *parser)
+t_bool	sets(char *line, int index, t_parser *parser)
 {
 	t_bool	check;
 
