@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/23 16:19:13 by arraji            #+#    #+#             */
-/*   Updated: 2021/04/05 14:36:42 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 15:03:14 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 
 static	t_bool	built_handle(t_command *cmd, int builtin, int pipefd[2])
 {
-	if (!cmd->simple && (g_all->pid = fork()) == -1)
-		return (error(E_STANDARD, 1, NULL));
+	if (!cmd->simple)
+	{
+		g_all->pid = fork();
+		if (g_all->pid == -1)
+			return (error(E_STANDARD, 1, NULL));
+	}
 	if (g_all->pid == 0)
 		close(pipefd[READ_END]);
 	else
@@ -25,7 +29,8 @@ static	t_bool	built_handle(t_command *cmd, int builtin, int pipefd[2])
 
 static	t_bool	execve_handle(t_command *cmd, int pipefd[2])
 {
-	if ((g_all->pid = fork()) == -1)
+	g_all->pid = fork();
+	if (g_all->pid == -1)
 		return (error(E_STANDARD, 1, NULL));
 	if (g_all->pid == 0)
 		close(pipefd[READ_END]);
@@ -59,11 +64,14 @@ static	void	post_executing(t_command *cmd, int pipefd[2], int savefd[2])
 	}
 }
 
-void			executing(t_command *cmd, int pipefd[2], int savefd[2])
+void	executing(t_command *cmd, int pipefd[2], int savefd[2])
 {
 	int		builthin;
 
-	builthin = cmd->cmd_name ? is_builtin(cmd->cmd_name) : 0;
+	if (cmd->cmd_name)
+		builthin = is_builtin(cmd->cmd_name);
+	else
+		builthin = 0;
 	if (pre_execute(cmd, pipefd, savefd, builthin) == TRUE)
 		peri_excuting(cmd, builthin, pipefd);
 	post_executing(cmd, pipefd, savefd);
