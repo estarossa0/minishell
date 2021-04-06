@@ -6,20 +6,20 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:59:41 by arraji            #+#    #+#             */
-/*   Updated: 2021/04/05 14:41:53 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 15:10:54 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static	int		set_state(void)
+static	int	set_state(void)
 {
 	struct termios		term;
 
 	if (tgetent(0, NULL) < 1)
 		exit(error(E_NOTERM, 1, NULL));
 	tcgetattr(0, &term);
-	term.c_lflag &= ~(ICANON | ECHO);
+	term.c_lflag &= ~ (ICANON | ECHO);
 	term.c_cc[VMIN] = 1;
 	term.c_cc[VTIME] = 0;
 	tcsetattr(0, TCSANOW, &term);
@@ -47,7 +47,7 @@ static	void	set_return(void)
 	g_all->pid = 0;
 }
 
-t_bool			here_we_go(t_all *all)
+t_bool	here_we_go(t_all *all)
 {
 	t_pipeline	*pipe;
 	t_command	*cmd;
@@ -74,11 +74,13 @@ t_bool			here_we_go(t_all *all)
 	return (TRUE);
 }
 
-t_bool			get_data(t_all *all)
+t_bool	get_data(t_all *all)
 {
 	set_state();
-	(all->exit_status == 0) ? ft_fprintf(1, "%s%s%s%s", BOLD, PRINT_GR, PS,
-	RESET) : ft_fprintf(1, "%s%s%s%s", BOLD, PRINT_RED, PS, RESET);
+	if (all->exit_status == 0)
+		ft_fprintf(1, "%s%s%s%s", BOLD, PRINT_GR, PS, RESET);
+	else
+		ft_fprintf(1, "%s%s%s%s", BOLD, PRINT_RED, PS, RESET);
 	all->parser.rt = readline(&all->parser.line, &(all->hist));
 	if (all->parser.rt == -1)
 		return (error(E_STANDARD, 1, NULL));
@@ -87,8 +89,8 @@ t_bool			get_data(t_all *all)
 		write(1, "exit\n", 6);
 		exit(0);
 	}
-	if (lexer(all->parser.line, &all->parser) == FALSE ||
-	parser(all->parser.line, all) == FALSE)
+	if (lexer(all->parser.line, &all->parser) == FALSE
+		|| parser(all->parser.line, all) == FALSE)
 		return (FALSE);
 	return (TRUE);
 }
