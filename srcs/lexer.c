@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 17:46:55 by arraji            #+#    #+#             */
-/*   Updated: 2021/03/07 15:56:42 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 15:14:45 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_bool	lexer(char *line, t_parser *parser)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (line[++i])
