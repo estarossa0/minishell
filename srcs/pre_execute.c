@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 18:41:46 by arraji            #+#    #+#             */
-/*   Updated: 2021/04/05 14:35:29 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 16:13:49 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ static	char	*parse_path(char *all_paths, char *name)
 	return (NULL);
 }
 
-static	int		with_path(char *name)
+static	int	with_path(char *name)
 {
-	int index;
+	int	index;
 
 	index = 0;
 	while (name[index])
@@ -90,13 +90,13 @@ static	t_bool	prepare_fd(t_command *cmd, int pipefd[2], int savefd[2])
 		dup2(savefd[1], STDOUT_FILENO);
 	if (cmd->file && cmd->fd >= 0 && and_op(cmd->read_type, -RED_FROM))
 		dup_close(cmd->fd, STDIN_FILENO);
-	if (cmd->file && cmd->fd >= 0 &&
-	(and_op(cmd->read_type, -RED_TO) || and_op(cmd->read_type, -RED_TO_APP)))
+	if (cmd->file && cmd->fd >= 0 && (and_op(cmd->read_type, -RED_TO)
+			|| and_op(cmd->read_type, -RED_TO_APP)))
 		dup_close(cmd->fd, STDOUT_FILENO);
 	return (check);
 }
 
-t_bool			pre_execute(t_command *cmd, int pipefd[2],
+t_bool	pre_execute(t_command *cmd, int pipefd[2],
 int savefd[2], int builthin)
 {
 	struct stat	buf;
@@ -109,8 +109,8 @@ int savefd[2], int builthin)
 			cmd->full_path = ft_strdup(cmd->cmd_name);
 		else
 		{
-			if (cmd->cmd_name[0] == 0 ||
-			get_path(cmd, ft_strjoin("/", cmd->cmd_name)) == FALSE)
+			if (cmd->cmd_name[0] == 0
+				|| get_path(cmd, ft_strjoin("/", cmd->cmd_name)) == FALSE)
 				return (error(E_NOCMD, 127, cmd->cmd_name));
 		}
 		if (stat(cmd->full_path, &buf) != 0)
