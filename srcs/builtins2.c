@@ -6,16 +6,14 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/04 13:59:29 by arraji            #+#    #+#             */
-/*   Updated: 2021/04/05 14:35:04 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 14:51:43 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static	int	ft_echo_print(char **str, int i, int newline)
+static	int	ft_echo_print(char **str, int i, int j, int newline)
 {
-	int		j;
-
 	while (str[i] && str[i][0] == '-')
 	{
 		if (str[i][1] == 'n')
@@ -35,26 +33,28 @@ static	int	ft_echo_print(char **str, int i, int newline)
 	while (str[i] != NULL)
 	{
 		ft_fprintf(1, "%s", str[i]);
-		(str[i + 1] != NULL) ? write(1, " ", 1) : 1;
+		if (str[i + 1] != NULL)
+			write (1, " ", 1);
 		i++;
 	}
 	return (newline);
 }
 
-t_bool		b_echo(t_command *cmd)
+t_bool	b_echo(t_command *cmd)
 {
 	int		index;
 	int		save;
 
 	save = 0;
 	index = 1;
-	save = ft_echo_print(cmd->argv, 1, 0);
-	save ? 1 : write(1, "\n", 1);
+	save = ft_echo_print(cmd->argv, 1, 0, 0);
+	if (!save)
+		write(1, "\n", 1);
 	g_all->exit_status = 0;
 	return (TRUE);
 }
 
-t_bool		b_cd(t_command *cmd)
+t_bool	b_cd(t_command *cmd)
 {
 	int		len;
 	char	*home;
@@ -66,7 +66,10 @@ t_bool		b_cd(t_command *cmd)
 	{
 		home = get_var_value("HOME");
 		if (home)
-			check = (chdir(home) == -1) ? error(E_CD, 1, home) : TRUE;
+		{
+			if (chdir(home) == -1)
+				check = error(E_CD, 1, home);
+		}
 		else
 			check = error(E_CD_HOME, 1, NULL);
 	}
@@ -76,7 +79,7 @@ t_bool		b_cd(t_command *cmd)
 	return (check);
 }
 
-t_bool		b_pwd(t_command *cmd)
+t_bool	b_pwd(t_command *cmd)
 {
 	if (ft_tablen(cmd->argv) != 1)
 		return (error(E_ARGS, 1, cmd->cmd_name));
@@ -84,7 +87,7 @@ t_bool		b_pwd(t_command *cmd)
 	return (TRUE);
 }
 
-t_bool		b_export(t_command *cmd)
+t_bool	b_export(t_command *cmd)
 {
 	int		index;
 	t_env	*curr;
