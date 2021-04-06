@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 12:23:09 by arraji            #+#    #+#             */
-/*   Updated: 2021/04/05 14:48:35 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 15:15:42 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ void	clear(t_all *all)
 			free_tab(curr->argv, ft_tablen(curr->argv));
 			ft_end((void**)&(curr->full_path), (void**)&(curr->file), 1);
 			while (curr->list_args)
-				curr->list_args =
-				(t_args *)ft_lstdelone((t_list *)curr->list_args, NULL);
+				curr->list_args
+					= (t_args *)ft_lstdelone((t_list *)curr->list_args, NULL);
 			while (curr->all_files)
-				curr->all_files =
-				(t_files *)ft_lstdelone((t_list *)curr->all_files, NULL);
+				curr->all_files
+					= (t_files *)ft_lstdelone((t_list *)curr->all_files, NULL);
 			save = (void *)curr;
 			curr = curr->next;
 			free(save);
@@ -57,7 +57,7 @@ void	clear(t_all *all)
 	}
 }
 
-int		main(int argc, char **argv, char **env)
+int	main(int argc, char **argv, char **env)
 {
 	t_all	all;
 
