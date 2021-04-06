@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 13:33:56 by rbougssi          #+#    #+#             */
-/*   Updated: 2021/04/05 14:42:33 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 16:58:37 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	append(char input, t_hlist *hist)
 void	handle_input(t_hist *hist, char input[5])
 {
 	if (input[0] == 127 && hist->list->llen > 0
-	&& write(1, "\b \b", 3))
+		&& write(1, "\b \b", 3))
 		hist->list->updated[--hist->list->llen] = '\0';
 	else if (input[2] == 65 && hist->list->prev)
 	{
@@ -50,7 +50,7 @@ void	handle_input(t_hist *hist, char input[5])
 		append(input[0], hist->list);
 }
 
-int		fail(t_hist *hist, int all)
+int	fail(t_hist *hist, int all)
 {
 	hist->list = hist->end->prev;
 	if (hist->list)
@@ -67,7 +67,7 @@ int		fail(t_hist *hist, int all)
 	return (1);
 }
 
-int		readline(char **line, t_hist *hist)
+int	readline(char **line, t_hist *hist)
 {
 	char			input[5];
 
@@ -75,16 +75,20 @@ int		readline(char **line, t_hist *hist)
 	if (line == NULL)
 		return (fail(hist, 1));
 	hist_init(hist->head, &(hist->end));
-	while ((g_all->parser.rt = read(0, &input, 4)) >= 0 && input[0] != '\n')
+	while (1)
 	{
+		g_all->parser.rt = read(0, &input, 4);
+		if (g_all->parser.rt < 0 || input[0] == '\n')
+			break ;
 		if (input[0] == 4 && hist->list->llen == 0)
 			return (0);
-		else
-			handle_input(&g_all->hist, input);
+		handle_input(&g_all->hist, input);
 		ft_bzero(input, 5);
 	}
-	*line = hist->list->updated
-	? ft_strdup(hist->list->updated) : ft_strdup("");
+	if (hist->list->updated)
+		*line = ft_strdup(hist->list->updated);
+	else
+		*line = ft_strdup("");
 	if (ft_strlen(hist->list->updated) == 0)
 		return (fail(hist, 0));
 	hist->end->cmd = ft_strdup(hist->list->updated);
