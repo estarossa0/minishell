@@ -6,16 +6,16 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 13:34:46 by rbougssi          #+#    #+#             */
-/*   Updated: 2021/04/05 14:52:32 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 15:14:03 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		hist_init(t_hlist *head, t_hlist **end)
+void	hist_init(t_hlist *head, t_hlist **end)
 {
-	*end =
-	dlist_push_back(&g_all->hist.list, (t_hlist *)malloc(sizeof(t_hlist)));
+	*end
+		= dlist_push_back(&g_all->hist.list, (t_hlist *)malloc(sizeof(t_hlist)));
 	g_all->hist.list = *end;
 	(*end)->llen = 0;
 	(*end)->cmd = NULL;
@@ -29,7 +29,7 @@ void		hist_init(t_hlist *head, t_hlist **end)
 	}
 }
 
-void		hist_reset(t_hlist *head, int all)
+void	hist_reset(t_hlist *head, int all)
 {
 	struct termios	restore;
 
@@ -49,7 +49,7 @@ void		hist_reset(t_hlist *head, int all)
 	}
 }
 
-t_hlist		*dlist_push_back(t_hlist **lst, t_hlist *new)
+t_hlist	*dlist_push_back(t_hlist **lst, t_hlist *new)
 {
 	t_hlist	*save;
 
@@ -72,7 +72,7 @@ t_hlist		*dlist_push_back(t_hlist **lst, t_hlist *new)
 	return (new);
 }
 
-void		del(int size)
+void	del(int size)
 {
 	while (size-- > 0)
 		write(1, "\b \b", 3);
