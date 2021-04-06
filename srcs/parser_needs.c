@@ -6,13 +6,13 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/02 17:22:29 by b-pearl           #+#    #+#             */
-/*   Updated: 2021/03/07 15:56:42 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 16:11:37 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static	int		get_next_word_size(t_args *current)
+static	int	get_next_word_size(t_args *current)
 {
 	int		size;
 	char	*var_value;
@@ -26,7 +26,10 @@ static	int		get_next_word_size(t_args *current)
 		{
 			var_value = get_var_value(current->str);
 			free(current->str);
-			current->str = var_value ? var_value : "";
+			if (var_value)
+				current->str = var_value;
+			else
+				current->str = "";
 			size += ft_strlen(current->str);
 		}
 		current = current->next;
@@ -50,18 +53,18 @@ static	void	copy_word(t_args *current, t_args *new, int *index)
 
 static	void	init_word(t_args *new[2], t_args *current, int need[2])
 {
-	int size;
+	int	size;
 
 	new[1] = (t_args *)ft_lstadd_back((t_list**)&new[0],
-	malloc(sizeof(t_args)));
+			malloc(sizeof(t_args)));
 	size = get_next_word_size(current);
 	new[1]->str = malloc(size + 1);
-	new[1]->str[size] = (char)0;
+	new[1]->str[size] = (char) 0;
 	need[0] = 1;
 	need[1] = 0;
 }
 
-void			reverse_args(t_args **args)
+void	reverse_args(t_args **args)
 {
 	t_args	*current[2];
 	t_args	*new[2];
@@ -85,7 +88,7 @@ void			reverse_args(t_args **args)
 	*args = new[0];
 }
 
-t_bool			link_argv(t_command *cmd)
+t_bool	link_argv(t_command *cmd)
 {
 	int		size;
 	t_args	*list[2];
