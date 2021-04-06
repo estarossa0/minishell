@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 06:13:12 by arraji            #+#    #+#             */
-/*   Updated: 2021/04/05 14:34:52 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 14:41:42 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,14 @@ static	t_bool	b_unset(t_command *cmd)
 	{
 		index = 0;
 		while (cmd->argv[++index])
+		{
 			if (!ft_strcmp(cmd->argv[index], curr->key))
 			{
 				ft_lstdel_index((t_list**)&g_all->env,
 				(void (*)(t_list *))del_env, jndex);
 				return (TRUE);
 			}
+		}
 		jndex++;
 		curr = curr->next;
 	}
@@ -49,21 +51,24 @@ static	t_bool	b_exit(t_command *cmd)
 	long long		index;
 
 	write(2, "exit\n", 5);
-	cmd->argv[1] == NULL ? exit(0) : 1;
-	index = (cmd->argv[1][0] == '-') || (cmd->argv[1][0] == '+') ? 1 : 0;
+	index = 0;
+	if (cmd->argv[1] == NULL)
+		exit(0);
+	if (cmd->argv[1][0] == '-' || cmd->argv[1][0] == '+')
+		index = 1;
 	if (!ft_isdigit(cmd->argv[1][index]))
 		exit(error(E_EXIT_ARG, 255, cmd->argv[1]));
 	if (ft_tablen(cmd->argv) > 2)
 		return (error(E_ARGS, 1, cmd->cmd_name));
 	index = ft_atol(cmd->argv[1]);
 	if (cmd->argv[1] && ((index < 0 && cmd->argv[1][0] != '-')
-	|| (index >= 0 && cmd->argv[1][0] == '-')))
+			|| (index >= 0 && cmd->argv[1][0] == '-')))
 		error(E_EXIT_ARG, 2, cmd->argv[1]);
 	exit(index);
 	return (TRUE);
 }
 
-t_bool			exec_builthin(t_command *cmd, int builthin)
+t_bool	exec_builthin(t_command *cmd, int builthin)
 {
 	t_bool	(*builthin_functions[7])(t_command *cmd);
 	t_bool	check;
@@ -76,7 +81,8 @@ t_bool			exec_builthin(t_command *cmd, int builthin)
 	builthin_functions[5] = b_unset;
 	builthin_functions[6] = b_exit;
 	check = builthin_functions[builthin](cmd);
-	g_all->exit_status = check == TRUE ? 0 : g_all->exit_status;
+	if (check == TRUE)
+		g_all->exit_status = 0;
 	if (!cmd->simple)
 		exit(g_all->exit_status);
 	return (check);
