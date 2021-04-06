@@ -6,13 +6,13 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 15:22:05 by arraji            #+#    #+#             */
-/*   Updated: 2021/04/05 14:33:38 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 15:05:03 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static	int		cmp(char *a, char *b)
+static	int	cmp(char *a, char *b)
 {
 	int	index;
 
@@ -82,7 +82,7 @@ static	t_env	*env_copy(t_env *lst)
 	return (head);
 }
 
-void			print_export(t_env *list)
+void	print_export(t_env *list)
 {
 	t_env	*new;
 	t_env	*tmp;
@@ -102,7 +102,7 @@ void			print_export(t_env *list)
 	}
 }
 
-int				valid_var(t_env *var)
+int	valid_var(t_env *var)
 {
 	int	index;
 
