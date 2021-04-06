@@ -6,18 +6,18 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/07 17:40:28 by arraji            #+#    #+#             */
-/*   Updated: 2021/03/07 18:02:58 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 18:37:59 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int		and_op(int x, int y)
+int	and_op(int x, int y)
 {
 	return (((x & y) == y));
 }
 
-int		nand_op(int x, int y)
+int	nand_op(int x, int y)
 {
 	return (((x & y) == 0));
 }
