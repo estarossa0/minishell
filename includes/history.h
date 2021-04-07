@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   history.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbougssi <rbougssi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/30 13:36:02 by rbougssi          #+#    #+#             */
-/*   Updated: 2021/03/30 13:36:03 by rbougssi         ###   ########.fr       */
+/*   Updated: 2021/04/07 13:45:53 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_HISTORY_H
-# define FT_HISTORY_H
+#ifndef HISTORY_H
+# define HISTORY_H
 # include "minishell.h"
 
 int			readline(char **line, t_hist *hist);

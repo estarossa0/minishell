@@ -6,17 +6,14 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/18 16:05:20 by arraji            #+#    #+#             */
-/*   Updated: 2021/04/05 14:58:26 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/07 13:48:02 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_STRUCT_H
-# define FT_STRUCT_H
-# ifndef D_ERROR
-#  error "include only dumbshell.h"
-# endif
+#ifndef STRUCT_H
+# define STRUCT_H
 
-typedef	struct	s_hlist
+typedef struct s_hlist
 {
 	struct s_hlist	*next;
 	struct s_hlist	*prev;
@@ -25,28 +22,28 @@ typedef	struct	s_hlist
 	int				llen;
 }				t_hlist;
 
-typedef	struct	s_hist
+typedef struct s_hist
 {
 	t_hlist		*list;
 	t_hlist		*head;
 	t_hlist		*end;
 }				t_hist;
 
-typedef	struct	s_files
+typedef struct s_files
 {
 	struct s_files	*next;
 	char			*file;
 	int				type;
 }				t_files;
 
-typedef	struct	s_parser
+typedef struct s_parser
 {
 	int		bits;
 	char	*line;
 	int		rt;
 }				t_parser;
 
-typedef	struct	s_args
+typedef struct s_args
 {
 	struct s_args	*next;
 	char			c;
@@ -54,7 +51,7 @@ typedef	struct	s_args
 	int				type;
 }				t_args;
 
-typedef	struct	s_command
+typedef struct s_command
 {
 	struct s_command	*next;
 	char				*cmd_name;
@@ -68,14 +65,14 @@ typedef	struct	s_command
 	int					simple;
 }				t_command;
 
-typedef	struct	s_pipeline
+typedef struct s_pipeline
 {
 	struct s_pipeline	*next;
 	int					simple;
 	struct s_command	*cmd_head;
 }				t_pipeline;
 
-typedef	struct	s_env
+typedef struct s_env
 {
 	struct s_env	*next;
 	char			*key;
@@ -84,7 +81,7 @@ typedef	struct	s_env
 	int				type;
 }				t_env;
 
-typedef	struct	s_all
+typedef struct s_all
 {
 	unsigned char	exit_status;
 	t_parser		parser;

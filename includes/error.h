@@ -6,12 +6,12 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 14:06:00 by arraji            #+#    #+#             */
-/*   Updated: 2021/03/07 15:42:14 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/07 13:45:29 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_ERROR_H
-# define FT_ERROR_H
+#ifndef ERROR_H
+# define ERROR_H
 # define E_STANDARD	1
 # define E_SYNTAX	2
 # define E_FILE		3
