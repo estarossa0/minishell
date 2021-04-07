@@ -6,7 +6,7 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 04:22:53 by arraji            #+#    #+#             */
-/*   Updated: 2021/04/06 19:10:21 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/06 19:19:30 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,15 +89,6 @@ static	void	assig(char **dest, char const *src, int *vars, char c)
 **vars[1] = g_assi_car
 **vars[2] = g_now_car
 */
-
-static	char	**freeall(char **tab, int i)
-{
-	i--;
-	while (i > 0)
-		free(tab[i--]);
-	free(tab);
-	return (NULL);
-}
 
 char	**ft_split(char const *s, char c)
 {

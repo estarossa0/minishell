@@ -6,12 +6,12 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 13:25:48 by arraji            #+#    #+#             */
-/*   Updated: 2021/04/05 14:38:21 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/07 13:45:58 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MINISHELL_H
-# define FT_MINISHELL_H
+#ifndef MINISHELL_H
+# define MINISHELL_H
 # define TRUE 0
 # define FALSE 1
 # define D_ERROR

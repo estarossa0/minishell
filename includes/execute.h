@@ -6,12 +6,12 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/22 13:31:39 by arraji            #+#    #+#             */
-/*   Updated: 2021/04/05 14:53:05 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/07 13:45:48 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_EXECUTE_H
-# define FT_EXECUTE_H
+#ifndef EXECUTE_H
+# define EXECUTE_H
 # define READ_END	0
 # define WRITE_END	1
 

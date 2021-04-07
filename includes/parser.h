@@ -6,12 +6,12 @@
 /*   By: arraji <arraji@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/01 14:02:21 by arraji            #+#    #+#             */
-/*   Updated: 2021/04/04 14:11:48 by arraji           ###   ########.fr       */
+/*   Updated: 2021/04/07 13:46:06 by arraji           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PARSER_H
-# define FT_PARSER_H
+#ifndef PARSER_H
+# define PARSER_H
 # ifndef PS
 #  define PS "minishell$> "
 # endif
