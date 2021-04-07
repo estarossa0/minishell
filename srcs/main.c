@@ -60,6 +60,7 @@ void	clear(t_all *all)
 int	main(int argc, char **argv, char **env)
 {
 	t_all	all;
+	int		on;
 
 	(void)argc;
 	(void)argv;
@@ -70,8 +71,11 @@ int	main(int argc, char **argv, char **env)
 	signal(SIGINT, handler);
 	signal(SIGQUIT, handler);
 	all.parser.line = NULL;
-	while (1)
+	on = 1;
+	while (on)
 	{
+		if (!isatty(0))
+			on = 0;
 		init(&all);
 		if (get_data(&all) == FALSE || here_we_go(&all) == FALSE || 1)
 			clear(&all);

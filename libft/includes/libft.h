@@ -17,6 +17,7 @@
 # include <string.h>
 # include <errno.h>
 # include "ft_fprintf.h"
+# include "get_next_line.h"
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 500
 # endif
@@ -62,4 +63,5 @@ int				and_op(int x, int y);
 int				nand_op(int x, int y);
 void			bit_on(int *x, int y);
 void			bit_off(int *x, int y);
+size_t			ft_linelen(char const *str, int type);
 #endif

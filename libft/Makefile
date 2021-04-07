@@ -54,6 +54,8 @@ SRC_FILES  =	ft_atoi.c \
 				ft_lutoa.c \
 				ft_putchar_fd.c \
 				ft_putstr_fd.c \
+				get_next_line.c \
+				ft_linelen.c \
 
 OBJECT_FILES = $(SRC_FILES:.c=.o)
 OBJECT_FILES := $(addprefix $(OBJECT_FOLDER)/, $(OBJECT_FILES))
