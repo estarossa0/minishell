@@ -21,7 +21,7 @@ void	append(char input, t_hlist *hist)
 	tmp = hist->updated;
 	hist->updated = (char *)malloc((len + 1) * sizeof(char));
 	ft_bzero(hist->updated, len + 1);
-	strncpy(hist->updated, tmp, len);
+	ft_strcpy(hist->updated, tmp);
 	hist->updated[len] = input;
 	hist->updated[len + 1] = '\0';
 	write(1, &input, 1);
