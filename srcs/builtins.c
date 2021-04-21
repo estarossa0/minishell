@@ -26,22 +26,22 @@ static	t_bool	b_unset(t_command *cmd)
 	int		jndex;
 	t_env	*curr;
 
-	jndex = 0;
-	curr = g_all->env;
-	while (curr)
+	index = 0;
+	while (cmd->argv[++index])
 	{
-		index = 0;
-		while (cmd->argv[++index])
+		jndex = 0;
+		curr = g_all->env;
+		while (curr)
 		{
 			if (!ft_strcmp(cmd->argv[index], curr->key))
 			{
 				ft_lstdel_index((t_list**)&g_all->env,
 				(void (*)(t_list *))del_env, jndex);
-				return (TRUE);
+				break ;
 			}
+			jndex++;
+			curr = curr->next;
 		}
-		jndex++;
-		curr = curr->next;
 	}
 	return (TRUE);
 }

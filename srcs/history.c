@@ -19,8 +19,8 @@ void	append(char input, t_hlist *hist)
 
 	len = ft_strlen(hist->updated);
 	tmp = hist->updated;
-	hist->updated = (char *)malloc((len + 1) * sizeof(char));
-	ft_bzero(hist->updated, len + 1);
+	hist->updated = (char *)malloc((len + 2) * sizeof(char));
+	ft_bzero(hist->updated, len + 2);
 	ft_strcpy(hist->updated, tmp);
 	hist->updated[len] = input;
 	hist->updated[len + 1] = '\0';
@@ -92,6 +92,6 @@ int	readline(char **line, t_hist *hist)
 	if (ft_strlen(hist->list->updated) == 0)
 		return (fail(hist, 0));
 	hist->end->cmd = ft_strdup(hist->list->updated);
-	hist_reset(hist->head, 1);
+	hist_reset(hist->end, 1);
 	return (1);
 }

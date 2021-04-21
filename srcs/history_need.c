@@ -38,7 +38,7 @@ void	hist_reset(t_hlist *head, int all)
 		free(head->updated);
 		head->updated = NULL;
 		head->llen = ft_strlen(head->cmd);
-		head = head->next;
+		head = head->prev;
 	}
 	if (all)
 	{
