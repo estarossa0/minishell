@@ -35,8 +35,8 @@ static	t_bool	b_unset(t_command *cmd)
 		{
 			if (!ft_strcmp(cmd->argv[index], curr->key))
 			{
-				ft_lstdel_index((t_list**)&g_all->env,
-				(void (*)(t_list *))del_env, jndex);
+				ft_lstdel_index((t_list **)&g_all->env,
+					(void (*)(t_list *))del_env, jndex);
 				break ;
 			}
 			jndex++;
@@ -62,7 +62,7 @@ static	t_bool	b_exit(t_command *cmd)
 		return (error(E_ARGS, 1, cmd->cmd_name));
 	index = ft_atol(cmd->argv[1]);
 	if (cmd->argv[1] && ((index < 0 && cmd->argv[1][0] != '-')
-			|| (index >= 0 && cmd->argv[1][0] == '-')))
+		|| (index >= 0 && cmd->argv[1][0] == '-')))
 		error(E_EXIT_ARG, 2, cmd->argv[1]);
 	exit(index);
 	return (TRUE);

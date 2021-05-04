@@ -43,7 +43,8 @@ static	void	set_return(void)
 		else if (ret == g_all->pid && WIFSIGNALED(data))
 		{
 			g_all->exit_status = 128 + WTERMSIG(data);
-			WTERMSIG(data) == SIGQUIT ? write(1, "Quit\n", 5) : 1;
+			if (WTERMSIG(data) == SIGQUIT)
+				write(1, "Quit\n", 5);
 		}
 	}
 	g_all->pid = 0;

@@ -55,7 +55,7 @@ static	void	init_word(t_args *new[2], t_args *current, int need[2])
 {
 	int	size;
 
-	new[1] = (t_args *)ft_lstadd_back((t_list**)&new[0],
+	new[1] = (t_args *)ft_lstadd_back((t_list **)&new[0],
 			malloc(sizeof(t_args)));
 	size = get_next_word_size(current);
 	new[1]->str = malloc(size + 1);
@@ -83,7 +83,7 @@ void	reverse_args(t_args **args)
 		if (current[1]->c != WORD_SEP)
 			copy_word(current[1], new[1], &needs[1]);
 		current[1] = current[1]->next;
-		ft_end((void**)&(current[0]), NULL, 1);
+		ft_end((void **)&(current[0]), NULL, 1);
 	}
 	*args = new[0];
 }

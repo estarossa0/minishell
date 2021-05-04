@@ -26,7 +26,8 @@ static	void	change_variables2(char *pwd, t_bool all)
 			if (all == -1)
 				ft_lstadd_back((t_list **)&g_all->env, (void *)new);
 			else
-				ft_lstdel_index((t_list**)&new, (void (*)(t_list *))del_env, 0);
+				ft_lstdel_index((t_list **)&new,
+					(void (*)(t_list *))del_env, 0);
 		}
 		free(pwd);
 	}
@@ -42,7 +43,7 @@ void	change_variables(char *old_pwd, t_bool all)
 		ft_stradd(&old_pwd, "OLDPWD=", -1);
 		new = new_var(old_pwd);
 		if (!find_replace(new))
-			ft_lstdel_index((t_list**)&new, (void (*)(t_list *))del_env, 0);
+			ft_lstdel_index((t_list **)&new, (void (*)(t_list *))del_env, 0);
 		free(old_pwd);
 	}
 	pwd = getcwd(NULL, 0);

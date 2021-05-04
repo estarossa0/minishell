@@ -19,8 +19,8 @@ static	void	init_list(t_command **current, t_all *all)
 		ft_lstadd_back((t_list **)&(all->pipe), malloc(sizeof(t_pipeline)));
 		all->pipe->cmd_head = NULL;
 		all->pipe->simple = 1;
-		*current = (t_command *)ft_lstadd_back((t_list **)&(all->pipe->cmd_head),
-				malloc(sizeof(t_command)));
+		*current = (t_command *)ft_lstadd_back((t_list **)
+				&(all->pipe->cmd_head), malloc(sizeof(t_command)));
 		**current = (t_command){0, 0, 0, 0, 0, 1, 0, 0, 0, 0};
 	}
 }
@@ -32,7 +32,7 @@ int index, t_all *all)
 
 	if (line[index] == PIPELINE_SEP)
 	{
-		pipe = (t_pipeline*)ft_lstadd_back((t_list **)&(all->pipe),
+		pipe = (t_pipeline *)ft_lstadd_back((t_list **)&(all->pipe),
 				malloc(sizeof(t_pipeline)));
 		pipe->cmd_head = NULL;
 		pipe->simple = 1;

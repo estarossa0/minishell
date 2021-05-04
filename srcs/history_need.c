@@ -15,7 +15,8 @@
 void	hist_init(t_hlist *head, t_hlist **end)
 {
 	*end
-		= dlist_push_back(&g_all->hist.list, (t_hlist *)malloc(sizeof(t_hlist)));
+		= dlist_push_back(&g_all->hist.list,
+			(t_hlist *)malloc(sizeof(t_hlist)));
 	g_all->hist.list = *end;
 	(*end)->llen = 0;
 	(*end)->cmd = NULL;

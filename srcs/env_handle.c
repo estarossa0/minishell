@@ -63,7 +63,7 @@ void	init_env(void)
 	while (g_all->environ[index])
 	{
 		current = new_var(g_all->environ[index]);
-		ft_lstadd_back((t_list**)&g_all->env, (t_list*)current);
+		ft_lstadd_back((t_list **)&g_all->env, (t_list *)current);
 		index++;
 		g_all->total_env++;
 		current->type = ENV_VAR;

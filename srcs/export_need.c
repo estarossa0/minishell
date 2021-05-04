@@ -76,7 +76,7 @@ static	t_env	*env_copy(t_env *lst)
 		new = (t_env *)malloc(sizeof(t_env));
 		*new = *lst;
 		new->next = NULL;
-		ft_lstadd_back((t_list**)&head, (t_list*)new);
+		ft_lstadd_back((t_list **)&head, (t_list *)new);
 		lst = lst->next;
 	}
 	return (head);

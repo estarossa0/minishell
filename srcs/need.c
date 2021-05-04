@@ -36,7 +36,7 @@ void	fd_saving(int savefd[2])
 
 void	dup_close(int fd1, int fd2)
 {
-	dup2(fd1, fd2) == -1 ? error(E_STANDARD, 1, NULL) : 1;
+	dup2(fd1, fd2);
 	close(fd1);
 }
 
@@ -51,8 +51,8 @@ int	find_replace(t_env *var)
 		{
 			if (var->type == SHELL_VAR)
 			{
-				ft_lstdel_index((t_list**)&var,
-				(void (*)(t_list *))del_env, 0);
+				ft_lstdel_index((t_list **)&var,
+					(void (*)(t_list *))del_env, 0);
 				return (1);
 			}
 			var->next = curr->next;

@@ -40,7 +40,7 @@ void	clear(t_all *all)
 		while (curr)
 		{
 			free_tab(curr->argv, ft_tablen(curr->argv));
-			ft_end((void**)&(curr->full_path), (void**)&(curr->file), 1);
+			ft_end((void **)&(curr->full_path), (void **)&(curr->file), 1);
 			while (curr->list_args)
 				curr->list_args
 					= (t_args *)ft_lstdelone((t_list *)curr->list_args, NULL);

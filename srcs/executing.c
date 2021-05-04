@@ -59,8 +59,8 @@ static	void	post_executing(t_command *cmd, int pipefd[2], int savefd[2])
 	}
 	else
 	{
-		dup2(savefd[0], STDIN_FILENO) == -1 ? error(E_STANDARD, 1, NULL) : 1;
-		dup2(savefd[1], STDOUT_FILENO) == -1 ? error(E_STANDARD, 1, NULL) : 1;
+		dup2(savefd[0], STDIN_FILENO);
+		dup2(savefd[1], STDOUT_FILENO);
 	}
 }
 

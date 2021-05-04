@@ -63,7 +63,7 @@ static	int	fail(int fd, char **save)
 {
 	if (fd == -5)
 	{
-		ft_end((void**)save, NULL, -1);
+		ft_end((void **)save, NULL, -1);
 	}
 	return (1);
 }
