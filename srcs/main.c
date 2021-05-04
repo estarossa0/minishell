@@ -14,7 +14,9 @@
 
 void	init(t_all *all)
 {
-	if (g_all->env == NULL)
+	static int	init = 0;
+
+	if (!init)
 	{
 		g_all->total_env = 0;
 		init_env();
@@ -22,6 +24,7 @@ void	init(t_all *all)
 		g_all->hist.end = NULL;
 		g_all->hist.list = NULL;
 		g_all->hist.head = NULL;
+		init = 1;
 	}
 	g_all->pid = 0;
 	all->parser.bits = 64;
