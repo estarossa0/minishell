@@ -12,44 +12,19 @@
 
 #include "minishell.h"
 
-static	int	cmp(char *a, char *b)
-{
-	int	index;
-
-	index = 0;
-	while (a[index])
-	{
-		a[index] = ft_toupper(a[index]);
-		index++;
-	}
-	index = 0;
-	while (b[index])
-	{
-		b[index] = ft_toupper(b[index]);
-		index++;
-	}
-	index = ft_strcmp(a, b);
-	free(a);
-	free(b);
-	return (index);
-}
-
 static	void	env_sort(t_env *lst)
 {
 	t_env	*begin_list;
 	t_env	*tmp;
 	t_env	swap;
-	int		max[2];
 
 	begin_list = lst;
-	max[0] = ft_tablen(g_all->environ) + 1;
-	while (lst != NULL && --max[0])
+	while (lst != NULL)
 	{
 		tmp = begin_list;
-		max[1] = max[0] + 1;
-		while (tmp->next != NULL && --max[1] - 1)
+		while (tmp->next != NULL)
 		{
-			if (cmp(ft_strdup(tmp->key), ft_strdup(tmp->next->key)) > 0)
+			if (ft_strcmp(ft_strdup(tmp->key), ft_strdup(tmp->next->key)) > 0)
 			{
 				swap = *tmp;
 				*tmp = *tmp->next;
