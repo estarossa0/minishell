@@ -56,8 +56,9 @@ static	t_bool	b_exit(t_command *cmd)
 		exit(0);
 	if (cmd->argv[1][0] == '-' || cmd->argv[1][0] == '+')
 		index = 1;
-	if (!ft_isdigit(cmd->argv[1][index]))
-		exit(error(E_EXIT_ARG, 255, cmd->argv[1]));
+	while (cmd->argv[1] && cmd->argv[1][index])
+		if (!ft_isdigit(cmd->argv[1][index++]))
+			exit(error(E_EXIT_ARG, 255, cmd->argv[1]));
 	if (ft_tablen(cmd->argv) > 2)
 		return (error(E_ARGS, 1, cmd->cmd_name));
 	index = ft_atol(cmd->argv[1]);
