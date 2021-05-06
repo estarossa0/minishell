@@ -18,6 +18,6 @@ void	fd_saving(int savefd[2]);
 int		is_builtin(char *cmd);
 int		find_replace(t_env *var);
 void	change_variables(char *old_pwd, t_bool all);
-void	print_export(t_env *list);
+t_bool	print_export(t_env *list);
 int		valid_var(t_env *var);
 #endif

@@ -95,22 +95,19 @@ t_bool	b_export(t_command *cmd)
 	check = TRUE;
 	index = 0;
 	if (ft_tablen(cmd->argv) == 1)
-		print_export(g_all->env);
-	else
+		return (print_export(g_all->env));
+	while (cmd->argv[++index])
 	{
-		while (cmd->argv[++index])
+		curr = new_var(cmd->argv[index]);
+		if (ft_strlen(curr->key) == 0 || !valid_var(curr))
 		{
-			curr = new_var(cmd->argv[index]);
-			if (ft_strlen(curr->key) == 0)
-			{
-				check = error(E_NOT_VAL, 1, curr->full_var);
-				free(curr);
-				continue ;
-			}
-			if (find_replace(curr))
-				continue ;
-			ft_lstadd_back((t_list **)&g_all->env, (void *)curr);
+			check = error(E_NOT_VAL, 1, curr->full_var);
+			ft_lstdel_index((t_list **)&curr, (void (*)(t_list *))del_env, 0);
+			continue ;
 		}
+		if (find_replace(curr))
+			continue ;
+		ft_lstadd_back((t_list **)&g_all->env, (void *)curr);
 	}
 	return (check);
 }

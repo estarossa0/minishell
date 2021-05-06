@@ -57,7 +57,7 @@ static	t_env	*env_copy(t_env *lst)
 	return (head);
 }
 
-void	print_export(t_env *list)
+t_bool	print_export(t_env *list)
 {
 	t_env	*new;
 	t_env	*tmp;
@@ -75,6 +75,7 @@ void	print_export(t_env *list)
 		new = new->next;
 		free(tmp);
 	}
+	return (TRUE);
 }
 
 int	valid_var(t_env *var)
