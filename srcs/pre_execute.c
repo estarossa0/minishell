@@ -83,16 +83,11 @@ static	t_bool	prepare_fd(t_command *cmd, int pipefd[2], int savefd[2])
 {
 	t_bool	check;
 
-	check = parse_files(cmd);
 	if (cmd->next && pipe(pipefd) == TRUE)
 		dup_close(pipefd[WRITE_END], STDOUT_FILENO);
 	if (cmd->next == NULL)
 		dup2(savefd[1], STDOUT_FILENO);
-	if (cmd->file && cmd->fd >= 0 && and_op(cmd->read_type, -RED_FROM))
-		dup_close(cmd->fd, STDIN_FILENO);
-	if (cmd->file && cmd->fd >= 0 && (and_op(cmd->read_type, -RED_TO)
-			|| and_op(cmd->read_type, -RED_TO_APP)))
-		dup_close(cmd->fd, STDOUT_FILENO);
+	check = parse_files(cmd);
 	return (check);
 }
 

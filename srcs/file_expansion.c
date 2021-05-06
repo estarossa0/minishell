@@ -45,28 +45,30 @@ char	*get_next_word(char *line, int *index)
 	return (word);
 }
 
-t_bool	parse_files(t_command *current)
+t_bool	parse_files(t_command *cmd)
 {
 	char	type;
 	t_files	*iterator;
 
-	iterator = current->all_files;
+	iterator = cmd->all_files;
 	while (iterator)
 	{
-		overwrite_file(current);
+		overwrite_file(cmd);
 		type = iterator->type;
-		current->file = iterator->file;
-		bit_on((int *)&(current->read_type), -1 * type);
+		cmd->file = iterator->file;
 		if (type == RED_TO)
-			current->fd = open(iterator->file,
-					O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			cmd->fd = open(iterator->file, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		else if (type == RED_FROM)
-			current->fd = open(iterator->file, O_RDONLY);
+			cmd->fd = open(iterator->file, O_RDONLY);
 		else if (type == RED_TO_APP)
-			current->fd = open(iterator->file,
+			cmd->fd = open(iterator->file,
 					O_WRONLY | O_CREAT | O_APPEND, 0644);
-		if (current->fd < 0)
-			return (error(E_FILE, 1, current->file));
+		if (cmd->fd < 0)
+			return (error(E_FILE, 1, cmd->file));
+		if (cmd->fd >= 0 && type == RED_FROM)
+			dup_close(cmd->fd, STDIN_FILENO);
+		if (cmd->fd >= 0 && ((type == RED_TO) || type == RED_TO_APP))
+			dup_close(cmd->fd, STDOUT_FILENO);
 		iterator = iterator->next;
 	}
 	return (TRUE);
