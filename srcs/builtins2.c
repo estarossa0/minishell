@@ -81,8 +81,7 @@ t_bool	b_cd(t_command *cmd)
 
 t_bool	b_pwd(t_command *cmd)
 {
-	if (ft_tablen(cmd->argv) != 1)
-		return (error(E_ARGS, 1, cmd->cmd_name));
+	(void)cmd;
 	ft_fprintf(1, "%s\n", g_all->pwd);
 	return (TRUE);
 }
