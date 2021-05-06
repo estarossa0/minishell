@@ -17,7 +17,7 @@ void	handler(int sig)
 	if (sig == SIGINT && g_all->pid == 0)
 	{
 		ft_fprintf(1, "\n" BOLD PRINT_RED PS RESET);
-		g_all->exit_status = 128 + sig;
+		g_all->exit_status = 1;
 		readline(NULL, &(g_all->hist));
 	}
 }
