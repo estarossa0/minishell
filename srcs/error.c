@@ -76,5 +76,5 @@ int	error(int err, int exit_value, char *need)
 	ft_fprintf(2, "minishell %d: ", err);
 	print_error(err, need);
 	g_all->exit_status = exit_value;
-	return (1);
+	return (exit_value);
 }
