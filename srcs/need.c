@@ -40,6 +40,27 @@ void	dup_close(int fd1, int fd2)
 	close(fd1);
 }
 
+static	void	replace(t_env *curr, t_env *var)
+{
+	char	*str;
+
+	if (var->plus)
+	{
+		str = ft_strjoin(curr->value, var->value);
+		free(var->value);
+		var->value = str;
+		free(var->full_var);
+		var->full_var = ft_strjoin(var->key, "=");
+		ft_stradd(&(var->full_var), var->value, 1);
+	}
+	var->next = curr->next;
+	free(curr->key);
+	free(curr->full_var);
+	free(curr->value);
+	*curr = *var;
+	free(var);
+}
+
 int	find_replace(t_env *var)
 {
 	t_env	*curr;
@@ -55,12 +76,7 @@ int	find_replace(t_env *var)
 					(void (*)(t_list *))del_env, 0);
 				return (1);
 			}
-			var->next = curr->next;
-			free(curr->key);
-			free(curr->full_var);
-			free(curr->value);
-			*curr = *var;
-			free(var);
+			replace(curr, var);
 			return (1);
 		}
 		curr = curr->next;

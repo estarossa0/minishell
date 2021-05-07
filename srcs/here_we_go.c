@@ -58,6 +58,8 @@ t_bool	here_we_go(t_all *all)
 	int			savefd[2];
 
 	pipe = all->pipe;
+	pipefd[0] = -1;
+	pipefd[1] = -1;
 	fd_saving(savefd);
 	while (pipe)
 	{

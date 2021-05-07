@@ -79,6 +79,7 @@ typedef struct s_env
 	char			*value;
 	char			*full_var;
 	int				type;
+	int				plus;
 }				t_env;
 
 typedef struct s_all

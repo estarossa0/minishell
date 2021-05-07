@@ -39,18 +39,22 @@ t_env	*new_var(char *full_var)
 
 	split = 0;
 	new = (t_env *)malloc(sizeof(t_env));
-	new->full_var = ft_strdup(full_var);
+	new->plus = 0;
 	while (full_var[split] != '=' && full_var[split])
 		split++;
-	new->key = ft_substr(new->full_var, 0, split);
+	if (full_var[split - 1] == '+')
+		new->plus = 1;
+	new->key = ft_substr(full_var, 0, split - new->plus);
 	if (full_var[split] == '=')
 		new->type = ENV_VAR;
 	else
 		new->type = SHELL_VAR;
 	if (new->type == ENV_VAR)
 		g_all->total_env++;
-	new->value = ft_substr(new->full_var, split + 1,
-			ft_strlen(new->full_var) - split);
+	new->value = ft_substr(full_var, split + 1,
+			ft_strlen(full_var) - split);
+	new->full_var = ft_strjoin(new->key, "=");
+	ft_stradd(&(new->full_var), new->value, 1);
 	return (new);
 }
 

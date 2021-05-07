@@ -24,7 +24,7 @@ static	void	env_sort(t_env *lst)
 		tmp = begin_list;
 		while (tmp->next != NULL)
 		{
-			if (ft_strcmp(ft_strdup(tmp->key), ft_strdup(tmp->next->key)) > 0)
+			if (ft_strcmp(tmp->key, tmp->next->key) > 0)
 			{
 				swap = *tmp;
 				*tmp = *tmp->next;
