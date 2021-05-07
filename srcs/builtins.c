@@ -53,7 +53,7 @@ static	t_bool	b_exit(t_command *cmd)
 	write(2, "exit\n", 5);
 	index = 0;
 	if (cmd->argv[1] == NULL)
-		exit(0);
+		exit(g_all->exit_status);
 	if (cmd->argv[1][0] == '-' || cmd->argv[1][0] == '+')
 		index = 1;
 	while (cmd->argv[1] && cmd->argv[1][index])
