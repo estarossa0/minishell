@@ -53,7 +53,10 @@ t_env	*new_var(char *full_var)
 		g_all->total_env++;
 	new->value = ft_substr(full_var, split + 1,
 			ft_strlen(full_var) - split);
-	new->full_var = ft_strjoin(new->key, "=");
+	if (new->type == ENV_VAR)
+		new->full_var = ft_strjoin(new->key, "=");
+	else
+		new->full_var = ft_strjoin(new->key, "");
 	ft_stradd(&(new->full_var), new->value, 1);
 	return (new);
 }
